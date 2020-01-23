@@ -8,5 +8,11 @@ ng g c modules/pages/rol/listar
 ng g s modules/services/rol/rol
 
 //crear un modulo
-ng g m modules/pages/usuario
+ng g m modules/pages/usuario 
+
+ng g m modules/pages/rol --routing true
+   ng g c modules/pages/rol/listarRol
+   ng g c modules/pages/rol/crearRol
+   ng g c modules/pages/rol/editarRol
+
 

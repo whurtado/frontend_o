@@ -13,8 +13,6 @@ const routes: Routes = [
       {path: 'listarRol', component: ListarRolComponent},
       {path: 'crearRol', component: CrearRolComponent},
       {path: 'editarRol/:id', component: EditarRolComponent }
-
-
     ]
   }
 ];
