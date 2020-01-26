@@ -1,1 +1,71 @@
-<p>listar-tipo-autorizacion works!</p>
+<div>
+        <div class="box box-primary">
+            <div class="box-header">
+                <h3 class="box-title">Listado de tipo autorizaciones</h3>
+                   <a routerLink="/dashboard/tipoAutorizacion/crearTipoAutorizacion" class="btn btn-primary  pull-right"><i class="fa fa-plus"></i> Crear tipo autorizacion</a>
+            </div>
+    
+            <div class="box-body">
+    
+                <div class="form-group" style="position: relative">
+                    <div class="col-md-6">
+                        <div class="input-group" style="display: inline-block;" >
+                            <select class="form-control " >
+                                <option value="name">Nombre</option>
+                            </select>
+                        </div>
+                        <div class="input-group" style="display: inline-block;" >
+                            <input type="text" v-model="buscar" class="form-control inline" placeholder="Texto a buscar" style="display: inline-block;">
+                        </div>
+                        <div class="input-group" style="display: inline-block;" >
+                            <button type="submit"  class="btn btn-primary inline"><i class="fa fa-search"></i> Buscar</button>
+                        </div>
+    
+                    </div>
+                </div>
+    
+    
+                <table id="posts-table" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+    
+                    </tr>
+                    </thead>
+                    <tbody>
+                    
+                    <tr *ngFor="let tipo of tipoAutorizacion">
+                        <td>{{ tipo.id}}</td>
+                        <td>{{ tipo.fvcnombre}}</td>
+                        <td>{{ tipo.estado}}</td>
+    
+                        <td>
+                            <a routerLink="/dashboard/tipoAutorizacion/editarTipoAutorizacion/{{tipo.id}}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                        </td>
+    
+                    </tr>
+                    </tbody>
+    
+                </table>
+    
+    
+                <!--<nav>
+                    <ul class="pagination">
+                        <li class="page-item" v-if="pagination.current_page > 1">
+                            <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)">Ant</a>
+                        </li>
+                        <li class="page-item" v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
+                            <a class="page-link" href="#" @click.prevent="cambiarPagina(page,buscar,criterio)" v-text="page"></a>
+                        </li>
+                        <li class="page-item" v-if="pagination.current_page < pagination.last_page">
+                            <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1,buscar,criterio)">Sig</a>
+                        </li>
+                    </ul>
+                </nav>-->
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TipoAutorizacionService } from '../../../services/tipoAutorizacion/tipo-autorizacion.service';
 
 @Component({
   selector: 'app-listar-tipo-autorizacion',
@@ -7,9 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListarTipoAutorizacionComponent implements OnInit {
 
-  constructor() { }
+  tipoAutorizacion:any = [];
+
+  constructor(public _tipoAutorizacionService: TipoAutorizacionService) { }
 
   ngOnInit() {
+  }
+
+
+  listarTodosLosTipoAutorizacion() {
+
+    this._tipoAutorizacionService.listarTodosLosTipoAutorizacion().subscribe(response => { 
+      this.tipoAutorizacion = response;
+      console.log("respuesta", response);
+      console.log("usus", this.tipoAutorizacion);
+
+      },
+      error =>{
+        console.log("error--------------",error);
+      });
   }
 
 }

@@ -2,10 +2,10 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
-import {PagesRoutingModule} from './pages-routing.module';
-import {PagesComponent} from './pages/pages.component';
-import {DashBoardComponent} from './dash-board/dash-board.component';
-import {LayoutModule} from '../layout/layout.module';
+import { PagesRoutingModule } from './pages-routing.module';
+import { PagesComponent } from './pages/pages.component';
+import { DashBoardComponent } from './dash-board/dash-board.component';
+import { LayoutModule } from '../layout/layout.module';
 import { UsuarioModule } from './usuario/usuario.module';
 import { RolModule } from './rol/rol.module';
 import { TipoAutorizacionModule } from './tipo-autorizacion/tipo-autorizacion.module';
@@ -24,16 +24,6 @@ import { VendedorModule } from './vendedor/vendedor.module';
   declarations: [
     PagesComponent, 
     DashBoardComponent,
-    TipoAutorizacionModule,
-    SedeModule,
-    CategoriaModule,
-    ArticuloModule,
-    AutorizacionModule,
-    ClasificacionPagoModule,
-    ClienteModule,
-    PagoModule,
-    RegistroPagoModule,
-    VendedorModule
    
   ],
 

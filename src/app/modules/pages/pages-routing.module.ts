@@ -8,7 +8,13 @@ const routes: Routes = [
     path: '', component: PagesComponent, children: [
       {path: '', component: DashBoardComponent},
       {path: 'usuario', loadChildren: () => import('./usuario/usuario.module').then(m => m.UsuarioModule)},
-      {path: 'rol', loadChildren: () => import('./rol/rol.module').then(m => m.RolModule)}
+      {path: 'rol', loadChildren: () => import('./rol/rol.module').then(m => m.RolModule)},
+      {path: 'vendedor', loadChildren: () => import('./vendedor/vendedor.module').then(m => m.VendedorModule)},
+      {path: 'categoria', loadChildren: () => import('./categoria/categoria.module').then(m => m.CategoriaModule)},
+      {path: 'cliente', loadChildren: () => import('./cliente/cliente.module').then(m => m.ClienteModule)},
+      {path: 'autorizacion', loadChildren: () => import('./autorizacion/autorizacion.module').then(m => m.AutorizacionModule)},
+      {path: 'tipoAutorizacion', loadChildren: () => import('./tipo-autorizacion/tipo-autorizacion.module').then(m => m.TipoAutorizacionModule)},
+      {path: 'sede', loadChildren: () => import('./sede/sede.module').then(m => m.SedeModule)},
 
       /*{path: 'usuario', component: UsuarioComponent},
       {path: 'rol', component: RolComponent }*/

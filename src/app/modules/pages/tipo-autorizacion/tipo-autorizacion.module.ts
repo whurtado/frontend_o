@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 import { TipoAutorizacionRoutingModule } from './tipo-autorizacion-routing.module';
 import { TipoAutorizacionComponent } from './tipo-autorizacion/tipo-autorizacion.component';
@@ -15,7 +16,8 @@ import { ListarTipoAutorizacionComponent } from './listar-tipo-autorizacion/list
                   ListarTipoAutorizacionComponent],
   imports: [
     CommonModule,
-    TipoAutorizacionRoutingModule
+    TipoAutorizacionRoutingModule,
+    FormsModule
   ]
 })
 export class TipoAutorizacionModule { }

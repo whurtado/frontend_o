@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { VendedorService } from '../../../services/vendedor/vendedor.service';
 
 @Component({
   selector: 'app-listar-vendedor',
@@ -7,9 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListarVendedorComponent implements OnInit {
 
-  constructor() { }
+  vendedores:any = [];
+
+  constructor( private _vendedorService: VendedorService) { }
 
   ngOnInit() {
+    this.listarTodosLosVendedores();
+
+  }
+
+  listarTodosLosVendedores() {
+
+    this._vendedorService.listarTodosLosVendedores().subscribe(response => { 
+      this.vendedores = response.vendedor.data;
+      console.log("respuesta", response);
+      console.log("usus", this.vendedores);
+
+      },
+      error =>{
+        console.log("error--------------",error);
+      });
   }
 
 }
