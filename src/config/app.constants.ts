@@ -20,6 +20,31 @@ export const constants = {
         mostrarRol:'api/auth/roles/edit',
         actualizarRol: 'api/auth/roles/actualizar',
 
+        listarVendedores: 'api/auth/vendedores',
+        cargarVendedor: 'api/auth/vendedores/create',
+        crearVendedor: 'api/auth/vendedores/registrar',
+        mostrarVendedor: 'api/auth/vendedores/edit',
+        actualizarVendedor: 'api/auth/vendedores/actualizar',
+
+        listarSedes: 'api/auth/sedes',
+        cargarSede: 'api/auth/sedes/create',
+        crearSede: 'api/auth/sedes/registrar',
+        mostrarSede: 'api/auth/sedes/edit',
+        actualizarSede: 'api/auth/sedes/actualizar',
+
+        listarCategorias: 'api/auth/categorias',
+        cargarCategoria: 'api/auth/categorias/create',
+        crearCategoria: 'api/auth/categorias/registrar',
+        mostrarCategoria: 'api/auth/categorias/edit',
+        actualizarCategoria: 'api/auth/categorias/actualizar',
+
+        listarTipoAutorizaciones: 'api/auth/tipoAutorizaciones',
+        cargarTipoAutorizacion: 'api/auth/tipoAutorizaciones/create',
+        crearTipoAutorizacion: 'api/auth/tipoAutorizaciones/registrar',
+        mostrarTipoAutorizacion: 'api/auth/tipoAutorizaciones/edit',
+        actualizarTipoAutorizacion: 'api/auth/tipoAutorizaciones/actualizar',
+
+        
 
 
 

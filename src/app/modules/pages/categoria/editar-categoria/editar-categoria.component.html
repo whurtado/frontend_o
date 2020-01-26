@@ -1,1 +1,89 @@
-<p>editar-categoria works!</p>
+<div class="row">
+
+        <div class="col-md-6">
+    
+            <div class="box box-primary">
+                <div class="box-header">
+                    <a routerLink="/dashboard/categoria/listarCategoria" class="btn btn-primary  pull-right"><i class="fa fa-pencil"></i> Listado usuarios</a>
+                </div>
+    
+                <div class="box-body">
+                    <form method="POST" (ngSubmit)="actualizarCategoria( f.value )" #f="ngForm"  autocomplete="off">
+    
+                        <!-- NOMBRE-->
+                        <div class="form-row">
+                            <div class="form-group col-md-12" >
+                                <div class="col-md-2">
+                                    <label>Nombre</label>
+                                </div>
+                                <div class="col-md-10">
+    
+                                    <input type="text" class="form-control" #nombre="ngModel"
+                                    name="nombre" [(ngModel)]="categoria.nombre">
+                                </div>
+                                <span *ngIf="!nombre.valid && nombre.touched">
+                                    error
+                                </span>
+    
+                            </div>
+    
+                        </div>    
+    
+                        <!-- ESTADO -->
+                        <div class="form-row">
+                            <div class="form-group col-md-12" >
+                                <div class="col-md-2">
+                                    <label>Genero</label>
+                                </div>
+                                <div class="col-md-10">
+    
+                                    <select class="form-control"
+                                            name="sede" [(ngModel)]="categoria.genero">
+    
+    
+                                        <option selected disabled value="0">Seleccionar...</option>
+                                        <!--<option v-for="sede in arraySedes" :value="sede.id"></option>-->
+    
+                                    </select>
+    
+    
+                                </div>
+    
+                            </div>
+    
+                        </div>
+
+
+                        <!-- DESCRIPCION-->
+                        <div class="form-row">
+                                <div class="form-group col-md-12" >
+                                    <div class="col-md-2">
+                                        <label>Descripcion</label>
+                                    </div>
+                                    <div class="col-md-10">
+        
+                                        <input type="text" class="form-control" #descripcion="ngModel"
+                                        name="descripcion" [(ngModel)]="categoria.descripcion">
+                                    </div>
+                                    <span *ngIf="!descripcion.valid && descripcion.touched">
+                                        error
+                                    </span>
+        
+                                </div>
+        
+                            </div>
+    
+    
+                        <div v-if="adminUsuario === true || updateUsuario === true" class="justify-content-end">
+                            <input type="submit" value="Actualizar Categoria" class="btn btn-primary btn-block" >
+                        </div>
+    
+                    </form>
+    
+                </div>
+    
+            </div>
+    
+        </div>
+    
+    </div>
