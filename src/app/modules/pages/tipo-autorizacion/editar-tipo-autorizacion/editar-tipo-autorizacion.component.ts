@@ -27,22 +27,22 @@ export class EditarTipoAutorizacionComponent implements OnInit {
               public _tipoAutorizacionService: TipoAutorizacionService) {
 
     this.id_tipoAutorizacion = this._router.snapshot.paramMap.get('id');
-    this.mostrarTipoAutorizacion(this.id_tipoAutorizacion);
    }
 
   ngOnInit() {
+    this.mostrarTipoAutorizacion(this.id_tipoAutorizacion);
+    this.verificarDatosLogin();
   }
 
 
   mostrarTipoAutorizacion(id){ 
 
     this._tipoAutorizacionService.mostrarTipoAutorizacion(id).subscribe(response => { 
-       console.log("respuesta",response);
 
       this.tipoAutorizacion = {
         id:  response.tipoAutorizacion.id ,
         nombre:response.tipoAutorizacion.fvcnombre,
-        estado:response.tipoAutorizacion.estado,
+        estado:response.tipoAutorizacion.fvcestado,
 
       }
 
@@ -54,10 +54,8 @@ export class EditarTipoAutorizacionComponent implements OnInit {
   }
 
   actualizarTipoAutorizacion(forma:NgForm){
-
-    console.log("forma",forma.value)
       
-    this._tipoAutorizacionService.actualizarTipoAutorizacion( forma.value, this.usuarioLogueado).subscribe((tipoAutorizacion: TipoAutorizacion) => { 
+    this._tipoAutorizacionService.actualizarTipoAutorizacion( forma.value, this.id_tipoAutorizacion, this.usuarioLogueado).subscribe((tipoAutorizacion: TipoAutorizacion) => { 
 
       Swal.fire({
         title: '',

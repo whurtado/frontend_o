@@ -20,10 +20,7 @@ export class ListarSedeComponent implements OnInit {
   listarTodasLasSedes() {
 
     this._sedeService.listarTodasLasSedes().subscribe(response => { 
-      this.sedes = response.vendedor.data;
-      console.log("respuesta", response);
-      console.log("usus", this.sedes);
-
+      this.sedes = response.sede.data;
       },
       error =>{
         console.log("error--------------",error);

@@ -15,6 +15,7 @@ const routes: Routes = [
       {path: 'autorizacion', loadChildren: () => import('./autorizacion/autorizacion.module').then(m => m.AutorizacionModule)},
       {path: 'tipoAutorizacion', loadChildren: () => import('./tipo-autorizacion/tipo-autorizacion.module').then(m => m.TipoAutorizacionModule)},
       {path: 'sede', loadChildren: () => import('./sede/sede.module').then(m => m.SedeModule)},
+      {path: 'clasificacionPago', loadChildren: () => import('./clasificacion-pago/clasificacion-pago.module').then(m => m.ClasificacionPagoModule)},
 
       /*{path: 'usuario', component: UsuarioComponent},
       {path: 'rol', component: RolComponent }*/

@@ -23,11 +23,12 @@ export class CrearTipoAutorizacionComponent implements OnInit {
   constructor( public _tipoAutorizacionService: TipoAutorizacionService) { }
 
   ngOnInit() {
+    this.verificarDatosLogin();
   } 
 
   crearTipoAutorizacion(forma:NgForm){
     
-    this._tipoAutorizacionService.crearTipoAutorizacion(forma,this.usuarioLogueado).subscribe((tipoAutorizacion: TipoAutorizacion)=>{
+    this._tipoAutorizacionService.crearTipoAutorizacion(forma.value,this.usuarioLogueado).subscribe((tipoAutorizacion: TipoAutorizacion)=>{
 
       Swal.fire({
         title: '',

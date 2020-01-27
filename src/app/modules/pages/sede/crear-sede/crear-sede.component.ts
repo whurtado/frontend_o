@@ -16,13 +16,14 @@ export class CrearSedeComponent implements OnInit {
   sede:  Sede  = {
     id:  null ,
     nombre:null,
-    estado:null,
+    estado: 'Seleccione Estado',
   };
   usuarioLogueado:any = [];
 
   constructor(public _sedeService: SedeService) { }
 
   ngOnInit() {
+    this.verificarDatosLogin();
   }
 
   crearSede(forma:NgForm){
@@ -36,6 +37,20 @@ export class CrearSedeComponent implements OnInit {
       });
 
     });
+  }
+
+  verificarDatosLogin(){
+
+    let adminUsuario  = false;
+    let crearRol  = false;
+
+    let arrayPermisos:any   = localStorage.getItem('rolesPermisos');
+    let arrayRol:any        = localStorage.getItem('roles');
+    this.usuarioLogueado = JSON.parse(localStorage.getItem('user'));
+
+    /*if(me.arrayPermisos.indexOf('create-role') >=0){ me.crearRol = true; }
+    if(me.arrayRol.indexOf('admin') >=0){ me.adminUsuario = true; }*/
+
   }
 
 }

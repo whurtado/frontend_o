@@ -25,11 +25,12 @@ export class CrearCategoriaComponent implements OnInit {
   constructor(public _categoriaService: CategoriaService) { }
 
   ngOnInit() {
+    this.verificarDatosLogin();
   }
 
   crearCategoria(forma:NgForm){
     
-    this._categoriaService.crearCategoria(forma,this.usuarioLogueado).subscribe((categoria: Categoria)=>{
+    this._categoriaService.crearCategoria(forma.value,this.usuarioLogueado).subscribe((categoria: Categoria)=>{
 
       Swal.fire({
         title: '',

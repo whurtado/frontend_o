@@ -13,16 +13,14 @@ export class ListarTipoAutorizacionComponent implements OnInit {
   constructor(public _tipoAutorizacionService: TipoAutorizacionService) { }
 
   ngOnInit() {
+    this.listarTodosLosTipoAutorizacion();
   }
 
 
   listarTodosLosTipoAutorizacion() {
 
     this._tipoAutorizacionService.listarTodosLosTipoAutorizacion().subscribe(response => { 
-      this.tipoAutorizacion = response;
-      console.log("respuesta", response);
-      console.log("usus", this.tipoAutorizacion);
-
+      this.tipoAutorizacion = response.tipoAutorizacion.data;
       },
       error =>{
         console.log("error--------------",error);

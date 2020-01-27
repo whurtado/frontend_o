@@ -8,7 +8,7 @@
                 </div>
     
                 <div class="box-body">
-                    <form method="POST" (ngSubmit)="actualizarTipoAutorizacion( f.value )" #f="ngForm"  autocomplete="off">
+                    <form method="POST" (ngSubmit)="actualizarTipoAutorizacion( f )" #f="ngForm"  autocomplete="off">
     
                         <!-- NOMBRE-->
                         <div class="form-row">
@@ -38,19 +38,17 @@
                                 <div class="col-md-10">
     
                                     <select class="form-control"
-                                            name="sede" [(ngModel)]="tipoAutorizacion.estado">
+                                            name="estado" [(ngModel)]="tipoAutorizacion.estado">
     
     
                                         <option selected disabled value="0">Seleccionar...</option>
-                                        <!--<option v-for="sede in arraySedes" :value="sede.id"></option>-->
+                                        <option value="ACTIVO">ACTIVO</option>
+                                        <option value="INACTIVO">INACTIVO</option>
     
                                     </select>
-    
-    
+
                                 </div>
-    
-                            </div>
-    
+                            </div>    
                         </div>
     
     
