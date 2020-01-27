@@ -36,13 +36,12 @@ export class SedeService {
 
   }
 
-    //metodo para crear un usuario
-    crearSede(sede,usuariologueado:object): Observable<Sede>{
+  //metodo para crear un usuario
+  crearSede(sede,usuariologueado:object): Observable<Sede>{
 
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
     headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
-    console.log("usuario", sede);
 
     const body: FormData = new FormData();
     body.append('fvcnombre', sede.nombre);
@@ -75,16 +74,12 @@ export class SedeService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
     headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
-  
-    console.log("rolssaaa---",sede);
-    
+      
     const body: FormData = new FormData();
     body.append('fvcnombre', sede.nombre);
     body.append('estado', sede.estado);
     body.append('id', id);
     body.append('usuario_sesion', usuariologueado[0].id);
-
-    
 
     const url = this.env.apiGatewayBackOffice + constants.config.actualizarSede;
 

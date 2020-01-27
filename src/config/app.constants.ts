@@ -44,6 +44,12 @@ export const constants = {
         mostrarTipoAutorizacion: 'api/auth/tipoAutorizaciones/edit',
         actualizarTipoAutorizacion: 'api/auth/tipoAutorizaciones/actualizar',
 
+        listarClasificacionPagos: 'api/auth/clasificacionPagos',
+        cargarClasificacionPago: 'api/auth/clasificacionPagos/create',
+        crearClasificacionPago: 'api/auth/clasificacionPagos/registrar',
+        mostrarClasificacionPago: 'api/auth/clasificacionPagos/edit',
+        actualizarClasificacionPago: 'api/auth/clasificacionPagos/actualizar',
+
         
 
 

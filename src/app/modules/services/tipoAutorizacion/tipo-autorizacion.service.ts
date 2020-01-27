@@ -42,7 +42,6 @@ crearTipoAutorizacion(tipoAutorizacion,usuariologueado:object): Observable<TipoA
   const headers = new HttpHeaders();
   headers.append('Content-Type', 'application/form-data');
   headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
-  console.log("usuario", tipoAutorizacion);
 
   const body: FormData = new FormData();
   body.append('fvcnombre', tipoAutorizacion.nombre);
@@ -71,25 +70,22 @@ mostrarTipoAutorizacion( id) : Observable<any>{
   );
 }
 
-actualizarTipoAutorizacion(tipoAutorizacion, usuariologueado:object): Observable<TipoAutorizacion>{
+actualizarTipoAutorizacion(tipoAutorizacion, id, usuariologueado:object): Observable<TipoAutorizacion>{
  
   const headers = new HttpHeaders();
   headers.append('Content-Type', 'application/form-data');
   headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
 
-  console.log("rolssaaa---",tipoAutorizacion);
-
   const body: FormData = new FormData();
   body.append('fvcnombre', tipoAutorizacion.nombre);
   body.append('estado', tipoAutorizacion.estado);
-  body.append('id', tipoAutorizacion.id);
+  body.append('id', id);
   body.append('usuario_sesion', usuariologueado[0].id);
 
 
 
   const url = this.env.apiGatewayBackOffice + constants.config.actualizarTipoAutorizacion;
 
-  console.log("ruta url",body)
   return this.http.post<TipoAutorizacion>(url, body, {headers})
   .pipe(
   delay(500)

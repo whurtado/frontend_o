@@ -28,10 +28,11 @@ export class EditarCategoriaComponent implements OnInit {
               public _categoriaService: CategoriaService) { 
 
     this.id_categoria = this._router.snapshot.paramMap.get('id');
-    this.mostrarCategoria(this.id_categoria);
               }
 
   ngOnInit() {
+    this.mostrarCategoria(this.id_categoria);
+    this.verificarDatosLogin();
   }
 
   mostrarCategoria(id){ 
@@ -57,7 +58,7 @@ export class EditarCategoriaComponent implements OnInit {
 
     console.log("forma",forma.value)
       
-    this._categoriaService.actualizarCategoria( forma.value, this.usuarioLogueado).subscribe((categoria: Categoria) => { 
+    this._categoriaService.actualizarCategoria( forma.value, this.id_categoria, this.usuarioLogueado).subscribe((categoria: Categoria) => { 
 
       Swal.fire({
         title: '',

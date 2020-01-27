@@ -46,8 +46,8 @@ export class CategoriaService {
 
     const body: FormData = new FormData();
     body.append('fvcnombre', categoria.nombre);
-    body.append('genero', categoria.estado);
-    body.append('descripcion', categoria.estado);
+    body.append('genero', categoria.genero);
+    body.append('descripcion', categoria.descripcion);
     body.append('usuario_sesion', usuariologueado[0].id);
    
     const url = this.env.apiGatewayBackOffice + constants.config.crearCategoria;
@@ -71,25 +71,27 @@ export class CategoriaService {
     );
   }
 
-  actualizarCategoria(categoria, usuariologueado:object): Observable<Categoria>{
+  actualizarCategoria(categoria, id,  usuariologueado:object): Observable<Categoria>{
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
     headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
   
     console.log("rolssaaa---",categoria);
+    console.log("aaa---",id);
+    console.log("ssss---",usuariologueado[0].id);
+
     
     const body: FormData = new FormData();
     body.append('fvcnombre', categoria.nombre);
-    body.append('genero', categoria.estado);
-    body.append('descripcion', categoria.estado);
-    body.append('id', categoria.id);
-    //body.append('usuario_sesion', usuariologueado[0].id);
+    body.append('genero', categoria.genero);
+    body.append('descripcion', categoria.descripcion);
+    body.append('id', id);
+    body.append('usuario_sesion', usuariologueado[0].id);
 
     
 
     const url = this.env.apiGatewayBackOffice + constants.config.actualizarCategoria;
 
-    console.log("ruta url",body)
     return this.http.post<Categoria>(url, body, {headers})
     .pipe(
       delay(500)

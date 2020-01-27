@@ -7,7 +7,7 @@
     
                 <div class="box box-primary animated fadeIn faster animated fadeIn faster">
                     <div class="box-header">
-                            <a routerLink="/dashboard/categoria/listarCategoria" class="btn btn-primary  pull-right"><i class="fa fa-pencil"></i> Listado usuarios</a>
+                            <a routerLink="/dashboard/categoria/listarCategoria" class="btn btn-primary  pull-right"><i class="fa fa-pencil"></i> Listado categoria</a>
                     </div>
     
                     <div class="box-body">
@@ -60,10 +60,10 @@
                             </div>
 
                             <!-- DESCRIPCION-->
-                            <div class="form-row " [ngClass]="{'has-error': (nombre.errors?.required || nombre.errors?.minlength) && nombre.touched }">
+                            <div class="form-row " [ngClass]="{'has-error': (descripcion.errors?.required || descripcion.errors?.minlength) && nombre.touched }">
                                     <div class="form-group col-md-12" >
                                         <div class="col-md-2">
-                                            <label for="nombre" >Nombre</label>
+                                            <label for="nombre" >Descripción</label>
                                         </div>
                                         <div class="col-md-10">
         
@@ -71,12 +71,12 @@
                                              placeholder="Ingrese su Nombre"
                                             name="descripcion"  [(ngModel)]="categoria.descripcion"
                                             minlength="5" required
-                                            #nombre="ngModel">
+                                            #descripcion="ngModel">
         
                                             <div *ngIf="nombre.errors?.required" class="help-block">
-                                                El nombre es requerido
+                                                La descripcion es requerida
                                             </div>
-                                            <div *ngIf="nombre.errors?.minlength" class="help-block">
+                                            <div *ngIf="descripcion.errors?.minlength" class="help-block">
                                                 Por lo menos {{ nombre.errors.minlength.requiredLength}} caracteres.
                                             </div>
                                         </div>

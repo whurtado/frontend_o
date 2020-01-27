@@ -4,11 +4,11 @@
     
             <div class="box box-primary">
                 <div class="box-header">
-                    <a routerLink="/dashboard/categoria/listarCategoria" class="btn btn-primary  pull-right"><i class="fa fa-pencil"></i> Listado usuarios</a>
+                    <a routerLink="/dashboard/categoria/listarCategoria" class="btn btn-primary  pull-right"><i class="fa fa-pencil"></i> Listado categoria</a>
                 </div>
     
                 <div class="box-body">
-                    <form method="POST" (ngSubmit)="actualizarCategoria( f.value )" #f="ngForm"  autocomplete="off">
+                    <form method="POST" (ngSubmit)="actualizarCategoria( f )" #f="ngForm"  autocomplete="off">
     
                         <!-- NOMBRE-->
                         <div class="form-row">
@@ -37,20 +37,14 @@
                                 </div>
                                 <div class="col-md-10">
     
-                                    <select class="form-control"
-                                            name="sede" [(ngModel)]="categoria.genero">
+                                    <select name="genero" class="form-control" [(ngModel)]="categoria.genero">
     
-    
-                                        <option selected disabled value="0">Seleccionar...</option>
-                                        <!--<option v-for="sede in arraySedes" :value="sede.id"></option>-->
-    
-                                    </select>
-    
-    
-                                </div>
-    
-                            </div>
-    
+                                        <option value="" selected>Seleccione Estado</option>
+                                        <option value="Masculino">Masculino</option>
+                                        <option value="Femenino">Femenino</option>
+                                    </select>     
+                                </div>    
+                            </div>    
                         </div>
 
 

@@ -13,13 +13,14 @@ export class ListarCategoriaComponent implements OnInit {
   constructor(private _categoriaService: CategoriaService) { }
 
   ngOnInit() {
+    this.listarTodosLosCategorias();
   }
 
 
   listarTodosLosCategorias() {
 
     this._categoriaService.listarTodasLasCategorias().subscribe(response => { 
-      this.categorias = response;
+      this.categorias = response.categoria.data;
       console.log("respuesta", response);
       console.log("usus", this.categorias);
 

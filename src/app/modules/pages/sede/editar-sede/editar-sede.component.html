@@ -4,7 +4,7 @@
     
             <div class="box box-primary">
                 <div class="box-header">
-                    <a routerLink="/dashboard/sede/listarSede" class="btn btn-primary  pull-right"><i class="fa fa-pencil"></i> Listado usuarios</a>
+                    <a routerLink="/dashboard/sede/listarSede" class="btn btn-primary  pull-right"><i class="fa fa-pencil"></i> Listado sede</a>
                 </div>
     
                 <div class="box-body">
@@ -39,19 +39,18 @@
                                 <div class="col-md-10">
     
                                     <select class="form-control"
-                                            name="sede" [(ngModel)]="sede.estado">
+                                            name="estado" [(ngModel)]="sede.estado">
     
     
                                         <option selected disabled value="0">Seleccionar...</option>
                                         <!--<option v-for="sede in arraySedes" :value="sede.id"></option>-->
+                                        <option value="ACTIVO">ACTIVO</option>
+                                        <option value="INACTIVO">INACTIVO</option>
     
                                     </select>
-    
-    
+
                                 </div>
-    
-                            </div>
-    
+                            </div>    
                         </div>
     
     

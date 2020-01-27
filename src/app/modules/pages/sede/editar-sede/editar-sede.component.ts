@@ -26,6 +26,8 @@ export class EditarSedeComponent implements OnInit {
                public _sedeService: SedeService ) {
                  
     this.id_sede = this._router.snapshot.paramMap.get('id');
+
+    console.log("id..",this.id_sede)
    }
 
   ngOnInit() {
@@ -36,14 +38,15 @@ export class EditarSedeComponent implements OnInit {
   mostrarSede(id){ 
 
     this._sedeService.mostrarSede(id).subscribe(response => { 
-       console.log("respuesta",response);
 
       this.sede = {
-        id:  response.vendedor.id ,
-        nombre:response.vendedor.fvcnombre,
-        estado:response.vendedor.estado,
+        id:  response.sede.id ,
+        nombre:response.sede.fvcnombre,
+        estado:response.sede.fvcestado,
 
       }
+      console.log("respuesaaaaaaaaaata",this.sede );
+
 
       },
       error =>{

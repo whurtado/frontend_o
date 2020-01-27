@@ -54,7 +54,6 @@ export class UsuarioService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
     headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
-    console.log("usuario", usuario);
 
     const body: FormData = new FormData();
     body.append('name', usuario.nombre);
@@ -91,9 +90,7 @@ export class UsuarioService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
     headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
- 
-    console.log("usuario",usuario);
-    
+     
     const body: FormData = new FormData();
     body.append('name', usuario.nombre);
     body.append('email', usuario.email);
@@ -105,7 +102,6 @@ export class UsuarioService {
 
     const url = this.env.apiGatewayBackOffice + constants.config.actualizarUsuario;
 
-    console.log("ruta url",body)
     return this.http.post<Usuario>(url, body, {headers})
     .pipe(
       delay(500)
@@ -125,7 +121,6 @@ export class UsuarioService {
 
     const url = this.env.apiGatewayBackOffice + constants.config.actualizarRolesUsuario;
 
-    console.log("ruta url",body)
     return this.http.post<any>(url, body, {headers})
     .pipe(
       delay(500)
@@ -145,7 +140,6 @@ export class UsuarioService {
 
     const url = this.env.apiGatewayBackOffice + constants.config.actualizarPermisosUsuario;
 
-    console.log("ruta url",body)
     return this.http.post<any>(url, body, {headers})
     .pipe(
       delay(500)

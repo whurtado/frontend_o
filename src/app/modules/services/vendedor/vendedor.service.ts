@@ -41,7 +41,6 @@ export class VendedorService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
     headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
-    console.log("usuario", vendedor);
 
     const body: FormData = new FormData();
     body.append('fvcnombre', vendedor.nombre);
@@ -74,9 +73,7 @@ export class VendedorService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
     headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
- 
-    console.log("rolssaaa---",vendedor);
-    
+     
     const body: FormData = new FormData();
     body.append('fvcnombre', vendedor.nombre);
     body.append('estado', vendedor.estado);
