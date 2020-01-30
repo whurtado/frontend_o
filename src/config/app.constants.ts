@@ -50,6 +50,12 @@ export const constants = {
         mostrarClasificacionPago: 'api/auth/clasificacionPagos/edit',
         actualizarClasificacionPago: 'api/auth/clasificacionPagos/actualizar',
 
+        listarRegistroPagos: 'api/auth/registroPagos',
+        cargarRegistroPago: 'api/auth/registroPagos/create',
+        crearRegistroPago: 'api/auth/registroPagos/registrar',
+        mostrarRegistroPago: 'api/auth/registroPagos/edit',
+        actualizarRegistroPago: 'api/auth/registroPagos/actualizar',
+
         
 
 

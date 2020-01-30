@@ -1,1 +1,195 @@
-<p>editar-registro-pago works!</p>
+<div class="row">
+
+        <div class="col-md-6">
+    
+            <div class="box box-primary">
+                <div class="box-header">
+                    <a routerLink="/dashboard/registroPago/listarRegistroPago" class="btn btn-primary  pull-right"><i class="fa fa-pencil"></i> Listado categoria</a>
+                </div>
+    
+                <div class="box-body">
+                    <form method="POST" (ngSubmit)="actualizarRegistroPago( f )" #f="ngForm"  autocomplete="off">
+    
+                        
+                            <!-- FACTURA-->
+                            <div class="form-row " [ngClass]="{'has-error': (factura.errors?.required || factura.errors?.minlength) && factura.touched }">
+                                    <div class="form-group col-md-12" >
+                                        <div class="col-md-2">
+                                            <label for="factura" >Factura</label>
+                                        </div>
+                                        <div class="col-md-10">
+        
+                                            <input type="text" class="form-control"
+                                             placeholder="Ingrese su Factura"
+                                            name="factura"  [(ngModel)]="registroPago.factura"
+                                            minlength="5" required
+                                            #factura="ngModel">
+        
+                                            <div *ngIf="factura.errors?.required" class="help-block">
+                                                La factura es requerida
+                                            </div>
+                                            <div *ngIf="factura.errors?.minlength" class="help-block">
+                                                Por lo menos {{ factura.errors.minlength.requiredLength}} caracteres.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                <!-- VALOR FACTURA-->
+                                <div class="form-row " [ngClass]="{'has-error': (valorFactura.errors?.required || valorFactura.errors?.minlength) && valorFactura.touched }">
+                                        <div class="form-group col-md-12" >
+                                            <div class="col-md-2">
+                                                <label for="valorFactura" >Valor Factura</label>
+                                            </div>
+                                            <div class="col-md-10">
+            
+                                                <input type="number" class="form-control"
+                                                 placeholder="0"
+                                                name="valorFactura"  [(ngModel)]="registroPago.valorFactura"
+                                                minlength="5" required
+                                                #valorFactura="ngModel">
+            
+                                                <div *ngIf="valorFactura.errors?.required" class="help-block">
+                                                    El valor de la Factura es requerido
+                                                </div>
+                                                <div *ngIf="valorFactura.errors?.minlength" class="help-block">
+                                                    Por lo menos {{ valorFactura.errors.minlength.requiredLength}} caracteres.
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+    
+                                <!-- FECHA A PAGAR-->
+                                <div class="form-row " [ngClass]="{'has-error': (fechaPago.errors?.required || fechaPago.errors?.minlength) && fechaPago.touched }">
+                                        <div class="form-group col-md-12" >
+                                            <div class="col-md-2">
+                                                <label for="fechaPago" >Fecha a Pagar</label>
+                                            </div>
+                                            <div class="col-md-10">
+            
+                                                <input type="date" class="form-control"
+                                                 placeholder=""
+                                                name="fechaPago"  [(ngModel)]="registroPago.fechaPago"
+                                                minlength="10" required
+                                                #fechaPago="ngModel">
+            
+                                                <div *ngIf="fechaPago.errors?.required" class="help-block">
+                                                    La Fecha de pago es requerida
+                                                </div>
+                                                <div *ngIf="fechaPago.errors?.minlength" class="help-block">
+                                                    Por lo menos {{ fechaPago.errors.minlength.requiredLength}} caracteres.
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+    
+                                <!-- DEDUCCION-->
+                                <div class="form-row " [ngClass]="{'has-error': (deduccion.errors?.required || deduccion.errors?.minlength) && deduccion.touched }">
+                                        <div class="form-group col-md-12" >
+                                            <div class="col-md-2">
+                                                <label for="deduccion" >Deduccion</label>
+                                            </div>
+                                            <div class="col-md-10">
+            
+                                                <input type="number" class="form-control"
+                                                 placeholder=""
+                                                name="deduccion"  [(ngModel)]="registroPago.deduccion"
+                                                minlength="5" required
+                                                #deduccion="ngModel">
+            
+                                                <div *ngIf="deduccion.errors?.required" class="help-block">
+                                                    La deduccion es requerida
+                                                </div>
+                                                <div *ngIf="deduccion.errors?.minlength" class="help-block">
+                                                    Por lo menos {{ deduccion.errors.minlength.requiredLength}} caracteres.
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+    
+                                <!-- VALOR TOTAL A PAGAR-->
+                                <div class="form-row " [ngClass]="{'has-error': (valorTotalPagar.errors?.required || valorTotalPagar.errors?.minlength) && valorTotalPagar.touched }">
+                                        <div class="form-group col-md-12" >
+                                            <div class="col-md-2">
+                                                <label for="valorTotalPagar" >Valor Total a Pagar</label>
+                                            </div>
+                                            <div class="col-md-10">
+            
+                                                <input type="number" class="form-control"
+                                                 placeholder=""
+                                                name="valorTotalPagar"  [(ngModel)]="registroPago.valorTotalPagar"
+                                                minlength="5" required
+                                                #valorTotalPagar="ngModel">
+            
+                                                <div *ngIf="valorTotalPagar.errors?.required" class="help-block">
+                                                    El Valor Total es requerido
+                                                </div>
+                                                <div *ngIf="valorTotalPagar.errors?.minlength" class="help-block">
+                                                    Por lo menos {{ valorTotalPagar.errors.minlength.requiredLength}} caracteres.
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+        
+                                <!-- OBSERVACION-->
+                                <div class="form-row " [ngClass]="{'has-error': (observacion.errors?.required || observacion.errors?.minlength) && observacion.touched }">
+                                        <div class="form-group col-md-12" >
+                                            <div class="col-md-2">
+                                                <label for="observacion" >Observacion</label>
+                                            </div>
+                                            <div class="col-md-10">
+            
+                                                <input type="text" class="form-control"
+                                                 placeholder="Ingrese su Observacion"
+                                                name="observacion"  [(ngModel)]="registroPago.observacion"
+                                                minlength="5" required
+                                                #observacion="ngModel">
+            
+                                                <div *ngIf="observacion.errors?.required" class="help-block">
+                                                    La observacion es requerida
+                                                </div>
+                                                <div *ngIf="observacion.errors?.minlength" class="help-block">
+                                                    Por lo menos {{ observacion.errors.minlength.requiredLength}} caracteres.
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+
+                                <!-- Estado-->
+                                <div class="form-row " [ngClass]="{'has-error': (estado.errors?.required || estado.errors?.minlength) && estado.touched }">
+                                        <div class="form-group col-md-12" >
+                                            <div class="col-md-2">
+                                                <label for="estado" >Estado</label>
+                                            </div>
+                                            <div class="col-md-10">
+            
+                                                <input type="text" class="form-control"
+                                                 placeholder="Ingrese su Estado"
+                                                name="estado"  [(ngModel)]="registroPago.estado"
+                                                minlength="5" required
+                                                #estado="ngModel">
+            
+                                                <div *ngIf="estado.errors?.required" class="help-block">
+                                                    El estado es requerida
+                                                </div>
+                                                <div *ngIf="estado.errors?.minlength" class="help-block">
+                                                    Por lo menos {{ estado.errors.minlength.requiredLength}} caracteres.
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+    
+    
+                        <div v-if="adminUsuario === true || updateUsuario === true" class="justify-content-end">
+                            <input type="submit" value="Actualizar RegistroPago" class="btn btn-primary btn-block" >
+                        </div>
+    
+                    </form>
+    
+                </div>
+    
+            </div>
+    
+        </div>
+    
+    </div>

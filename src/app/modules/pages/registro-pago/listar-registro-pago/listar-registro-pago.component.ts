@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RegistroPagoService } from '../../../services/registroPago/registro-pago.service';
 
 @Component({
   selector: 'app-listar-registro-pago',
@@ -7,9 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListarRegistroPagoComponent implements OnInit {
 
-  constructor() { }
+  registroPago:any = [];
+
+  constructor(private _registroPagoService: RegistroPagoService) { }
+
 
   ngOnInit() {
+    this.listarTodosLosRegistroPagos();
+  }
+
+
+  listarTodosLosRegistroPagos() {
+
+    this._registroPagoService.listarTodosLosRegistroPagos().subscribe(response => { 
+      this.registroPago = response.registroPago.data;
+      console.log("respuesta", response);
+      console.log("usus", this.registroPago);
+
+      },
+      error =>{
+        console.log("error--------------",error);
+      });
   }
 
 }
+ 

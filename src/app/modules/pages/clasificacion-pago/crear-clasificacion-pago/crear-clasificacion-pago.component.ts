@@ -28,7 +28,7 @@ export class CrearClasificacionPagoComponent implements OnInit {
     this.verificarDatosLogin();
   }
 
-  crearCategoria(forma:NgForm){
+  crearClasificacionPago(forma:NgForm){
     
     this._clasificacionPagoService.crearClasificacionPago(forma.value,this.usuarioLogueado).subscribe((clasificacionPago: ClasificacionPago)=>{
 

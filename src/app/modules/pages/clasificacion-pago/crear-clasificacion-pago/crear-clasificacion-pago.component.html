@@ -7,11 +7,11 @@
 
             <div class="box box-primary animated fadeIn faster animated fadeIn faster">
                 <div class="box-header">
-                        <a routerLink="/dashboard/categoria/listarCategoria" class="btn btn-primary  pull-right"><i class="fa fa-pencil"></i> Listado categoria</a>
+                        <a routerLink="/dashboard/clasificacionPago/listarClasificacionPago" class="btn btn-primary  pull-right"><i class="fa fa-pencil"></i> Listado ClasificacionPago</a>
                 </div>
 
                 <div class="box-body">
-                    <form (ngSubmit)="crearCategoria( f )" #f="ngForm" autocomplete="off" novalidate="">
+                    <form (ngSubmit)="crearClasificacionPago( f )" #f="ngForm" autocomplete="off" novalidate="">
 
 
                         <!-- NOMBRE-->
@@ -70,7 +70,7 @@
                                 </div>
                                 <div class="col-md-10">
 
-                                    <select name="genero" class="form-control" [(ngModel)]="clasificacionPago.estado">
+                                    <select name="estado" class="form-control" [(ngModel)]="clasificacionPago.estado">
 
                                         <option value="" selected>Seleccione Estado</option>
                                         <option value="ACTIVO">ACTIVO</option>
