@@ -21,9 +21,6 @@ export class ListarCategoriaComponent implements OnInit {
 
     this._categoriaService.listarTodasLasCategorias().subscribe(response => { 
       this.categorias = response.categoria.data;
-      console.log("respuesta", response);
-      console.log("usus", this.categorias);
-
       },
       error =>{
         console.log("error--------------",error);

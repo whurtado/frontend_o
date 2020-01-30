@@ -38,13 +38,12 @@ export class EditarClasificacionPagoComponent implements OnInit {
   mostrarClasificacionPago(id){ 
 
     this._clasificacionPagoService.mostrarClasificacionPago(id).subscribe(response => { 
-       console.log("respuesta",response);
 
       this.clasificacionPago = {
         id:  response.clasificacionPago.id ,
         nombre:response.clasificacionPago.fvcnombre,
-        estado:response.clasificacionPago.estado,
-        descripcion:response.clasificacionPago.estado,
+        estado:response.clasificacionPago.fvcestado,
+        descripcion:response.clasificacionPago.fvcdescripcion,
       }
 
       },
@@ -55,8 +54,6 @@ export class EditarClasificacionPagoComponent implements OnInit {
   }
 
   actualizarClasificacionPago(forma:NgForm){
-
-    console.log("forma",forma.value)
       
     this._clasificacionPagoService.actualizarClasificacionPago( forma.value, this.id_clasificacionPago, this.usuarioLogueado).subscribe((clasificacionPago: ClasificacionPago) => { 
 

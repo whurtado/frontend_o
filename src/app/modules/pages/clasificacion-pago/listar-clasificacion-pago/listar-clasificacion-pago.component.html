@@ -41,8 +41,8 @@
                 <tr *ngFor="let clasificacion of clasificacionPago">
                     <td>{{ clasificacion.id}}</td>
                     <td>{{ clasificacion.fvcnombre}}</td>
-                    <td>{{ clasificacion.fvcgenero}}</td>
-                    <td>{{ clasificacion.fvcgenero}}</td>
+                    <td>{{ clasificacion.fvcdescripcion}}</td>
+                    <td>{{ clasificacion.fvcestado}}</td>
 
                     <td>
                         <a routerLink="/dashboard/clasificacionPago/editarClasificacionPago/{{clasificacion.id}}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>

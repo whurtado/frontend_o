@@ -74,16 +74,11 @@ export class ClasificacionPagoService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
     headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
-  
-    console.log("rolssaaa---",clasificacionPago);
-    console.log("aaa---",id);
-    console.log("ssss---",usuariologueado[0].id);
-
-    
+      
     const body: FormData = new FormData();
     body.append('fvcnombre', clasificacionPago.nombre);
-    body.append('fvcdescripcion', clasificacionPago.genero);
-    body.append('estado', clasificacionPago.descripcion);
+    body.append('fvcdescripcion', clasificacionPago.descripcion);
+    body.append('estado', clasificacionPago.estado);
     body.append('id', id);
     body.append('usuario_sesion', usuariologueado[0].id);
 

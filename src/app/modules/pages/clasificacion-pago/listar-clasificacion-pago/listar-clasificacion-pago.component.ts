@@ -8,9 +8,9 @@ import { ClasificacionPagoService } from '../../../services/clasificacionPago/cl
 })
 export class ListarClasificacionPagoComponent implements OnInit {
 
-  constructor(private _clasificacionPagoService: ClasificacionPagoService) { }
-
   clasificacionPago:any = [];
+
+  constructor(private _clasificacionPagoService: ClasificacionPagoService) { }
 
   ngOnInit() {
     this.listarTodasLasClasificaciones();
@@ -20,7 +20,7 @@ export class ListarClasificacionPagoComponent implements OnInit {
   listarTodasLasClasificaciones() {
 
     this._clasificacionPagoService.listarTodasLasClasificaciones().subscribe(response => { 
-      this.clasificacionPago = response.categoria.data;
+      this.clasificacionPago = response.clasificacionPago.data;
       console.log("respuesta", response);
       console.log("usus", this.clasificacionPago);
 

@@ -7,5 +7,7 @@ export  class  RegistroPago {
     public deduccion:  any;  
     public valorTotalPagar:  any;  
     public observacion:  string;  
+    public estado:  string;  
+
 
   }
