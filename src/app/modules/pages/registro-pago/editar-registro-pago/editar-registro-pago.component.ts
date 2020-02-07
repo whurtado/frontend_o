@@ -14,7 +14,7 @@ export class EditarRegistroPagoComponent implements OnInit {
 
   public form: FormGroup;
 
-  registroPago:  RegistroPago  = {
+  registroPago:  RegistroPago  = { 
     id:  null ,
     factura:null,
     valorFactura:null,
@@ -22,6 +22,7 @@ export class EditarRegistroPagoComponent implements OnInit {
     deduccion:null,
     valorTotalPagar:null,
     observacion:null,
+    estado:null,
   };
   usuarioLogueado:any = [];
   id_registroPago:any;

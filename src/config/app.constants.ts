@@ -43,6 +43,7 @@ export const constants = {
         crearTipoAutorizacion: 'api/auth/tipoAutorizaciones/registrar',
         mostrarTipoAutorizacion: 'api/auth/tipoAutorizaciones/edit',
         actualizarTipoAutorizacion: 'api/auth/tipoAutorizaciones/actualizar',
+        verTipoAutorizacion: 'api/auth/tipoAutorizaciones/mostrarTipoAutorizacion',
 
         listarClasificacionPagos: 'api/auth/clasificacionPagos',
         cargarClasificacionPago: 'api/auth/clasificacionPagos/create',
@@ -55,6 +56,32 @@ export const constants = {
         crearRegistroPago: 'api/auth/registroPagos/registrar',
         mostrarRegistroPago: 'api/auth/registroPagos/edit',
         actualizarRegistroPago: 'api/auth/registroPagos/actualizar',
+
+        listarAutorizaciones: 'api/auth/autorizaciones',
+        cargarAutorizacion: 'api/auth/autorizaciones/create',
+        crearAutorizacion: 'api/auth/autorizaciones/registrar',
+        mostrarAutorizacion: 'api/auth/autorizaciones/edit',
+        actualizarAutorizacion: 'api/auth/autorizaciones/actualizar',
+
+        listarPagos: 'api/auth/pagos',
+        cargarPago: 'api/auth/pagos/create',
+        crearPago: 'api/auth/pagos/registrar',
+        mostrarPago: 'api/auth/pagos/edit',
+        actualizarPago: 'api/auth/pagos/actualizar',
+
+        listarArticulos: 'api/auth/articulos',
+        cargarArticulo: 'api/auth/articulos/create',
+        crearArticulo: 'api/auth/articulos/registrar',
+        mostrarArticulo: 'api/auth/articulos/edit',
+        actualizarArticulo: 'api/auth/articulos/actualizar',
+
+        listarClientes: 'api/auth/clientes',
+        cargarCliente: 'api/auth/clientes/create',
+        crearCliente: 'api/auth/clientes/registrar',
+        mostrarCliente: 'api/auth/clientes/edit',
+        actualizarCliente: 'api/auth/clientes/actualizar',
+
+
 
         
 

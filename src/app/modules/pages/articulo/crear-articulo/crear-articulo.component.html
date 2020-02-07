@@ -1,1 +1,239 @@
-<p>crear-articulo works!</p>
+<div>
+
+        <div class="row">
+    
+            <div class="col-md-8">
+    
+    
+                <div class="box box-primary animated fadeIn faster animated fadeIn faster">
+                    <div class="box-header">
+                            <a routerLink="/dashboard/articulo/listarArticulo" class="btn btn-primary  pull-right"><i class="fa fa-pencil"></i> Listado articulo</a>
+                    </div>
+    
+                    <div class="box-body">
+                        <form (ngSubmit)="crearArticulo( f )" #f="ngForm" autocomplete="off" novalidate="" enctype ="multipart/form-data">
+
+                            <!-- CATEGORIAS -->
+                         <div class="form-row">
+                                <div class="form-group col-md-12" >
+                                    <div class="col-md-2">
+                                        <label>Categoria</label>
+                                    </div>
+                                    <div class="col-md-10">
+    
+                                        <select name="categoria" class="form-control" [(ngModel)]="articulo.categoria_id">
+                                              
+                                            <option value="" selected>Seleccione Estado</option>
+                                            <option *ngFor="let categoria of categorias;index as i"
+                                                [value]="categoria.id">{{ categoria.fvcnombre}} - {{ categoria.fvcgenero}}</option>
+    
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+   
+    
+                            <!-- CODIGO BARRAS-->
+                            <div class="form-row " [ngClass]="{'has-error': (codigoBarras.errors?.required || codigoBarras.errors?.minlength) && codigoBarras.touched }">
+                                <div class="form-group col-md-12" >
+                                    <div class="col-md-2">
+                                        <label for="codigoBarras" >Codigo de Barras</label>
+                                    </div>
+                                    <div class="col-md-10">
+    
+                                        <input type="text" class="form-control"
+                                         placeholder="Ingrese su Codigo de Barras"
+                                        name="codigoBarras"  [(ngModel)]="articulo.codigoBarras"
+                                        minlength="5" required
+                                        #codigoBarras="ngModel">
+
+                                        <ngx-barcode [bc-value]="articulo.codigoBarras" [bc-display-value]="true"></ngx-barcode>
+
+    
+                                        <div *ngIf="codigoBarras.errors?.required" class="help-block">
+                                            El codigo de barras es requerido
+                                        </div>
+                                        <div *ngIf="codigoBarras.errors?.minlength" class="help-block">
+                                            Por lo menos {{ codigoBarras.errors.minlength.requiredLength}} caracteres.
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- NOMBRE-->
+                            <div class="form-row " [ngClass]="{'has-error': (nombre.errors?.required || nombre.errors?.minlength) && nombre.touched }">
+                                    <div class="form-group col-md-12" >
+                                        <div class="col-md-2">
+                                            <label for="nombre" >Nombre</label>
+                                        </div>
+                                        <div class="col-md-10">
+        
+                                            <input type="text" class="form-control"
+                                             placeholder="Ingrese su Nombre"
+                                            name="nombre"  [(ngModel)]="articulo.nombre"
+                                            minlength="5" required
+                                            #nombre="ngModel">
+        
+                                            <div *ngIf="nombre.errors?.required" class="help-block">
+                                                El nombre es requerido
+                                            </div>
+                                            <div *ngIf="nombre.errors?.minlength" class="help-block">
+                                                Por lo menos {{ nombre.errors.minlength.requiredLength}} caracteres.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- PRECIO-->
+                            <div class="form-row " [ngClass]="{'has-error': (valor.errors?.required || valor.errors?.minlength) && valor.touched }">
+                                    <div class="form-group col-md-12" >
+                                        <div class="col-md-2">
+                                            <label for="valor" >Precio</label>
+                                        </div>
+                                        <div class="col-md-10">
+        
+                                            <input type="number" class="form-control"
+                                             placeholder="Ingrese su Precio"
+                                            name="valor"  [(ngModel)]="articulo.valor"
+                                            minlength="3" required
+                                            #valor="ngModel">
+        
+                                            <div *ngIf="valor.errors?.required" class="help-block">
+                                                El precio es requerido
+                                            </div>
+                                            <div *ngIf="valor.errors?.minlength" class="help-block">
+                                                Por lo menos {{ valor.errors.minlength.requiredLength}} caracteres.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- CANTIDAD-->
+                            <div class="form-row " [ngClass]="{'has-error': (cantidad.errors?.required || cantidad.errors?.minlength) && cantidad.touched }">
+                                    <div class="form-group col-md-12" >
+                                        <div class="col-md-2">
+                                            <label for="cantidad" >Cantidad</label>
+                                        </div>
+                                        <div class="col-md-10">
+        
+                                            <input type="number" class="form-control"
+                                             placeholder="Ingrese su Cantidad"
+                                            name="cantidad"  [(ngModel)]="articulo.cantidad"
+                                            minlength="1" required
+                                            #cantidad="ngModel">
+        
+                                            <div *ngIf="cantidad.errors?.required" class="help-block">
+                                                La cantidad es requerido
+                                            </div>
+                                            <div *ngIf="cantidad.errors?.minlength" class="help-block">
+                                                Por lo menos {{ cantidad.errors.minlength.requiredLength}} caracteres.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+    
+                            <!-- REQUIERE DEPOSITO -->
+                            <div class="form-row">
+                                <div class="form-group col-md-12" >
+                                    <div class="col-md-2">
+                                        <label>Requiere Deposito</label>
+                                    </div>
+                                    <div class="col-md-10">
+    
+                                        <select name="requiereDeposito" class="form-control" [(ngModel)]="articulo.requiereDeposito">
+    
+                                            <option value="" selected>Seleccione una Opcion</option>
+                                            <option value="SI">SI</option>
+                                            <option value="NO">NO</option>
+                                        </select>
+                                    </div>
+    
+                                </div>
+    
+                            </div>
+
+                               <!-- VALOR DEPOSITO-->
+                               <div class="form-row " >
+                                    <div class="form-group col-md-12" >
+                                        <div class="col-md-2">
+                                            <label for="valorDeposito" >Valor Deposito</label>
+                                        </div>
+                                        <div class="col-md-10">
+        
+                                            <input type="number" class="form-control"
+                                             placeholder="Ingrese su Nombre"
+                                            name="valorDeposito"  [(ngModel)]="articulo.valorDeposito"
+                                            minlength="5" 
+                                            #valorDeposito="ngModel">
+        
+                                            <div *ngIf="valorDeposito.errors?.required" class="help-block">
+                                                EL Valor del Deposito es requerida
+                                            </div>
+                                            <div *ngIf="valorDeposito.errors?.minlength" class="help-block">
+                                                Por lo menos {{ valorDeposito.errors.minlength.requiredLength}} caracteres.
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+
+                            <!-- DESCRIPCION-->
+                            <div class="form-row " [ngClass]="{'has-error': (descripcion.errors?.required || descripcion.errors?.minlength) && nombre.touched }">
+                                    <div class="form-group col-md-12" >
+                                        <div class="col-md-2">
+                                            <label for="nombre" >Descripción</label>
+                                        </div>
+                                        <div class="col-md-10">
+        
+                                            <input type="text" class="form-control"
+                                             placeholder="Ingrese su Nombre"
+                                            name="descripcion"  [(ngModel)]="articulo.descripcion"
+                                            minlength="5" required
+                                            #descripcion="ngModel">
+        
+                                            <div *ngIf="nombre.errors?.required" class="help-block">
+                                                La descripcion es requerida
+                                            </div>
+                                            <div *ngIf="descripcion.errors?.minlength" class="help-block">
+                                                Por lo menos {{ nombre.errors.minlength.requiredLength}} caracteres.
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+
+                            <!-- IMAGEN-->
+                            <div class="form-row " >
+                                    <div class="form-group col-md-12" >
+                                        <div class="col-md-2">
+                                            <label for="nombre" >Imagen</label>
+                                        </div>
+                                        <div class="col-md-10">
+        
+                                            <input type="file" class="form-control"
+                                            name="imagen"  [(ngModel)]="articulo.imagen"
+                                            minlength="5" (change)="onImageChange($event)">
+                                        </div>
+                                    </div>
+                            </div>
+    
+                            <div class="col-xs-12">
+                                <button [disabled]="!f.valid"  type="submit" 
+                                class="btn btn-lg btn-primary btn-block" >Crear articulo</button>
+                              </div>
+    
+                            <!--<div v-if="adminUsuario === true || crearUsuario === true" class="justify-content-end">
+                                <input type="submit" value="Crear usuario" class="btn btn-primary btn-block" >
+                            </div>-->
+    
+                        </form>
+    
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AutorizacionService } from '../../../services/autorizacion/autorizacion.service';
 
 @Component({
   selector: 'app-listar-autorizacion',
@@ -7,9 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListarAutorizacionComponent implements OnInit {
 
-  constructor() { }
+  autorizaciones:any = [];
+
+  constructor(private _autorizacionService: AutorizacionService) { }
+
 
   ngOnInit() {
+    this.listarTodasLasAutorizaciones();
   }
 
+
+  listarTodasLasAutorizaciones() {
+
+    this._autorizacionService.listarTodasLasAutorizaciones().subscribe(response => { 
+      this.autorizaciones = response.autorizacion.data;
+      console.log("respuesta", response);
+      console.log("usus", this.autorizaciones);
+
+      },
+      error =>{
+        console.log("error--------------",error);
+      });
+  }
 }

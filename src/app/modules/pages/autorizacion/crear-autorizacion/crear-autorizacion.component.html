@@ -1,1 +1,126 @@
-<p>crear-autorizacion works!</p>
+<div>
+
+    <div class="row">
+
+        <div class="col-md-8">
+
+
+            <div class="box box-primary animated fadeIn faster animated fadeIn faster">
+                <div class="box-header">
+                        <a routerLink="/dashboard/autorizacion/listarAutorizacion" class="btn btn-primary  pull-right"><i class="fa fa-pencil"></i> Listado Autorizacion</a>
+                </div>
+
+                <div class="box-body">
+                    <form (ngSubmit)="crearAutorizacion( f )" #f="ngForm" autocomplete="off" novalidate="">
+
+
+                        <!-- DESCRIPCION-->
+                        <div class="form-row " [ngClass]="{'has-error': (descripcion.errors?.required || descripcion.errors?.minlength) && descripcion.touched }">
+                            <div class="form-group col-md-12" >
+                                <div class="col-md-2">
+                                    <label for="descripcion" >Descripcion</label>
+                                </div>
+                                <div class="col-md-10">
+
+                                    <input type="text" class="form-control"
+                                     placeholder="Ingrese su descripcion"
+                                    name="descripcion"  [(ngModel)]="autorizacion.descripcion"
+                                    minlength="5" required
+                                    #descripcion="ngModel">
+
+                                    <div *ngIf="descripcion.errors?.required" class="help-block">
+                                        La descripcion es requerida
+                                    </div>
+                                    <div *ngIf="descripcion.errors?.minlength" class="help-block">
+                                        Por lo menos {{ descripcion.errors.minlength.requiredLength}} caracteres.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                         <!-- TIPO AUTORIZACION -->
+                         <div class="form-row">
+                            <div class="form-group col-md-12" >
+                                <div class="col-md-2">
+                                    <label>Tipo Autorizacion</label>
+                                </div>
+                                <div class="col-md-10">
+
+                                    <select name="tipoAutorizacion" class="form-control" [(ngModel)]="autorizacion.tipoAutorizacion">
+                                          
+                                        <option value="" selected>Seleccione Estado</option>
+                                        <option *ngFor="let tipo of tipoAutorizacions;index as i"
+                                            [value]="tipo.id">{{ tipo.fvcnombre}}</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FECHA A PAGAR-->
+                        <div class="form-row " [ngClass]="{'has-error': (fechaAplicaAutorizacion.errors?.required || fechaAplicaAutorizacion.errors?.minlength) && fechaAplicaAutorizacion.touched }">
+                                <div class="form-group col-md-12" >
+                                    <div class="col-md-2">
+                                        <label for="fechaAplicaAutorizacion" >Fecha Aplica Autorizacion</label>
+                                    </div>
+                                    <div class="col-md-10">
+    
+                                        <input type="date" class="form-control"
+                                         placeholder=""
+                                        name="fechaAplicaAutorizacion"  [(ngModel)]="autorizacion.fechaAplicaAutorizacion"
+                                        minlength="10" required
+                                        #fechaAplicaAutorizacion="ngModel">
+    
+                                        <div *ngIf="fechaAplicaAutorizacion.errors?.required" class="help-block">
+                                            La Fecha de autorizacion es requerida
+                                        </div>
+                                        <div *ngIf="fechaAplicaAutorizacion.errors?.minlength" class="help-block">
+                                            Por lo menos {{ fechaAplicaAutorizacion.errors.minlength.requiredLength}} caracteres.
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+
+                        <!-- ESTADO-->
+                        <div class="form-row " [ngClass]="{'has-error': (estado.errors?.required || estado.errors?.minlength) && estado.touched }">
+                                <div class="form-group col-md-12" >
+                                    <div class="col-md-2">
+                                        <label for="estado" >Estado</label>
+                                    </div>
+                                    <div class="col-md-10">
+     
+                                        <input type="text" class="form-control" readonly="true"
+                                         placeholder="Ingrese su Observacion"
+                                        name="estado"  [(ngModel)]="autorizacion.estado"
+                                        minlength="5" required
+                                        #estado="ngModel">
+    
+                                        <div *ngIf="estado.errors?.required" class="help-block">
+                                            El estado es requerido
+                                        </div>
+                                        <div *ngIf="estado.errors?.minlength" class="help-block">
+                                            Por lo menos {{ estado.errors.minlength.requiredLength}} caracteres.
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+
+
+                        <div class="col-xs-12">
+                            <button [disabled]="!f.valid"  type="submit" 
+                            class="btn btn-lg btn-primary btn-block" >Crear registroPago</button>
+                          </div>
+
+                        <!--<div v-if="adminUsuario === true || crearUsuario === true" class="justify-content-end">
+                            <input type="submit" value="Crear usuario" class="btn btn-primary btn-block" >
+                        </div>-->
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

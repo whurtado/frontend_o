@@ -12,4 +12,4 @@ export class EditarArticuloComponent implements OnInit {
   ngOnInit() {
   }
 
-}
+} 
