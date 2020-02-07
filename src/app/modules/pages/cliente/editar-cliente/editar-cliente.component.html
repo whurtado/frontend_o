@@ -1,1 +1,443 @@
-<p>editar-cliente works!</p>
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">Actualizar cliente</h3>
+
+                    <a routerLink="/dashboard/cliente/listarCliente" class="btn btn-primary  pull-right"><i class="fa fa-pencil"></i> Listado clientes</a>
+
+                </div>
+
+                <div class="box-body">
+
+
+                    <form (ngSubmit)="actualizarCliente( f )" #f="ngForm" autocomplete="off" novalidate="">
+
+                            
+                        <!-- NOMBRES -->
+                        <div class="form-row" >
+                            <div class="form-group col-md-6" [ngClass]="{'has-error': (primernombre.errors?.required || primernombre.errors?.minlength) && primernombre.touched }">
+                                <div class="col-md-4">
+                                    <label>Primer Nombre</label>
+                                </div>
+                                <div class="col-md-8">
+
+                                    <input type="text" class="form-control"
+                                     placeholder="Ingrese su Nombre"
+                                    name="primernombre"  [(ngModel)]="cliente.primernombre"
+                                    minlength="5" required
+                                    #primernombre="ngModel">
+
+                                    <div *ngIf="primernombre.errors?.required" class="help-block">
+                                        El primernombre es requerido
+                                    </div>
+                                    <div *ngIf="primernombre.errors?.minlength" class="help-block">
+                                        Por lo menos {{ primernombre.errors.minlength.requiredLength}} caracteres.
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                            <div class="form-group col-md-6" [ngClass]="{'has-error': (segundonombre.errors?.required || segundonombre.errors?.minlength) && segundonombre.touched }">
+                                <div class="col-md-4">
+                                    <label>Segundo Nombre</label>
+                                </div>
+                                <div class="col-md-8">
+
+                                    <input type="text" class="form-control"
+                                     placeholder="Ingrese su Nombre"
+                                    name="segundonombre"  [(ngModel)]="cliente.segundonombre"
+                                    minlength="5" required
+                                    #segundonombre="ngModel">
+
+                                    <div *ngIf="segundonombre.errors?.required" class="help-block">
+                                        El segundonombre es requerido
+                                    </div>
+                                    <div *ngIf="segundonombre.errors?.minlength" class="help-block">
+                                        Por lo menos {{ segundonombre.errors.minlength.requiredLength}} caracteres.
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <!-- APELLIDOS -->
+                        <div class="form-row" >
+                            <div class="form-group col-md-6" [ngClass]="{'has-error': (primerapellido.errors?.required || primerapellido.errors?.minlength) && primerapellido.touched }">
+                                <div class="col-md-4">
+                                    <label>Primer Apellido</label>
+                                </div>
+                                <div class="col-md-8">
+
+                                    <input type="text" class="form-control"
+                                     placeholder="Ingrese su Apellido"
+                                    name="primerapellido"  [(ngModel)]="cliente.primerapellido"
+                                    minlength="5" required
+                                    #primerapellido="ngModel">
+
+                                    <div *ngIf="primerapellido.errors?.required" class="help-block">
+                                        El primerapellido es requerido
+                                    </div>
+                                    <div *ngIf="primerapellido.errors?.minlength" class="help-block">
+                                        Por lo menos {{ primerapellido.errors.minlength.requiredLength}} caracteres.
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                            <div class="form-group col-md-6" [ngClass]="{'has-error': (segundoapellido.errors?.required || segundoapellido.errors?.minlength) && segundoapellido.touched }">
+                                <div class="col-md-4">
+                                    <label>Segundo Apellido</label>
+                                </div>
+                                <div class="col-md-8">
+
+                                    <input type="text" class="form-control"
+                                     placeholder="Ingrese su Apellido"
+                                    name="segundoapellido"  [(ngModel)]="cliente.segundoapellido"
+                                    minlength="5" required
+                                    #segundoapellido="ngModel">
+
+                                    <div *ngIf="segundoapellido.errors?.required" class="help-block">
+                                        El segundoapellido es requerido
+                                    </div>
+                                    <div *ngIf="segundoapellido.errors?.minlength" class="help-block">
+                                        Por lo menos {{ segundoapellido.errors.minlength.requiredLength}} caracteres.
+                                    </div>
+
+
+                                </div>
+
+                             </div>
+                        </div>
+
+                        <!-- DOCUMENTO -->
+                        <div class="form-row" >
+
+                            <div class="form-group col-md-6" [ngClass]="{'has-error': (documento.errors?.required || documento.errors?.minlength) && documento.touched }">
+                                <div class="col-md-4">
+                                    <label>Documento</label>
+                                </div>
+                                <div class="col-md-8">
+
+                                    <input type="text" class="form-control"
+                                     placeholder="Ingrese su Dcoumento"
+                                    name="documento"  [(ngModel)]="cliente.documento"
+                                    minlength="5" required
+                                    #documento="ngModel">
+
+                                    <div *ngIf="documento.errors?.required" class="help-block">
+                                        El documento es requerido
+                                    </div>
+                                    <div *ngIf="documento.errors?.minlength" class="help-block">
+                                        Por lo menos {{ documento.errors.minlength.requiredLength}} caracteres.
+                                    </div>
+
+
+                                </div>
+
+                             </div>
+                        </div>
+
+                        <!-- DIRECCION -->
+                        <div class="form-row" >
+                            <div class="form-group col-md-6" [ngClass]="{'has-error': (direccion.errors?.required || direccion.errors?.minlength) && direccion.touched }">
+                                <div class="col-md-4">
+                                    <label>Direccion</label>
+                                </div>
+                                <div class="col-md-8">
+
+                                    <input type="text" class="form-control"
+                                     placeholder="Ingrese su Direccion"
+                                    name="direccion"  [(ngModel)]="cliente.direccion"
+                                    minlength="5" required
+                                    #direccion="ngModel">
+
+                                    <div *ngIf="direccion.errors?.required" class="help-block">
+                                        El direccion es requerido
+                                    </div>
+                                    <div *ngIf="direccion.errors?.minlength" class="help-block">
+                                        Por lo menos {{ direccion.errors.minlength.requiredLength}} caracteres.
+                                    </div>
+
+
+                                </div>
+
+                             </div>
+                            <div class="form-group col-md-6" [ngClass]="{'has-error': (telefonoCasa.errors?.required || telefonoCasa.errors?.minlength) && telefonoCasa.touched }">
+                                <div class="col-md-4">
+                                    <label>Telefono Casa</label>
+                                </div>
+                                <div class="col-md-8">
+
+                                    <input type="text" class="form-control"
+                                     placeholder="Ingrese su Telefono"
+                                    name="telefonoCasa"  [(ngModel)]="cliente.telefonoCasa"
+                                    minlength="5" required
+                                    #telefonoCasa="ngModel">
+
+                                    <div *ngIf="telefonoCasa.errors?.required" class="help-block">
+                                        El telefonoCasa es requerido
+                                    </div>
+                                    <div *ngIf="telefonoCasa.errors?.minlength" class="help-block">
+                                        Por lo menos {{ telefonoCasa.errors.minlength.requiredLength}} caracteres.
+                                    </div>
+
+
+                                </div>
+
+                             </div>
+                        </div>
+
+
+                        <!-- TELEFONO -->
+                        <div class="form-row" >
+                            <div class="form-group col-md-6" [ngClass]="{'has-error': (telefonoOficina.errors?.required || telefonoOficina.errors?.minlength) && telefonoOficina.touched }">
+                                <div class="col-md-4">
+                                    <label>Telefono Oficina</label>
+                                </div>
+                                <div class="col-md-8">
+
+                                    <input type="text" class="form-control"
+                                     placeholder="Ingrese su Telefono"
+                                    name="telefonoOficina"  [(ngModel)]="cliente.telefonoOficina"
+                                    minlength="5" required
+                                    #telefonoOficina="ngModel">
+
+                                    <div *ngIf="telefonoOficina.errors?.required" class="help-block">
+                                        El telefonoOficina es requerido
+                                    </div>
+                                    <div *ngIf="telefonoOficina.errors?.minlength" class="help-block">
+                                        Por lo menos {{ telefonoOficina.errors.minlength.requiredLength}} caracteres.
+                                    </div>
+
+
+                                </div>
+
+                             </div>
+                             <div class="form-group col-md-6" [ngClass]="{'has-error': (celular.errors?.required || celular.errors?.minlength) && celular.touched }">
+                                <div class="col-md-4">
+                                    <label>Celular</label>
+                                </div>
+                                <div class="col-md-8">
+
+                                    <input type="text" class="form-control"
+                                     placeholder="Ingrese su Celular"
+                                    name="celular"  [(ngModel)]="cliente.celular"
+                                    minlength="5" required
+                                    #celular="ngModel">
+
+                                    <div *ngIf="celular.errors?.required" class="help-block">
+                                        El celular es requerido
+                                    </div>
+                                    <div *ngIf="celular.errors?.minlength" class="help-block">
+                                        Por lo menos {{ celular.errors.minlength.requiredLength}} caracteres.
+                                    </div>
+
+
+                                </div>
+
+                             </div>
+                        </div>
+
+
+                        <!-- DIRECCION TRABAJO -->
+                        <div class="form-row" >
+                            <div class="form-group col-md-6" [ngClass]="{'has-error': (direccionTrabajo.errors?.required || direccionTrabajo.errors?.minlength) && direccionTrabajo.touched }">
+                                <div class="col-md-4">
+                                    <label>Direccion de Trabajo</label>
+                                </div>
+                                <div class="col-md-8">
+
+                                    <input type="text" class="form-control"
+                                     placeholder="Ingrese su Direccion"
+                                    name="direccionTrabajo"  [(ngModel)]="cliente.direccionTrabajo"
+                                    minlength="5" required
+                                    #direccionTrabajo="ngModel">
+
+                                    <div *ngIf="direccionTrabajo.errors?.required" class="help-block">
+                                        La direccionTrabajo es requerido
+                                    </div>
+                                    <div *ngIf="direccionTrabajo.errors?.minlength" class="help-block">
+                                        Por lo menos {{ direccionTrabajo.errors.minlength.requiredLength}} caracteres.
+                                    </div>
+
+
+                                </div>
+
+                             </div>
+
+                             <div class="form-group col-md-6" [ngClass]="{'has-error': (email.errors?.required || email.errors?.minlength) && email.touched }">
+                                <div class="col-md-4">
+                                    <label>Email</label>
+                                </div>
+                                <div class="col-md-8">
+
+                                    <input type="email" class="form-control" placeholder="EIngrese su Correo"
+                                       name="email" [(ngModel)]="cliente.email"
+                                       required 
+                                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                                       #email="ngModel">
+
+                                    <div *ngIf="email.errors?.required" class="help-block">
+                                        El email es requerido
+                                    </div>
+                                    <div *ngIf="email.errors?.minlength" class="help-block">
+                                        Por lo menos {{ email.errors.minlength.requiredLength}} caracteres.
+                                    </div>
+
+
+                                </div>
+
+                             </div>
+                        </div>
+
+                        <!-- FECHA NACIMIENTO -->
+
+                        <div class="form-row" >
+                            <div class="form-group col-md-6" [ngClass]="{'has-error': (fechaNacimiento.errors?.required || fechaNacimiento.errors?.minlength) && fechaNacimiento.touched }">
+                                <div class="col-md-4">
+                                    <label>Fecha d nacimiento</label>
+                                </div>
+                                <div class="col-md-8">
+
+                                    <input type="date" class="form-control"
+                                     placeholder="Ingrese su fechaNacimiento"
+                                    name="fechaNacimiento"  [(ngModel)]="cliente.fechaNacimiento"
+                                    minlength="5" required
+                                    #fechaNacimiento="ngModel">
+
+                                    <div *ngIf="fechaNacimiento.errors?.required" class="help-block">
+                                        El fechaNacimiento es requerido
+                                    </div>
+                                    <div *ngIf="fechaNacimiento.errors?.minlength" class="help-block">
+                                        Por lo menos {{ fechaNacimiento.errors.minlength.requiredLength}} caracteres.
+                                    </div>
+
+
+                                </div>
+
+                             </div>
+                             <div class="form-group col-md-6" [ngClass]="{'has-error': (observacion.errors?.required || observacion.errors?.minlength) && observacion.touched }">
+                                <div class="col-md-4">
+                                    <label>Observacion</label>
+                                </div>
+                                <div class="col-md-8">
+
+                                    <input type="text" class="form-control"
+                                     placeholder="Ingrese su observacion"
+                                    name="observacion"  [(ngModel)]="cliente.observacion"
+                                    minlength="5" required
+                                    #observacion="ngModel">
+
+                                    <div *ngIf="observacion.errors?.required" class="help-block">
+                                        El observacion es requerido
+                                    </div>
+                                    <div *ngIf="observacion.errors?.minlength" class="help-block">
+                                        Por lo menos {{ observacion.errors.minlength.requiredLength}} caracteres.
+                                    </div>
+
+
+                                </div>
+
+                             </div>
+                </div>
+
+
+                        <!-- PRUEBAS DETALLE DINAMICO   -->
+
+                        <div class="form-row">
+                            <div class="form-group col-md-10" >
+                                    <div class="box-title">
+                                        <h4><strong>Datos Referencia</strong></h4>
+                                    </div>
+                            </div>
+                        </div>
+
+
+
+                        <table class="table table-bordered table-striped table-sm ">
+
+                        <div class="form-row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Nombre Referencia</label>
+                                    <div class="form-inline">
+                                        <input type="text" class="form-control" name="nombre_referencia" [(ngModel)]="detalleCliente.nombre_referencia"  placeholder="Ingrese Nombre">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Telefono Referencia</label>
+                                    <input type="number" class="form-control" name="telefono_referencia" [(ngModel)]="detalleCliente.telefono_referencia"  placeholder="Ingrese Telefono">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label></label>
+
+                                    <input type="button" class="btn btn-success form-control "   (click)="agregarDetalle()" value="+" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group row border">
+                            <div class="table-responsive col-md-12">
+                                <table class="table table-bordered table-striped table-sm ">
+                                    <thead>
+                                    <tr>
+                                        <th>Opciones</th>
+                                        <th>Nombre Referencia</th>
+                                        <th>Telefono Referencia</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody *ngIf="arrayDetalleCliente.length">
+                                        <tr *ngFor="let detalle of arrayDetalleCliente ; index as i" >
+                                            <td>
+                                                <button (click)="eliminarDetalle(i)" type="button" class="btn btn-danger btn-sm">
+                                                    X
+                                                </button>
+                                            </td>
+                                        <td >{{ detalle.dfvnombre_referencia}}</td>
+                                        <td >{{ detalle.dfvtelefono_referencia }}</td>
+                                        </tr>
+
+                                    </tbody>
+                                    <tbody *ngIf="!arrayDetalleCliente.length">
+                                    <tr>
+                                        <td colspan="6">
+                                            NO hay Rererencias agregadas
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        </table>
+
+
+                        <!-- FIN PRUEBAS DETALLE DINAMICO   -->
+
+
+
+                        <div v-if="adminUsuario === true || crearCliente === true" class="justify-content-end">
+                            <input type="submit" value="Actualizar cliente" class="btn btn-primary btn-block" >
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>

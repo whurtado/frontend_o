@@ -19,6 +19,7 @@ export class CrearRegistroPagoComponent implements OnInit {
     deduccion:null,
     valorTotalPagar:null,
     observacion:null,
+    estado:null
   };
   usuarioLogueado:any = [];
 

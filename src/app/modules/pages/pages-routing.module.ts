@@ -17,6 +17,8 @@ const routes: Routes = [
       {path: 'sede', loadChildren: () => import('./sede/sede.module').then(m => m.SedeModule)},
       {path: 'clasificacionPago', loadChildren: () => import('./clasificacion-pago/clasificacion-pago.module').then(m => m.ClasificacionPagoModule)},
       {path: 'registroPago', loadChildren: () => import('./registro-pago/registro-pago.module').then(m => m.RegistroPagoModule)},
+      {path: 'pago', loadChildren: () => import('./pago/pago.module').then(m => m.PagoModule)},
+      {path: 'articulo', loadChildren: () => import('./articulo/articulo.module').then(m => m.ArticuloModule)},
 
       /*{path: 'usuario', component: UsuarioComponent},
       {path: 'rol', component: RolComponent }*/

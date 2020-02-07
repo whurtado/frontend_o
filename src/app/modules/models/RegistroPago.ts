@@ -8,6 +8,4 @@ export  class  RegistroPago {
     public valorTotalPagar:  any;  
     public observacion:  string;  
     public estado:  string;  
-
-
   }

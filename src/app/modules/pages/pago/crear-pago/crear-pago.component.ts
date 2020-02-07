@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Pago } from "../../../models/pago";
+import { PagoService } from '../../../services/pago/pago.service';
+import Swal from 'sweetalert2';
+import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-crear-pago',
@@ -7,9 +11,54 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CrearPagoComponent implements OnInit {
 
-  constructor() { }
+  public form: FormGroup;
 
-  ngOnInit() {
+  pago: Pago = {
+     id: null,
+     nombre:  null,  
+     documento:  null,  
+     telefono:  null,
+     direccion:  null,  
+     valor:  null, 
+     observacion:  null,
+     ahh:  null,  
+     factura:  null,  
   }
 
-}
+  usuarioLogueado:any = [];
+
+  constructor(public _pagoService: PagoService) { }
+
+  ngOnInit() {
+    this.verificarDatosLogin();
+  }
+
+  crearPago(forma:NgForm){
+    
+    this._pagoService.crearPago(forma.value,this.usuarioLogueado).subscribe((pago: Pago)=>{
+
+      Swal.fire({
+        title: '',
+        text: 'Registro creado correctamente',
+        //type: 'success'
+      });
+
+    });
+  }
+
+  verificarDatosLogin(){
+
+    let adminUsuario  = false;
+    let crearRol  = false;
+
+    let arrayPermisos:any   = localStorage.getItem('rolesPermisos');
+    let arrayRol:any        = localStorage.getItem('roles');
+    this.usuarioLogueado = JSON.parse(localStorage.getItem('user'));
+
+    /*if(me.arrayPermisos.indexOf('create-role') >=0){ me.crearRol = true; }
+    if(me.arrayRol.indexOf('admin') >=0){ me.adminUsuario = true; }*/
+
+  }
+
+
+} 
