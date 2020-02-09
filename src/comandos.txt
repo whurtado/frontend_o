@@ -6,6 +6,7 @@ ng g c modules/pages/rol/listar
 
 //crear un servicio
 ng g s modules/services/rol/rol
+ng g s modules/services/autocomplete/autocomplete
 
 //crear un modulo
 ng g m modules/pages/usuario 

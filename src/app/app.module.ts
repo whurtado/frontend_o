@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {LayoutModule} from './modules/layout/layout.module';
 import {EnvServiceProvider} from './modules/services/utils/env.service.provider';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,8 @@ import {EnvServiceProvider} from './modules/services/utils/env.service.provider'
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    AutocompleteLibModule,
+
   ],
   providers: [
     EnvServiceProvider

@@ -18,6 +18,7 @@ import { ClienteModule } from './cliente/cliente.module';
 import { PagoModule } from './pago/pago.module';
 import { RegistroPagoModule } from './registro-pago/registro-pago.module';
 import { VendedorModule } from './vendedor/vendedor.module';
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { VendedorModule } from './vendedor/vendedor.module';
     VendedorModule,
     FormsModule,
     ReactiveFormsModule,
+    AutocompleteLibModule
   ]
 })
 export class PagesModule {

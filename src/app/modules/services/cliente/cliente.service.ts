@@ -4,7 +4,7 @@ import { Observable } from  'rxjs';
 import { delay } from "rxjs/operators";
 import {EnvService} from '../utils/env.service';
 import {constants} from '../../../../config/app.constants';
-import { Cliente } from '../../models/cliente';
+import { Cliente, EstadoCliente } from '../../models/cliente';
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +41,6 @@ listarTodosLosClientes(): Observable<any>{
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
     headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
-    console.log("usuario", detalleCliente);
 
     const body: FormData = new FormData();
     body.append('primernombre', cliente.primernombre);
@@ -86,10 +85,6 @@ listarTodosLosClientes(): Observable<any>{
     headers.append('Content-Type', 'application/form-data');
     headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
 
-    console.log("rolssaaa---",cliente);
-    console.log("aaa---",id);
-    console.log("ssss---",usuariologueado[0].id);
-
 
     const body: FormData = new FormData();
     body.append('primernombre', cliente.primernombre);
@@ -116,4 +111,71 @@ listarTodosLosClientes(): Observable<any>{
     delay(500)
     );
   }
+
+  mostrarEstados( id) : Observable<any>{
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/form-data');
+    headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
+
+    const body: FormData = new FormData();
+    const url = this.env.apiGatewayBackOffice + constants.config.mostrarEstados + '/'+id;
+    return this.http.get(url, {headers})
+    .pipe(
+    delay(500)
+    );
+  }
+
+  registrarEstadoCliente(estadoCliente, cliente_id,usuariologueado:object): Observable<EstadoCliente>{
+
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/form-data');
+    headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
+
+    const body: FormData = new FormData();
+    body.append('fdtestado', estadoCliente.estado);
+    body.append('fvcdescripcion', estadoCliente.descripcion);
+    body.append('fvccliente_id', cliente_id);
+    body.append('fvcusuario_id', usuariologueado[0].id);
+
+
+    const url = this.env.apiGatewayBackOffice + constants.config.registrarEstadoCliente;
+    return this.http.post<EstadoCliente>(url, body, {headers})
+    .pipe(
+    delay(500)
+    );
+  }
+
+
+   mostrarNovedades( id) : Observable<any>{
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/form-data');
+    headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
+
+    const body: FormData = new FormData();
+    const url = this.env.apiGatewayBackOffice + constants.config.mostrarNovedades + '/'+id;
+    return this.http.get(url, {headers})
+    .pipe(
+    delay(500)
+    );
+  }
+
+  registrarNovedadCliente(novedadCliente, cliente_id,usuariologueado:object): Observable<EstadoCliente>{
+
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/form-data');
+    headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
+
+    const body: FormData = new FormData();
+    body.append('fdtdescripcion', novedadCliente.descripcion);
+    body.append('fvccliente_id', cliente_id);
+    body.append('fvcusuario_id', usuariologueado[0].id);
+     
+
+    const url = this.env.apiGatewayBackOffice + constants.config.registrarNovedadCliente;
+    return this.http.post<EstadoCliente>(url, body, {headers})
+    .pipe(
+    delay(500)
+    );
+  }
+
 }

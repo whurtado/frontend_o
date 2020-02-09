@@ -24,3 +24,17 @@ export  class  Cliente {
     public telefono_referencia:  string;  
     
   }
+
+  export  class  EstadoCliente {
+
+    public id: string;
+    public estado:  string;  
+    public descripcion:  string;  
+    
+  }
+
+  export  class  NovedadCliente {
+
+    public id: string;
+    public descripcion:  string; 
+  }

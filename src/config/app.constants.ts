@@ -80,7 +80,13 @@ export const constants = {
         crearCliente: 'api/auth/clientes/registrar',
         mostrarCliente: 'api/auth/clientes/edit',
         actualizarCliente: 'api/auth/clientes/actualizar',
+        mostrarEstados: 'api/auth/clientes/cargarEstadoCliente',
+        registrarEstadoCliente: 'api/auth/clientes/cambioEstado',
+         mostrarNovedades: 'api/auth/clientes/cargarNovedadCliente',
+        registrarNovedadCliente: 'api/auth/clientes/asignacionNovedad',
 
+        autocompleteCliente: 'api/auth/autocomplete/search',
+        autocompleteVendedor: 'api/auth/autocomplete/search',
 
 
         

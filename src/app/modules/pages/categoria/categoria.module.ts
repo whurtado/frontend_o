@@ -8,7 +8,6 @@ import { CrearCategoriaComponent } from './crear-categoria/crear-categoria.compo
 import { EditarCategoriaComponent } from './editar-categoria/editar-categoria.component';
 import { CategoriaComponent } from './categoria/categoria.component';
 
-
 @NgModule({
   declarations: [ListarCategoriaComponent, CrearCategoriaComponent, EditarCategoriaComponent, CategoriaComponent],
   imports: [
