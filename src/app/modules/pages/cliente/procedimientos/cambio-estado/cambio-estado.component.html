@@ -1,0 +1,160 @@
+<div>
+
+    <div class="row">
+
+        <div class="col-md-8">
+
+
+            <div class="box box-success">
+
+                <div class="box-body">
+                    <form (ngSubmit)="registrarEstadoCliente( f )" #f="ngForm" autocomplete="off" novalidate="">
+
+                        <!-- CLIENTE-->
+                        <div class="form-row" >
+                            <div class="form-group col-md-12" >
+
+                                <div class="col-md-2">
+                                    <label>Cliente:</label>
+                                </div>
+
+                                <div class="ng-autocomplete col-md-10">
+                                    <ng-autocomplete
+                                      [data]="cliente"
+                                      [searchKeyword]="keyword"
+                                      placeHolder="Ingrese el nombre del cliente"
+                                      (selected)='selectEvent($event)'
+                                      (inputChanged)='onChangeSearch($event)'
+                                      (inputFocused)='onFocused($event)'
+                                      historyIdentifier="cliente"
+                                      [itemTemplate]="itemTemplate"
+                                      [notFoundTemplate]="notFoundTemplate">
+                                    </ng-autocomplete>
+                                  
+                                    <ng-template #itemTemplate let-item>
+                                      <a [innerHTML]="item.fvcprimernombre"></a>
+                                    </ng-template>
+                                  
+                                    <ng-template #notFoundTemplate let-notFound>
+                                      <div [innerHTML]="notFound"></div>
+                                    </ng-template>
+                                  </div>
+                  
+                            </div>
+
+                            
+                        </div> 
+
+                        <!-- ESTADO -->
+                        <div class="form-row">
+                            <div class="form-group col-md-12" >
+                                <div class="col-md-2">
+                                    <label>Estado</label>
+                                </div>
+                                <div class="col-md-10">
+
+                                    <select name="estado" class="form-control" [(ngModel)]="estadoCliente.estado">
+
+                                        <option value="" selected>Seleccione Estado</option>
+                                        <option value="CONFIRMADO">CONFIRMADO</option>
+                                        <option value="POR CONFIRMAR">POR CONFIRMAR</option>
+                                    </select>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- DESCRIPCION-->
+                        <div class="form-row " [ngClass]="{'has-error': (descripcion.errors?.required || descripcion.errors?.minlength) && descripcion.touched }">
+                            <div class="form-group col-md-12" >
+                                <div class="col-md-2">
+                                    <label for="nombre" >Descripción</label>
+                                </div>
+                                <div class="col-md-10">
+
+                                    <input type="text" class="form-control"
+                                     placeholder="Ingrese su Nombre"
+                                    name="descripcion"  [(ngModel)]="estadoCliente.descripcion"
+                                    minlength="5" required
+                                    #descripcion="ngModel">
+
+                                    <div *ngIf="descripcion.errors?.required" class="help-block">
+                                        La descripcion es requerida
+                                    </div>
+                                    <div *ngIf="descripcion.errors?.minlength" class="help-block">
+                                        Por lo menos {{ descripcion.errors.minlength.requiredLength}} caracteres.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="justify-content-end">
+                            <div class="col-md-6">
+                                <input type="submit" value="Actualizar Estado" class="btn btn-primary btn-block" >
+
+                            </div>
+                            <div class="col-md-6">
+                                <input
+                                        type="button"
+                                        value="Ver Historico"
+                                        class="btn btn-primary btn-block "
+                                        (click)="verOcultarHistorico()">
+
+                            </div>
+
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12" >
+
+
+                                <table id="mostrar-historico" class="table table-bordered table-striped table-sm " style="display: none; margin-top: 15px">
+
+
+                                    <div class="form-group row border">
+                                        <div class="table-responsive col-md-12">
+                                            <table class="table table-bordered table-striped table-sm ">
+                                                <thead>
+                                                <tr>
+                                                    <th>Estado</th>
+                                                    <th>Descripcion</th>
+                                                    <th>Fecha</th>
+                                                    <th>Usuario</th>
+
+
+                                                </tr>
+                                                </thead>
+                                                <tbody *ngIf="arrayEstado.length">
+                                                <tr *ngFor="let detalle of arrayEstado; index as i">
+
+                                                    <td>{{ detalle.fdtestado}}</td>
+                                                    <td>{{ detalle.fdtobservacion }}</td>
+                                                    <td>{{ detalle.fdtfecha }}</td>
+                                                    <td>{{ detalle.name }}</td>
+                                                </tr>
+
+                                                </tbody>
+                                                <tbody *ngIf="!arrayEstado.length">
+                                                <tr>
+                                                    <td colspan="6">
+                                                        NO hay Rererencias agregadas
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </table>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

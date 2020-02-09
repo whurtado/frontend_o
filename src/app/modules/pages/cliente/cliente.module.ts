@@ -7,14 +7,17 @@ import { ClienteComponent } from './cliente/cliente.component';
 import { CrearClienteComponent } from './crear-cliente/crear-cliente.component';
 import { EditarClienteComponent } from './editar-cliente/editar-cliente.component';
 import { ListarClienteComponent } from './listar-cliente/listar-cliente.component';
-
+import { CambioEstadoComponent } from './procedimientos/cambio-estado/cambio-estado.component';
+import { AsignacionNovedadComponent } from './procedimientos/asignacion-novedad/asignacion-novedad.component';
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 
 @NgModule({
-  declarations: [ClienteComponent, CrearClienteComponent, EditarClienteComponent, ListarClienteComponent],
+  declarations: [ClienteComponent, CrearClienteComponent, EditarClienteComponent, ListarClienteComponent, CambioEstadoComponent, AsignacionNovedadComponent],
   imports: [
     CommonModule,
     ClienteRoutingModule,
-    FormsModule
+    FormsModule,
+    AutocompleteLibModule
   ]
 })
 export class ClienteModule { }

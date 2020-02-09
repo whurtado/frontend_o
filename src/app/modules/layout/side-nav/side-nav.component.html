@@ -59,6 +59,17 @@
         </a>
         <ul class="treeview-menu">
           <li routerLinkActive="active"><a routerLink="/dashboard/cliente/listarCliente"   ><i class="fa fa-circle-o"></i> Cliente</a></li>
+          <li class="treeview">
+            <a href="#"><i class="fa fa-circle-o"></i> Procedimientos
+              <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+              <li routerLinkActive="active"><a routerLink="/dashboard/cliente/cambioEstadoCliente"><i class="fa fa-circle-o"></i> Cambio Estado</a></li>
+              <li routerLinkActive="active"><a routerLink="/dashboard/cliente/asignacionNovedadCliente"><i class="fa fa-circle-o"></i> Asignación Novedad</a></li>
+            </ul>
+          </li>
           
         </ul>
       </li>
