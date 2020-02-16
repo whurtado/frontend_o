@@ -19,6 +19,7 @@ const routes: Routes = [
       {path: 'registroPago', loadChildren: () => import('./registro-pago/registro-pago.module').then(m => m.RegistroPagoModule)},
       {path: 'pago', loadChildren: () => import('./pago/pago.module').then(m => m.PagoModule)},
       {path: 'articulo', loadChildren: () => import('./articulo/articulo.module').then(m => m.ArticuloModule)},
+      {path: 'ordenServicio', loadChildren: () => import('./orden-servicio/orden-servicio.module').then(m => m.OrdenServicioModule)},
 
       /*{path: 'usuario', component: UsuarioComponent},
       {path: 'rol', component: RolComponent }*/

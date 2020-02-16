@@ -1,0 +1,23 @@
+.strikethrough{
+    text-decoration: line-through;
+}
+.mostrar_comprobante{
+    display: list-item !important;
+    opacity: 1 !important;
+    position: absolute !important;
+    background-color: #3c29297a !important;
+    width: 100% !important;
+    /*height: 100% !important;*/
+
+}
+.modal-content{
+    width: 60% !important;
+    position: absolute !important;
+    margin: 50px 0px 0px 0px;
+}
+.mostrar{
+    display: list-item !important;
+    opacity: 1 !important;
+    position: absolute !important;
+    background-color: #3c29297a !important;
+}

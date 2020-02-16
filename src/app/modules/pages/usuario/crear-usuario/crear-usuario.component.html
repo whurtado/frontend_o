@@ -96,13 +96,29 @@
                                 </div>
                                 <div class="col-md-10">
 
-                                    <select name="sede" class="form-control">
+                                    <!--<select name="sede" class="form-control">
 
 
                                         <option selected disabled value="0">Seleccionar...</option>
                                         <option ></option>
 
-                                    </select>
+                                    </select>-->
+
+                                    <div class="form-group select-multiple">
+                                        <ng-multiselect-dropdown
+                                        [placeholder]="'Seleccione su sede'"
+                                        [data]="dropdownList"
+                                        [(ngModel)]="selectedSedes"
+                                        [settings]="dropdownSettings"
+                                        (onSelect)="onItemSelect($event)"
+                                        (onSelectAll)="onSelectAll($event)"
+                                        (onDeSelect)="onItemDeSelect($event)"
+                                        (onDeSelectAll)="onDeSelectAll($event)"
+
+                                        >
+                                        </ng-multiselect-dropdown>
+                                   
+                                     </div>
                                 </div>
 
                             </div>

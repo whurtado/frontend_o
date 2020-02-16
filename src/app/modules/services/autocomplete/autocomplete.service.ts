@@ -30,5 +30,26 @@ export class AutocompleteService {
     delay(500)
     );
 
-  }
+  } 
+
+  autocompleteVededor(datosBuscar){
+
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/form-data');
+    headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
+
+    const body: FormData = new FormData();
+    body.append('searchquery', datosBuscar);
+    body.append('tabla', 'vendedor');
+
+    const url = this.env.apiGatewayBackOffice + constants.config.autocompleteVendedor;
+
+    return this.http.post<any>(url, body, {headers})
+    .pipe(
+    delay(500)
+    );
+
+  } 
+
+  
 }

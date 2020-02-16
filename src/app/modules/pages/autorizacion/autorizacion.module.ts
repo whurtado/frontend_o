@@ -7,6 +7,7 @@ import { AutorizacionComponent } from './autorizacion/autorizacion.component';
 import { ListarAutorizacionComponent } from './listar-autorizacion/listar-autorizacion.component';
 import { CrearAutorizacionComponent } from './crear-autorizacion/crear-autorizacion.component';
 import { EditarAutorizacionComponent } from './editar-autorizacion/editar-autorizacion.component';
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { EditarAutorizacionComponent } from './editar-autorizacion/editar-autori
   imports: [
     CommonModule,
     AutorizacionRoutingModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ]
 })
 export class AutorizacionModule { }

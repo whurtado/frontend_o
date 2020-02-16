@@ -9,6 +9,8 @@ import { CategoriaService } from '../../../services/categoria/categoria.service'
 export class ListarCategoriaComponent implements OnInit {
 
   categorias:any = [];
+  p: number = 1;
+
 
   constructor(private _categoriaService: CategoriaService) { }
 

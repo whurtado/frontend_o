@@ -36,7 +36,7 @@ listarTodosLosArticulos(): Observable<any>{
 }
 
 //metodo para crear un usuario
-crearArticulo(articulo,usuariologueado:object): Observable<Articulo>{
+crearArticulo(articulo,imagen, usuariologueado:object): Observable<Articulo>{
 
   const headers = new HttpHeaders();
   headers.append('Content-Type', 'application/form-data');
@@ -48,7 +48,7 @@ crearArticulo(articulo,usuariologueado:object): Observable<Articulo>{
   body.append('descripcion', articulo.descripcion);
   body.append('codigo_barras', articulo.codigoBarras);
   body.append('valor', articulo.valor);
-  body.append('fvcimagen', articulo.imagen);
+  body.append('fvcimagen', imagen);
   body.append('categoria', articulo.categoria);
   body.append('fvccantidad', articulo.cantidad);
   body.append('flvrequieredeposito', articulo.requiereDeposito);
@@ -77,7 +77,7 @@ mostrarArticulo( id) : Observable<any>{
   );
 }
 
-actualizarArticulo(articulo, id,  usuariologueado:object): Observable<Articulo>{
+actualizarArticulo(articulo, id, imagen,  usuariologueado:object): Observable<Articulo>{
   const headers = new HttpHeaders();
   headers.append('Content-Type', 'application/form-data');
   headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
@@ -92,8 +92,8 @@ actualizarArticulo(articulo, id,  usuariologueado:object): Observable<Articulo>{
   body.append('descripcion', articulo.descripcion);
   body.append('codigo_barras', articulo.codigoBarras);
   body.append('valor', articulo.valor);
-  body.append('fvcimagen', articulo.fvcimagen);
-  body.append('categoria', articulo.categoria_id);
+  body.append('fvcimagen', imagen);
+  body.append('categoria', articulo.categoria);
   body.append('fvccantidad', articulo.cantidad);
   body.append('flvrequieredeposito', articulo.requiereDeposito);
   body.append('flngvalorDeposito', articulo.valorDeposito);
