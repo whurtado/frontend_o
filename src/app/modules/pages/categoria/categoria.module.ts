@@ -7,13 +7,15 @@ import { ListarCategoriaComponent } from './listar-categoria/listar-categoria.co
 import { CrearCategoriaComponent } from './crear-categoria/crear-categoria.component';
 import { EditarCategoriaComponent } from './editar-categoria/editar-categoria.component';
 import { CategoriaComponent } from './categoria/categoria.component';
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 
 @NgModule({
   declarations: [ListarCategoriaComponent, CrearCategoriaComponent, EditarCategoriaComponent, CategoriaComponent],
   imports: [
     CommonModule,
     CategoriaRoutingModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ]
 })
 export class CategoriaModule { }

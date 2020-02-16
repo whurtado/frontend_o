@@ -88,12 +88,12 @@ export const constants = {
         autocompleteCliente: 'api/auth/autocomplete/search',
         autocompleteVendedor: 'api/auth/autocomplete/search',
 
-
-        
-
-
-
-
+        listarOrdenServicios: 'api/auth/ordenservicios',
+        cargarOrdenServicio: 'api/auth/ordenservicios/create',
+        crearOrdenServicio: 'api/auth/ordenservicios/registrar',
+        mostrarOrdenServicio: 'api/auth/ordenservicios/edit',
+        actualizarOrdenServicio: 'api/auth/ordenservicios/actualizar',
+        listarArticulosPorGenero: 'api/auth/ordenservicios/listarArticulos',
 
 
     }

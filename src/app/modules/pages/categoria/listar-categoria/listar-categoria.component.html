@@ -12,22 +12,23 @@
                         <div class="input-group" style="display: inline-block;" >
                             <select class="form-control " >
                                 <option value="name">Nombre</option>
+                                <option value="genero">Genero</option>
                             </select>
                         </div>
                         <div class="input-group" style="display: inline-block;" >
                             <input type="text" v-model="buscar" class="form-control inline" placeholder="Texto a buscar" style="display: inline-block;">
                         </div>
-                        <div class="input-group" style="display: inline-block;" >
-                            <button type="submit"  class="btn btn-primary inline"><i class="fa fa-search"></i> Buscar</button>
+                        <div class="input-group " style="display: inline-block;" >
+                            <button type="submit"  class="btn btn-primary inline boton-buscar"><i class="fa fa-search"></i> Buscar</button>
                         </div>
     
                     </div>
                 </div>
     
     
-                <table id="posts-table" class="table table-bordered table-striped">
+                <table id="posts-table" class="table table-bordered table-striped "  >
                     <thead>
-                    <tr>
+                    <tr class="tablas-encabezado">
                         <th>Id</th>
                         <th>Nombre</th>
                         <th>Genero</th>
@@ -37,7 +38,7 @@
                     </thead>
                     <tbody>
                     
-                    <tr *ngFor="let categoria of categorias">
+                    <tr *ngFor="let categoria of categorias | paginate: { itemsPerPage: 1, currentPage: p } ">
                         <td>{{ categoria.id}}</td>
                         <td>{{ categoria.fvcnombre}}</td>
                         <td>{{ categoria.fvcgenero}}</td>
@@ -50,6 +51,12 @@
                     </tbody>
     
                 </table>
+                <pagination-controls  class="espacio-paginacion"
+                      (pageChange)="p = $event"
+                        previousLabel="Anterior" 
+                        nextLabel="Siguiente">
+                </pagination-controls>
+
     
     
                 <!--<nav>

@@ -37,3 +37,42 @@
     display: table;
     margin: 0 auto;
   }
+
+
+  .tablas-encabezado{
+    background-color: darkgrey
+   }
+
+   /*espacio paginacion*/
+   .ngx-pagination{
+     margin-top: 1rem!important;
+   }
+
+   /* organizarboton buscar */
+
+.boton-buscar{
+  padding-bottom: 6px!important;
+  margin-bottom: 28px!important;
+} 
+
+
+/*autocomplete*/
+.ng-autocomplete {
+  width: 295px!important;
+}
+
+.ng-autocomplete {
+  width: 100%!important;
+  max-width: 295px!important;
+  display: table;
+  margin-left: -2px;
+  /* margin: 0 auto; */
+}
+
+.autocomplete-container {
+  height: 32px!important;
+}
+
+.autocomplete-container .input-container input {
+  height: 32px!important;
+}

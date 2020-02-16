@@ -41,8 +41,9 @@ export class CrearArticuloComponent implements OnInit {
   crearArticulo(forma:NgForm){
 
     console.log("forma.value",forma.value);
-    
-    this._articuloService.crearArticulo(forma.value,this.usuarioLogueado).subscribe((articulo: Articulo)=>{
+    console.log("imagen",this.articulo.imagen);
+
+    this._articuloService.crearArticulo(forma.value,this.articulo.imagen,this.usuarioLogueado).subscribe((articulo: Articulo)=>{
 
       Swal.fire({
         title: '',
@@ -78,7 +79,7 @@ export class CrearArticuloComponent implements OnInit {
   }
 
   //IMAGEN
-  onImageChange(e) {
+ /* onImageChange(e) {
  
     let files = e.target.files || e.dataTransfer.files;
     if (!files.length)
@@ -89,7 +90,29 @@ export class CrearArticuloComponent implements OnInit {
         this.articulo.imagen = e.target[`result`];
       };
       reader.readAsDataURL(files[0]);
-  }
+  }*/
+
+  onImageChange() {
+
+    console.log("imagen",document.getElementById('imagen'))
+
+    const input = document.getElementById('imagen')
+    if (input[`files`] && input[`files`][0]) {
+       const reader = new FileReader();
+       console.log("imaaaagen",input[`files`])
+       console.log("nombre",input[`files`][0])
+
+
+       reader.onload = (e) => {
+
+        this.articulo.imagen = e.target[`result`];
+        console.log("articulo",this.articulo.imagen)
+
+       };
+
+       reader.readAsDataURL(input[`files`][0]);
+    }
+ }
  
 }
  

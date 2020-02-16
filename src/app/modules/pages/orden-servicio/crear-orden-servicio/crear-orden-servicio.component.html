@@ -1,0 +1,683 @@
+<div>
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+
+            <div class="box box-primary">
+                <div class="box-header">
+                        <div class="box-header">
+                                <a routerLink="/dashboard/ordenServicio/listarOrdenServico" class="btn btn-primary  pull-right"><i class="fa fa-pencil"></i> Listado Orden Servicio</a>
+                        </div>
+                </div>
+
+                <div class="box-body">
+                    <form (ngSubmit)="crearOrdenServicio( f )" #f="ngForm" autocomplete="off" novalidate="">
+
+                  
+
+                        <div class="form-row" style="margin-bottom: 1px">
+                            <div class="form-group col-md-6" [ngClass]="{'has-error': (codigo.errors?.required || codigo.errors?.minlength) && codigo.touched }">
+                                <div class="col-md-4">
+                                    <label>Codigo No.:</label>
+                                </div>
+                                <div class="col-md-8">
+
+                                      <input type="number" class="form-control"
+                                       name="codigo"  [(ngModel)]="ordenServicio.codigo"
+                                       minlength="5" required
+                                       #codigo="ngModel">
+
+                                </div>
+
+                            </div>
+
+                            <div class="form-group col-md-6" [ngClass]="{'has-error': (estado.errors?.required || estado.errors?.minlength) && estado.touched }">
+                                <div class="col-md-4">
+                                    <label>Estado :</label>
+                                </div>
+                                <div class="col-md-8">
+
+                                    <input type="text" class="form-control"
+                                        placeholder="Ingrese su Nombre"
+                                        name="estado"  [(ngModel)]="ordenServicio.estado"
+                                        minlength="5" required
+                                        readonly="true"
+                                        #estado="ngModel">
+                                </div>    
+                        </div>
+                            
+                        </div>
+                        <div class="form-row" >
+                            <div class="form-group col-md-12" [ngClass]="{'has-error': (cliente.errors?.required || cliente.errors?.minlength) && cliente.touched }">
+                                <div class="col-md-2">
+                                    <label>Cliente</label>
+                                </div>
+                                <div class="col-md-4">
+
+                                        <div class="ng-autocomplete">
+                                            <ng-autocomplete
+                                                [data]="cliente"
+                                                [searchKeyword]="keywordCliente"
+                                                placeHolder="Ingrese el nombre del cliente"
+                                                (selected)='selectEventCliente($event)'
+                                                (inputChanged)='onChangeSearchCliente($event)'
+                                                (inputFocused)='onFocusedCliente($event)'
+                                                historyIdentifier="cliente"
+                                                [itemTemplate]="itemTemplate"
+                                                [notFoundTemplate]="notFoundTemplate">
+                                            </ng-autocomplete>
+                                            
+                                            <ng-template #itemTemplate let-item>
+                                                <a [innerHTML]="item.fvcprimernombre"></a>
+                                            </ng-template>
+                                            
+                                            <ng-template #notFoundTemplate let-notFound>
+                                                <div [innerHTML]="notFound"></div>
+                                            </ng-template>
+                                        </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                            <!-- USUARIO-->
+                        <div class="form-row">
+                            <div class="form-group col-md-6" [ngClass]="{'has-error': (usuario.errors?.required || usuario.errors?.minlength) && usuario.touched }">
+                                    <div class="col-md-4">
+                                        <label>Usuario:</label>
+                                    </div>
+                                    <div class="col-md-8">
+    
+                                            <input type="text" class="form-control"
+                                            placeholder="Ingrese su Nombre"
+                                            name="usuario"  [(ngModel)]="ordenServicio.usuario"
+                                            minlength="5" required
+                                            #usuario="ngModel">
+    
+                                    </div>
+    
+                            </div>
+                            <div class="form-group col-md-6" [ngClass]="{'has-error': (genero.errors?.required || genero.errors?.minlength) && genero.touched }">
+                                <div class="col-md-4">
+                                    <label>Genero:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select name="genero" class="form-control" 
+                                     [(ngModel)]="ordenServicio.genero" 
+                                     (change)="listarArticulosPorGenero(ordenServicio.genero)"
+                                     #genero>
+
+                                            <option value="" selected>Seleccione Genero</option>
+                                            <option value="Masculino">Masculino</option>
+                                            <option value="Femenino">Femenino</option>
+                                        </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--FECHA ENTREGA-->
+                        <div class="form-row">
+                                <div class="form-group col-md-6" [ngClass]="{'has-error': (fecha_entrega.errors?.required || fecha_entrega.errors?.minlength) && fecha_entrega.touched }">
+                                    <div class="col-md-4">
+                                        <label>Fecha Entrega:</label>
+                                    </div>
+                                    <div class="col-md-8">
+    
+                                            <input type="date" class="form-control"
+                                            placeholder="Ingrese su Nombre"
+                                            name="fecha_entrega"  [(ngModel)]="ordenServicio.fecha_entrega"
+                                            minlength="5" required
+                                            #fecha_entrega="ngModel">
+    
+                                    </div>
+        
+                                </div>
+                                <div class="form-group col-md-6" [ngClass]="{'has-error': (hora_entrega.errors?.required || hora_entrega.errors?.minlength) && hora_entrega.touched }">
+                                        <div class="col-md-4">
+                                            <label>Hora Entrega:</label>
+                                        </div>
+                                        <div class="col-md-8">
+        
+                                                <input type="time" class="form-control"
+                                                placeholder="Ingrese su Nombre"
+                                                name="hora_entrega"  [(ngModel)]="ordenServicio.hora_entrega"
+                                                minlength="5" required
+                                                #hora_entrega="ngModel">
+        
+                                        </div>
+                                </div>
+                        </div>
+
+                        <!--FECHA PRUEBA-->
+
+                        <div class="form-row">
+                                <div class="form-group col-md-6" [ngClass]="{'has-error': (fecha_prueba.errors?.required || fecha_prueba.errors?.minlength) && fecha_prueba.touched }">
+                                        <div class="col-md-4">
+                                            <label>Fecha Prueba:</label>
+                                        </div>
+                                        <div class="col-md-8">
+        
+                                                <input type="date" class="form-control"
+                                                placeholder="Ingrese su Nombre"
+                                                name="fecha_prueba"  [(ngModel)]="ordenServicio.fecha_prueba"
+                                                minlength="5" required
+                                                #fecha_prueba="ngModel">
+        
+                                        </div>
+            
+                                    </div>
+                                    <div class="form-group col-md-6" [ngClass]="{'has-error': (hora_prueba.errors?.required || hora_prueba.errors?.minlength) && hora_prueba.touched }">
+                                            <div class="col-md-4">
+                                                <label>Hora Prueba:</label>
+                                            </div>
+                                            <div class="col-md-8">
+            
+                                                    <input type="time" class="form-control"
+                                                    placeholder="Ingrese su Nombre"
+                                                    name="hora_prueba"  [(ngModel)]="ordenServicio.hora_prueba"
+                                                    minlength="5" required
+                                                    #hora_prueba="ngModel">
+            
+                                            </div>
+                                    </div>
+                        </div>
+
+                        <!--FECHA DEVOLUCION-->
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6" [ngClass]="{'has-error': (fecha_devolucion.errors?.required || fecha_devolucion.errors?.minlength) && fecha_devolucion.touched }">
+                                    <div class="col-md-4">
+                                        <label>Fecha Devolucion:</label>
+                                    </div>
+                                    <div class="col-md-8">
+    
+                                            <input type="date" class="form-control"
+                                            placeholder="Ingrese su Nombre"
+                                            name="fecha_devolucion"  [(ngModel)]="ordenServicio.fecha_devolucion"
+                                            minlength="5" required
+                                            #fecha_devolucion="ngModel">
+    
+                                    </div>    
+                            </div>
+                            <div class="form-group col-md-6" [ngClass]="{'has-error': (sede.errors?.required || sede.errors?.minlength) && sede.touched }">
+                                    <div class="col-md-4">
+                                        <label>Sede:</label>
+                                    </div>
+                                    <div class="col-md-8">
+    
+                                            <input type="text" class="form-control"
+                                            placeholder="Ingrese su Nombre"
+                                            name="sede"  [(ngModel)]="ordenServicio.sede"
+                                            minlength="5" required readonly='true'
+                                            #sede="ngModel">
+    
+                                    </div>    
+                            </div>
+                        </div>
+
+                        <!-- VENDEDOR-->
+                        <div class="form-row">
+                            <div class="form-group col-md-6" >
+                                <div class="col-md-4">
+                                    <label>Vendedor:</label>
+                                </div>
+                                <div class="col-md-8">
+
+                                        <div class="ng-autocomplete ">
+                                                <ng-autocomplete
+                                                    [data]="vendedor"
+                                                    [searchKeyword]="keywordVendedor"
+                                                    placeHolder="Ingrese el nombre del vendedor"
+                                                    (selected)='selectEventVendedor($event)'
+                                                    (inputChanged)='onChangeSearchVendedor($event)'
+                                                    (inputFocused)='onFocusedVendedor($event)'
+                                                    historyIdentifier="vendedor"
+                                                    [itemTemplate]="itemTemplate"
+                                                    [notFoundTemplate]="notFoundTemplate">
+                                                </ng-autocomplete>
+                                                
+                                                <ng-template #itemTemplate let-item>
+                                                    <a [innerHTML]="item.fvcprimernombre"></a>
+                                                </ng-template>
+                                                
+                                                <ng-template #notFoundTemplate let-notFound>
+                                                    <div [innerHTML]="notFound"></div>
+                                                </ng-template>
+                                            </div>
+                                </div>
+
+                            </div>
+                            <div class="form-group col-md-6" [ngClass]="{'has-error': (total.errors?.required || total.errors?.minlength) && total.touched }">
+                                <div class="col-md-4">
+                                    <label>Confeccion:</label>
+                                </div>
+                                <div class="col-md-8">
+
+                                        <select name="confesion" class="form-control" [(ngModel)]="ordenServicio.confesion">
+                                                <option value="SI" selected>SI</option>
+                                                <option value="NO">NO</option>
+                                            </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TOTAL-->
+                        <div class="form-row">
+                            <div class="form-group col-md-6" [ngClass]="{'has-error': (total.errors?.required || total.errors?.minlength) && total.touched }">
+                                    <div class="col-md-4">
+                                        <label>Total:</label>
+                                    </div>
+                                    <div class="col-md-8">
+    
+                                        <input type="number" class="form-control"
+                                            placeholder="Ingrese su Nombre"
+                                            name="total"  [(ngModel)]="ordenServicio.total"
+                                            minlength="5" required
+                                            #total="ngModel">
+                                    </div>    
+                            </div>
+                            <div class="form-group col-md-6" [ngClass]="{'has-error': (abono.errors?.required || abono.errors?.minlength) && abono.touched }">
+                                    <div class="col-md-4">
+                                        <label>Abono:</label>
+                                    </div>
+                                    <div class="col-md-4">
+    
+                                        <input type="number" class="form-control"
+                                            placeholder="Ingrese su Nombre"
+                                            name="abono"  [(ngModel)]="ordenServicio.abono"
+                                            minlength="5" required
+                                            #abono="ngModel">
+                                    </div>   
+                                    
+                                    <div class="col-md-4">
+                                            <input type="button" class="btn btn-success form-control " id="add_cancion()"  (click)="abrirModal('Abono')" value="Realizar Abono" />
+                                    </div> 
+                            </div>
+                        </div>
+
+
+                        <!-- DESCRIPCION FORMAPAGO-->
+                        <div class="form-row">
+                           
+                            <div class="form-group col-md-6" [ngClass]="{'has-error': (deposito.errors?.required || deposito.errors?.minlength) && deposito.touched }">
+                                    <div class="col-md-4">
+                                        <label>Deposito :</label>
+                                    </div>
+                                    <div class="col-md-4">
+    
+                                        <input type="number" class="form-control"
+                                            placeholder="Ingrese su Nombre"
+                                            name="deposito"  [(ngModel)]="ordenServicio.deposito"
+                                            minlength="5" required
+                                            #deposito="ngModel">
+                                    </div> 
+                                    
+                                    <div class="col-md-4">
+                                            <input type="button" class="btn btn-success form-control " id="add_cancion()"  (click)="abrirModal('Deposito')" value=" Realizar Deposito" />
+                                    </div> 
+                            </div>
+                            <div class="form-group col-md-6" [ngClass]="{'has-error': (saldo.errors?.required || saldo.errors?.minlength) && saldo.touched }">
+                                <div class="col-md-4">
+                                    <label>Saldo :</label>
+                                </div>
+                                <div class="col-md-8">
+
+                                    <input type="number" class="form-control"
+                                        placeholder="Ingrese su Nombre"
+                                        name="saldo"  [(ngModel)]="ordenServicio.saldo"
+                                        minlength="5" required
+                                        #saldo="ngModel">
+                                </div>    
+                        </div>
+                        </div>
+                        <!-- SALDO -->
+                        <div class="form-row">
+                            
+                           
+                        </div>
+
+                        <!-- TRAJE-->
+                        <div class="form-row">
+                            <div class="form-group col-md-6" [ngClass]="{'has-error': (traje.errors?.required || traje.errors?.minlength) && traje.touched }">
+                                    <div class="col-md-4">
+                                        <label>Traje :</label>
+                                    </div>
+                                    <div class="col-md-8">
+    
+                                        <input type="text" class="form-control"
+                                            placeholder="Ingrese su Nombre"
+                                            name="traje"  [(ngModel)]="ordenServicio.traje"
+                                            minlength="5" required
+                                            #traje="ngModel">
+                                    </div>    
+                            </div>
+                            <div class="form-group col-md-6" [ngClass]="{'has-error': (ficha.errors?.required || ficha.errors?.minlength) && ficha.touched }">
+                                    <div class="col-md-4">
+                                        <label>No Ficha :</label>
+                                    </div>
+                                    <div class="col-md-8">
+    
+                                        <input type="text" class="form-control"
+                                            placeholder="Ingrese su Nombre"
+                                            name="ficha"  [(ngModel)]="ordenServicio.ficha"
+                                            minlength="5" required
+                                            #ficha="ngModel">
+                                    </div>    
+                            </div>
+                        </div>
+
+                        <!-- BLOQUEO-->
+
+                        <div class="form-row">
+                                <div class="form-group col-md-6" [ngClass]="{'has-error': (bloqueo.errors?.required || bloqueo.errors?.minlength) && bloqueo.touched }">
+                                        <div class="col-md-4">
+                                            <label>Bloqueo :</label>
+                                        </div>
+                                        <div class="col-md-8">
+        
+                                            <select name="bloqueo" class="form-control" [(ngModel)]="ordenServicio.bloqueo" #bloqueo>
+                                                    <option value="SI" selected>SI</option>
+                                                    <option value="NO">NO</option>
+                                                </select>
+                                        </div>    
+                                </div>
+                                <div class="form-group col-md-6" [ngClass]="{'has-error': (ficha.errors?.required || ficha.errors?.minlength) && ficha.touched }">
+                                        <div class="col-md-4">
+                                            <label>Motivo Bloqueo :</label>
+                                        </div>
+                                        <div class="col-md-8">
+        
+                                                <input type="text" class="form-control"
+                                                    placeholder="Ingrese el motivo de bloqueo"
+                                                    name="motivo_bloqueo"  [(ngModel)]="ordenServicio.motivo_bloqueo"
+                                                #motivo_bloqueo>
+                                        </div>    
+                                </div>
+                            </div>
+
+                        <!-- OBSERVACION -->
+
+                        <div class="form-row" >
+                                <div class="form-group col-md-12" [ngClass]="{'has-error': (observacion.errors?.required || observacion.errors?.minlength) && observacion.touched }">
+                                    <div class="col-md-2">
+                                        <label>Observacion:</label>
+                                    </div>
+                                    <div class="col-md-9">
+    
+                                        <input type="text" class="form-control"
+                                            placeholder="Ingrese su Nombre"
+                                            name="observacion"  [(ngModel)]="ordenServicio.observacion"
+                                            minlength="5" required
+                                            #observacion="ngModel">
+                                    </div>
+    
+                                </div>
+    
+                            </div>
+                 
+
+                        <!-- PRUEBAS DETALLE DINAMICO   -->
+
+                        <!-- <div class="form-row">
+                            <div class="form-group col-md-10">
+                                <div class="col-md-offset-1 col-md-8"><label>Datos Referencia</label></div>
+                                <div class="col-md-1"><input type="button" class="btn btn-success" id="add_cancion()"  @click="addCancion()" value="+" /></div>
+                            </div>-->
+                            <!-- El id="canciones" indica que la función de JavaScript dejará aquí el resultado -->
+                            <!-- <div  id="canciones"></div>
+
+                        </div>-->
+                        <div class="form-row">
+                            <div class="form-group col-md-10" >
+                                    <div class="box-title">
+                                        <h4><strong>Articulos</strong></h4>
+                                    </div>
+                            </div>
+                        </div>
+
+
+
+                        <table class="table table-bordered table-striped table-sm" border="1">
+
+                                <div class="form-row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Articulo</label>
+                                            <div class="form-inline">
+
+                                                <select  class="form-control" v-model="articulo_id">
+                                                        <option value="" selected>Seleccione Articulo</option>
+
+                                                    <option *ngFor="let detalle of arrayArticulos; index as i">{{detalle.fvcnombre}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="form-group">
+                                            <label>Talla</label>
+                                            <input type="text" class="form-control" name="talla" [(ngModel)]="detalleOrdenServicio.talla"  >
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Medicion</label>
+                                            <div class="form-inline">
+                                                <input type="text" class="form-control" name="medicion" [(ngModel)]="detalleOrdenServicio.medicion" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Descripcion</label>
+                                            <input type="text" class="form-control" name="descripcion" [(ngModel)]="detalleOrdenServicio.descripcion"  >
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="form-group">
+                                            <label>Entregado</label>
+                                            <input type="text" class="form-control" name="entregado" [(ngModel)]="detalleOrdenServicio.entregado" >
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-1">
+                                        <div class="form-group">
+                                            <label></label>
+
+                                            <input type="button" class="btn btn-success form-control " id="add_cancion()"  (click)="agregarDetalle()" value="+" />
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="form-group row border">
+                                    <div class="table-responsive col-md-12">
+                                        <table class="table table-bordered table-striped table-sm ">
+                                            <thead>
+                                            <tr>
+                                                <th>Opciones</th>
+                                                <th>Articulo</th>
+                                                <th>Talla</th>
+                                                <th>Medicion</th>
+                                                <th>Descripcion</th>
+                                                <th>Entregado</th>
+
+                                            </tr>
+                                            </thead>
+                                            <tbody *ngIf="arrayDetalle.length">
+                                                <tr *ngFor="let detalle of arrayDetalle; index as i">
+                                                    <td>
+                                                        <button (click)="eliminarDetalle(i)" type="button" class="btn btn-danger btn-sm">
+                                                            X
+                                                        </button>
+                                                    </td>
+                                                <td>{{ detalle.articulo_id }}</td>
+                                                <td>{{ detalle.talla }}</td>
+                                                <td>{{ detalle.medicion }}</td>
+                                                <td>{{ detalle.descripcion }}</td>
+                                                <td>{{ detalle.entregado }}</td>
+
+                                                </tr>
+
+                                            </tbody>
+                                            <tbody *ngIf="!arrayDetalle.length">
+                                            <tr>
+                                                <td colspan="6">
+                                                    NO hay Rererencias agregadas
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                        </table>
+
+
+                        <!-- FIN PRUEBAS DETALLE DINAMICO   -->
+
+
+
+                        <!-- VENTANA MODAL--> 
+
+                           <!--Inicio del modal agregar/actualizar-->
+                           <div class="modal fade" tabindex="-1" [ngClass]="{'mostrar_comprobante' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;overflow-y: scroll" aria-hidden="true">
+                            <div class="modal-dialog  modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h4 class="modal-title" >{{ tituloModal}}</h4>
+                                        <button type="button" class="close" (click)="cerrarModal()" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                         <!-- CLIENTE-->
+                            <!--<div class="form-row" >
+                                <div class="form-group col-md-12" :class="{ 'has-error': errors.has('ordenservicio') }">
+
+                                    <div class="col-md-2">
+                                        <label>Orden Servicio:</label>
+                                    </div>
+                                    <div class="col-md-10">
+
+                        
+                                    </div>
+
+                                </div>
+                            </div>-->
+
+                            <!-- VALOR -->
+                            <div class="form-row">
+                                <div class="form-group col-md-12" >
+                                    <div class="col-md-2">
+                                        <label>Valor</label>
+                                    </div>
+                                    <div class="col-md-10">
+
+                                            <input type="number" class="form-control"
+                                                placeholder="Ingrese su Nombre"
+                                                name="valorAbonoDeposito"  [(ngModel)]="ordenServicio.valorAbonoDeposito"
+                                                minlength="5" required
+                                                #motivo_bloqueo1="ngModel">
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                                <!-- FORMAPAGO -->
+                            <div class="form-row">
+                                <div class="form-group col-md-12" >
+                                    <div class="col-md-2">
+                                        <label>Forma Pago</label>
+                                    </div>
+                                    <div class="col-md-10">
+
+                                            <select name="formapago" class="form-control" [(ngModel)]="ordenServicio.formapago">
+                                                    
+                                                <option value="" selected>Seleccione Forma Pago</option>
+                                                <option value="EFECTIVO">EFECTIVO</option>
+                                                <option value="TARJETA CREDITO">TARJETA CREDITO</option>
+                                                <option value="TARJETA DEBITO">TARJETA DEBITO</option>
+                                                <option value="OTRO">OTRO</option>
+
+                                            </select>
+
+                                       
+
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <!-- VALOR -->
+                            <div class="form-row">
+                                <div class="form-group col-md-12" >
+                                    <div class="col-md-2">
+                                        <label>No. Tarjeta</label>
+                                    </div>
+                                    <div class="col-md-10">
+
+                                        <input type="number" class="form-control"
+                                            placeholder="Ingrese su Nombre"
+                                            name="numero_tarjeta"  [(ngModel)]="ordenServicio.no_tarjeta"
+                                            minlength="5" required
+                                            #no_tarjeta="ngModel">
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <!-- DESCRIPCION FORMAPAGO -->
+                            <div class="form-row">
+                                <div class="form-group col-md-12" >
+                                    <div class="col-md-2">
+                                        <label>Descri FormaPago</label>
+                                    </div>
+                                    <div class="col-md-10">
+
+                                      <input type="text" class="form-control"
+                                            placeholder="Ingrese su Nombre"
+                                            name="descripcion_fromapago"  [(ngModel)]="ordenServicio.descripcion_tarjeta"
+                                            placeholder="Ingrese su descripcion de forma pago"
+                                            minlength="5" required
+                                            #descripcion_tarjeta="ngModel">
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                                       
+                        </div>
+                        <div class="modal-footer">
+                                <button type="button" class="btn btn-primary pull-right" (click)="guardarAbonoDeposito()" >Guardar</button>
+                                <button type="button" class="btn btn-danger pull-right" (click)="cerrarModal()" style="margin-left: 20rem">Cerrar</button>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div><!-- fin -->
+            <!-- FIN VNTANA MODAL-->
+
+
+
+                        <div v-if="adminUsuario === true || crearFactura === true" class="justify-content-end">
+                            <input type="submit" value="Crear Orden de Servicio" class="btn btn-primary btn-block" >
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

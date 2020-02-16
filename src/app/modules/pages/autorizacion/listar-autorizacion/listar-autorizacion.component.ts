@@ -9,6 +9,7 @@ import { AutorizacionService } from '../../../services/autorizacion/autorizacion
 export class ListarAutorizacionComponent implements OnInit {
 
   autorizaciones:any = [];
+  p: number = 1;
 
   constructor(private _autorizacionService: AutorizacionService) { }
 

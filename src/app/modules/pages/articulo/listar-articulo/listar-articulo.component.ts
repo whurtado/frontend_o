@@ -10,6 +10,8 @@ export class ListarArticuloComponent implements OnInit {
 
   articulos:any = [];
   categorias:any = [];
+  p: number = 1;
+
 
   constructor(private _articuloService: ArticuloService) { }
 
@@ -19,8 +21,9 @@ export class ListarArticuloComponent implements OnInit {
 
   listarTodosLosArticulos() {
 
-    this._articuloService.listarTodosLosArticulos().subscribe(response => { 
-      this.articulos = response.articulos.data;
+    this._articuloService.listarTodosLosArticulos().subscribe(response => {
+      console.log(response) 
+      this.articulos = response.articulo.data;
       },
       error =>{
         console.log("error--------------",error);

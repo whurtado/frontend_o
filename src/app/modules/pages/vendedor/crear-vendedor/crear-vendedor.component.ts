@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Vendedor } from "../../../models/vendedor";
 import { VendedorService } from '../../../services/vendedor/vendedor.service';
+import { ValidacionesService } from '../../../services/validaciones/validaciones.service';
+
 import Swal from 'sweetalert2';
 import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 
@@ -20,7 +22,8 @@ export class CrearVendedorComponent implements OnInit {
   };
   usuarioLogueado:any = [];
 
-  constructor(public _vendedorService: VendedorService) { }
+  constructor(public _vendedorService: VendedorService,
+              public _validacionesService: ValidacionesService) { }
 
   ngOnInit() {
     this.verificarDatosLogin();
@@ -31,10 +34,22 @@ export class CrearVendedorComponent implements OnInit {
     this._vendedorService.crearVendedor(forma.value,this.usuarioLogueado).subscribe((vendedor: Vendedor)=>{
 
       Swal.fire({
+        icon: 'success',
         title: '',
         text: 'Registro creado correctamente',
         //type: 'success'
       });
+
+    },
+     error => {
+
+      const mensaje:any = this._validacionesService.mensajeErrorVendedor(error.error);
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: mensaje,
+      })
 
     });
   }
@@ -52,5 +67,7 @@ export class CrearVendedorComponent implements OnInit {
     if(me.arrayRol.indexOf('admin') >=0){ me.adminUsuario = true; }*/
 
   }
+
+  
 
 }

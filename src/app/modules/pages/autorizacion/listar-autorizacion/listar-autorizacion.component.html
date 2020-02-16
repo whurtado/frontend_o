@@ -27,7 +27,7 @@
 
             <table id="posts-table" class="table table-bordered table-striped">
                 <thead>
-                <tr>
+                <tr class="tablas-encabezado">
                     <th>Id</th>
                     <th>Descripcion</th>
                     <th>Tipo Autorizacion</th>
@@ -39,7 +39,7 @@
                 </thead>
                 <tbody>
                 
-                <tr *ngFor="let autorizacion of autorizaciones">
+                <tr *ngFor="let autorizacion of autorizaciones | paginate: { itemsPerPage: 20, currentPage: p }">
                     <td>{{ autorizacion.id}}</td>
                     <td>{{ autorizacion.fvcdescripcion}}</td>
                     <td>{{ autorizacion.fvctipoautorizacion_id}}</td>
@@ -54,6 +54,12 @@
                 </tbody>
 
             </table>
+
+            <pagination-controls  class="espacio-paginacion"
+                      (pageChange)="p = $event"
+                        previousLabel="Anterior" 
+                        nextLabel="Siguiente">
+                </pagination-controls>
 
 
             <!--<nav>

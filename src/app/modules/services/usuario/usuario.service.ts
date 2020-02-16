@@ -49,7 +49,10 @@ export class UsuarioService {
   }
 
   //metodo para crear un usuario
-  crearUsuario(usuario,rolesGuardar: any, permisosGuardar:any): Observable<Usuario>{
+  crearUsuario(usuario,rolesGuardar: any, permisosGuardar:any, sedeSeleccionadas): Observable<Usuario>{
+
+   const sede =this.separarIdSede(sedeSeleccionadas);
+
 
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
@@ -61,7 +64,7 @@ export class UsuarioService {
     body.append('password', usuario.password);
     body.append('rolesGuardar', rolesGuardar);
     body.append('permisosGuardar', permisosGuardar);
-    body.append('sede', '1');
+    body.append('sede',sede );
 
     
 
@@ -86,7 +89,10 @@ export class UsuarioService {
     );
   }
 
-  actualizarUsuario(usuario,id_usuario): Observable<Usuario>{
+  actualizarUsuario(usuario,id_usuario, sedeSeleccionadas): Observable<Usuario>{
+
+    const sede =this.separarIdSede(sedeSeleccionadas);
+
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
     headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
@@ -95,7 +101,7 @@ export class UsuarioService {
     body.append('name', usuario.nombre);
     body.append('email', usuario.email);
     body.append('password', usuario.password);
-    body.append('sede', '1');
+    body.append('sede', sede);
     body.append('id', id_usuario);
 
     
@@ -144,5 +150,20 @@ export class UsuarioService {
     .pipe(
       delay(500)
     );
+  } 
+
+  separarIdSede(Sedes: any){
+
+    let sede = "";
+
+    Sedes.forEach(element => {
+      sede = sede+ element.id+',';
+    });
+
+    //se le quita la coma al final
+    sede =sede.slice(0, -1);
+
+    return sede;
+
   }
 }

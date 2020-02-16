@@ -19,12 +19,15 @@ import { PagoModule } from './pago/pago.module';
 import { RegistroPagoModule } from './registro-pago/registro-pago.module';
 import { VendedorModule } from './vendedor/vendedor.module';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
+import { OrdenServicioModule } from './orden-servicio/orden-servicio.module';
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 @NgModule({
   declarations: [
     PagesComponent, 
-    DashBoardComponent,
+    DashBoardComponent, 
    
   ],
 
@@ -46,7 +49,11 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
     VendedorModule,
     FormsModule,
     ReactiveFormsModule,
-    AutocompleteLibModule
+    AutocompleteLibModule,
+    OrdenServicioModule,
+    NgxPaginationModule,
+    NgMultiSelectDropDownModule.forRoot()
+
   ]
 })
 export class PagesModule {

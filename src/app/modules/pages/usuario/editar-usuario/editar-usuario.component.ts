@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { UsuarioService } from '../../../services/usuario/usuario.service';
+import { SedeService } from '../../../services/sede/sede.service';
+
 import { Usuario } from "../../../models/usuario";
 import Swal from 'sweetalert2';
 import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-editar-usuario',
@@ -29,17 +32,31 @@ export class EditarUsuarioComponent implements OnInit {
   permisosGuardar :any = [];
   rolesUsuario :any = [];
   permisosUsuario :any = [];
-
+  dropdownList = [];
+  selectedSedes = [];
+  dropdownSettings:IDropdownSettings = {};
 
   constructor( private _router: ActivatedRoute,
-               public _usuarioService: UsuarioService) { 
+               public _usuarioService: UsuarioService,
+               public _sedeService: SedeService) { 
 
     this.id_usuario = this._router.snapshot.paramMap.get('id');
 
-    this.mostrarUsuaio(this.id_usuario);
   }
 
   ngOnInit() {
+    this.mostrarUsuaio(this.id_usuario);
+    this.listarSedes();
+
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'fvcnombre',
+      selectAllText: 'Marcar Todas',
+      unSelectAllText: 'Desmarcar Todas',
+      itemsShowLimit: 3,
+      allowSearchFilter: true
+    };
   } 
 
   mostrarUsuaio(id){ 
@@ -147,7 +164,7 @@ export class EditarUsuarioComponent implements OnInit {
 
   actualizarUsuario(forma:NgForm){
       
-    this._usuarioService.actualizarUsuario( forma,this.id_usuario).subscribe((usuario: Usuario) => { 
+    this._usuarioService.actualizarUsuario( forma,this.id_usuario, this.selectedSedes).subscribe((usuario: Usuario) => { 
 
       Swal.fire({
         title: '',
@@ -194,6 +211,56 @@ export class EditarUsuarioComponent implements OnInit {
           console.log("error--------------",error);
         });
 
+    }
+
+    async listarSedes() {
+      this._sedeService.listarTodasLasSedes().subscribe(response => {
+            
+        this.dropdownList = response.sede.data;
+
+
+     //se arma el array para mostrar las sedes seleccionadas
+      var arrayDeSedes = this.usuario.sede.split(',');
+
+        for (var i=0; i < arrayDeSedes.length; i++) {
+
+            for (var j=0; i < this.dropdownList.length; i++) {
+
+              if(arrayDeSedes[i] == this.dropdownList[j].id){
+                this.selectedSedes.push({id: this.dropdownList[j].id,
+                                        fvcnombre: this.dropdownList[j].fvcnombre}) 
+              }
+            }
+        }
+
+       console.log("sedes",this.selectedSedes);
+  
+      });
+    }
+
+      //metodos para los eventos
+    onItemSelect(item: any) {
+
+      console.log("sin item",this.selectedSedes);
+      this.selectedSedes.push(item);
+
+      console.log("con item",this.selectedSedes);
+
+    }
+
+    onSelectAll(items: any) {
+      this.selectedSedes = items;
+    }
+
+    //metodo para desmarcar las sedes
+    onItemDeSelect(item: any){
+    var i = this.selectedSedes.indexOf( item );
+    this.selectedSedes.splice( i, 1 );
+
+    }
+
+    onDeSelectAll(items: any){
+    this.selectedSedes = [];
     }
     
 

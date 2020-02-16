@@ -1,19 +1,21 @@
 //crear modulo y enrutador
-ng g m modules/pages/rol --routing true
+ng g m modules/pages/ordenServicio --routing true
 
 //crear un componente 
 ng g c modules/pages/rol/listar
 
 //crear un servicio
-ng g s modules/services/rol/rol
+ng g s modules/services/ordenServicio/ordenServicio
 ng g s modules/services/autocomplete/autocomplete
 
 //crear un modulo
-ng g m modules/pages/usuario 
+ng g m modules/pages/ordenServicio/ordenServicio 
 
 ng g m modules/pages/rol --routing true
-   ng g c modules/pages/rol/listarRol
-   ng g c modules/pages/rol/crearRol
-   ng g c modules/pages/rol/editarRol
+   ng g c modules/pages/ordenServicio/listarOrdenServicio
+   ng g c modules/pages/ordenServicio/crearOrdenServicio
+   ng g c modules/pages/ordenServicio/editarOrdenServicio
+      ng g c modules/pages/ordenServicio/ordenServicio
+
 
 

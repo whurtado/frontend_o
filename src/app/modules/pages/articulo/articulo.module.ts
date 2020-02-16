@@ -8,6 +8,7 @@ import { ListarArticuloComponent } from './listar-articulo/listar-articulo.compo
 import { CrearArticuloComponent } from './crear-articulo/crear-articulo.component';
 import { EditarArticuloComponent } from './editar-articulo/editar-articulo.component';
 import { NgxBarcodeModule } from 'ngx-barcode';
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { NgxBarcodeModule } from 'ngx-barcode';
     CommonModule,
     ArticuloRoutingModule,
     FormsModule,
-    NgxBarcodeModule
+    NgxBarcodeModule,
+    NgxPaginationModule
   ]
 })
 export class ArticuloModule { }

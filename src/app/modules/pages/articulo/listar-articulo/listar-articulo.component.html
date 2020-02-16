@@ -27,7 +27,7 @@
     
                 <table id="posts-table" class="table table-bordered table-striped">
                     <thead>
-                    <tr>
+                    <tr class="tablas-encabezado">
                         <th>Id</th>
                         <th>Nombre</th>
                         <th>Descripcion</th>
@@ -38,11 +38,11 @@
                     </thead>
                     <tbody>
                     
-                    <tr *ngFor="let articulo of articulos">
+                    <tr *ngFor="let articulo of articulos | paginate: { itemsPerPage: 20, currentPage: p }">
                         <td>{{ articulo.id}}</td>
                         <td>{{ articulo.fvcnombre}}</td>
                         <td>{{ articulo.fvcdescripcion}}</td>
-                        <td>{{ articulo.flngvalor}}</td>    
+                        <td>{{ articulo.flngvalor }}</td>    
                         <td>
                             <a routerLink="/dashboard/articulo/editarArticulo/{{articulo.id}}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
                         </td>
@@ -51,6 +51,12 @@
                     </tbody>
     
                 </table>
+
+                <pagination-controls  class="espacio-paginacion"
+                      (pageChange)="p = $event"
+                        previousLabel="Anterior" 
+                        nextLabel="Siguiente">
+                </pagination-controls>
     
     
                 <!--<nav>

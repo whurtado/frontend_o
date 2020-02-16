@@ -7,6 +7,7 @@ import { ListarUsuarioComponent } from './listar-usuario/listar-usuario.componen
 import { CrearUsuarioComponent } from './crear-usuario/crear-usuario.component';
 import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.component';
 import { UsuarioComponent } from './usuario/usuario.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 @NgModule({
@@ -14,7 +15,9 @@ import { UsuarioComponent } from './usuario/usuario.component';
   imports: [
     CommonModule,
     UsuarioRoutingModule,
-    FormsModule
+    FormsModule,
+    NgMultiSelectDropDownModule.forRoot()
+
   ]
 })
 export class UsuarioModule { }
