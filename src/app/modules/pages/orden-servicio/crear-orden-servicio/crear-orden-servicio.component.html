@@ -8,7 +8,7 @@
             <div class="box box-primary">
                 <div class="box-header">
                         <div class="box-header">
-                                <a routerLink="/dashboard/ordenServicio/listarOrdenServico" class="btn btn-primary  pull-right"><i class="fa fa-pencil"></i> Listado Orden Servicio</a>
+                                <a routerLink="/dashboard/ordenServicio/listarOrdenServicio" class="btn btn-primary  pull-right"><i class="fa fa-pencil"></i> Listado Orden Servicio</a>
                         </div>
                 </div>
 
@@ -65,15 +65,15 @@
                                                 (inputChanged)='onChangeSearchCliente($event)'
                                                 (inputFocused)='onFocusedCliente($event)'
                                                 historyIdentifier="cliente"
-                                                [itemTemplate]="itemTemplate"
-                                                [notFoundTemplate]="notFoundTemplate">
+                                                [itemTemplate]="itemTemplateCliente"
+                                                [notFoundTemplate]="notFoundTemplateCliente">
                                             </ng-autocomplete>
                                             
-                                            <ng-template #itemTemplate let-item>
+                                            <ng-template #itemTemplateCliente let-item>
                                                 <a [innerHTML]="item.fvcprimernombre"></a>
                                             </ng-template>
                                             
-                                            <ng-template #notFoundTemplate let-notFound>
+                                            <ng-template #notFoundTemplateCliente let-notFound>
                                                 <div [innerHTML]="notFound"></div>
                                             </ng-template>
                                         </div>
@@ -240,7 +240,7 @@
                                                 </ng-autocomplete>
                                                 
                                                 <ng-template #itemTemplate let-item>
-                                                    <a [innerHTML]="item.fvcprimernombre"></a>
+                                                    <a [innerHTML]="item.fvcnombre"></a>
                                                 </ng-template>
                                                 
                                                 <ng-template #notFoundTemplate let-notFound>
@@ -250,18 +250,18 @@
                                 </div>
 
                             </div>
-                            <div class="form-group col-md-6" [ngClass]="{'has-error': (total.errors?.required || total.errors?.minlength) && total.touched }">
-                                <div class="col-md-4">
-                                    <label>Confeccion:</label>
-                                </div>
-                                <div class="col-md-8">
+                                <div class="form-group col-md-6" [ngClass]="{'has-error': (total.errors?.required || total.errors?.minlength) && total.touched }">
+                                    <div class="col-md-4">
+                                        <label>Confeccion:</label>
+                                    </div>
+                                    <div class="col-md-8">
 
-                                        <select name="confesion" class="form-control" [(ngModel)]="ordenServicio.confesion">
-                                                <option value="SI" selected>SI</option>
-                                                <option value="NO">NO</option>
-                                            </select>
+                                            <select name="confesion" class="form-control" [(ngModel)]="ordenServicio.confesion">
+                                                    <option value="SI" selected>SI</option>
+                                                    <option value="NO">NO</option>
+                                                </select>
+                                    </div>
                                 </div>
-                            </div>
                         </div>
 
                         <!-- TOTAL-->
@@ -285,10 +285,10 @@
                                     </div>
                                     <div class="col-md-4">
     
-                                        <input type="number" class="form-control"
+                                        <input type="text" class="form-control"
                                             placeholder="Ingrese su Nombre"
                                             name="abono"  [(ngModel)]="ordenServicio.abono"
-                                            minlength="5" required
+                                            required readonly="true"
                                             #abono="ngModel">
                                     </div>   
                                     
@@ -308,10 +308,10 @@
                                     </div>
                                     <div class="col-md-4">
     
-                                        <input type="number" class="form-control"
+                                        <input type="text" class="form-control"
                                             placeholder="Ingrese su Nombre"
                                             name="deposito"  [(ngModel)]="ordenServicio.deposito"
-                                            minlength="5" required
+                                            required readonly="true"
                                             #deposito="ngModel">
                                     </div> 
                                     
@@ -363,7 +363,6 @@
                                         <input type="text" class="form-control"
                                             placeholder="Ingrese su Nombre"
                                             name="ficha"  [(ngModel)]="ordenServicio.ficha"
-                                            minlength="5" required
                                             #ficha="ngModel">
                                     </div>    
                             </div>
@@ -384,7 +383,7 @@
                                                 </select>
                                         </div>    
                                 </div>
-                                <div class="form-group col-md-6" [ngClass]="{'has-error': (ficha.errors?.required || ficha.errors?.minlength) && ficha.touched }">
+                                <div class="form-group col-md-6" [ngClass]="{'has-error': (motivo_bloqueo.errors?.required || motivo_bloqueo.errors?.minlength) && motivo_bloqueo.touched }">
                                         <div class="col-md-4">
                                             <label>Motivo Bloqueo :</label>
                                         </div>
@@ -448,10 +447,11 @@
                                             <label>Articulo</label>
                                             <div class="form-inline">
 
-                                                <select  class="form-control" v-model="articulo_id">
-                                                        <option value="" selected>Seleccione Articulo</option>
+                                                <select  class="form-control" [(ngModel)]="detalleOrdenServicio.articulo_id" name="articulo">
+                                                    <option value="" selected>Seleccione Articulo</option>
 
-                                                    <option *ngFor="let detalle of arrayArticulos; index as i">{{detalle.fvcnombre}}</option>
+                                                    <option *ngFor="let articulo of arrayArticulos; index as i" 
+                                                            [value]="articulo.id">{{articulo.fvcnombre}}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -514,7 +514,7 @@
                                                             X
                                                         </button>
                                                     </td>
-                                                <td>{{ detalle.articulo_id }}</td>
+                                                <td>{{ detalle.articulo }}</td>
                                                 <td>{{ detalle.talla }}</td>
                                                 <td>{{ detalle.medicion }}</td>
                                                 <td>{{ detalle.descripcion }}</td>

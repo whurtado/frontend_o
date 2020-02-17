@@ -4,6 +4,7 @@ import { ArticuloService } from '../../../services/articulo/articulo.service';
 import Swal from 'sweetalert2';
 import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { CategoriaService } from '../../../services/categoria/categoria.service';
+import { NumericService } from '../../../services/numerics/numeric.service';
 
 @Component({
   selector: 'app-crear-articulo',
@@ -29,13 +30,23 @@ export class CrearArticuloComponent implements OnInit {
   };
   usuarioLogueado:any = [];
   categorias:any = [];
+  message: any;
 
   constructor(public _articuloService: ArticuloService,
-              public _categoriaService: CategoriaService) { }
+              public _categoriaService: CategoriaService,
+              public numeric: NumericService,) { }
 
   ngOnInit() {
     this.verificarDatosLogin();
     this.listarTodasLasCategorias();
+
+      //mantiene actualizado el numero que se va digitando con separadores de miles
+    this.numeric.customMessage.subscribe(msg => {
+      
+      this.message = msg;
+      this.articulo.valor = msg;
+
+     });
   }
 
   crearArticulo(forma:NgForm){
@@ -113,6 +124,16 @@ export class CrearArticuloComponent implements OnInit {
        reader.readAsDataURL(input[`files`][0]);
     }
  }
+
+  changeMessage() {
+      //se envian la informacion al componente principal (padre)
+      //para que pueda ser accedida cuando cuando se tecleen los botones del escritorio
+      const fila: any = {
+                    id: 1,
+                    valor_pagar: this.articulo.valor
+                  }
+      this.numeric.changeMessage(fila);
+    }
  
 }
  

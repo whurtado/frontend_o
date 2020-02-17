@@ -94,9 +94,10 @@
                                         </div>
                                         <div class="col-md-10">
         
-                                            <input type="number" class="form-control"
+                                            <input type="text" class="form-control"
                                              placeholder="Ingrese su Precio"
                                             name="valor"  [(ngModel)]="articulo.valor"
+                                            (keyup)="changeMessage()"
                                             minlength="3" required
                                             #valor="ngModel">
         

@@ -18,7 +18,7 @@ export class CrearOrdenServicioComponent implements OnInit {
 
      id: null,
      nombre: null,
-     genero:  null, 
+     genero:  "", 
      sede:  'NORTE',  
      vendedor:  null,
      total:  null, 
@@ -53,7 +53,7 @@ export class CrearOrdenServicioComponent implements OnInit {
   detalleOrdenServicio:  DetalleOrdenServicio  = {
 
     articulo     :  null,
-    articulo_id  :  null,
+    articulo_id  :  "",
     talla        :  null,
     medicion     :  null,
     descripcion  :  null,
@@ -121,7 +121,7 @@ export class CrearOrdenServicioComponent implements OnInit {
   
     crearOrdenServicio(forma:NgForm){
       
-      this._ordenServicioService.crearOrdenServicio(forma.value,this.arrayDetalle,this.usuarioLogueado).subscribe((ordenServicio:  OrdenServicio)=>{
+      this._ordenServicioService.crearOrdenServicio(forma.value,this.ordenServicio, this.arrayDetalle, this.arrayAbonos, this.usuarioLogueado).subscribe((ordenServicio:  OrdenServicio)=>{
   
         Swal.fire({
           title: '',
@@ -152,43 +152,35 @@ export class CrearOrdenServicioComponent implements OnInit {
     }; 
 
     agregarDetalle(){
+
+      this.arrayArticulos.forEach(element => {
+         if(element.id == this.detalleOrdenServicio.articulo_id){
+             this.detalleOrdenServicio.articulo =element.fvcnombre;
+         }
+      });
+
       if(this.detalleOrdenServicio.articulo_id !=''  ){
 
-              this.arrayDetalle.push({
-                  articulo_id : this.detalleOrdenServicio.articulo_id,
-                  talla : this.detalleOrdenServicio.talla,
-                  medicion : this.detalleOrdenServicio.medicion,
-                  descripcion : this.detalleOrdenServicio.descripcion,
-                  entregado : this.detalleOrdenServicio.entregado
+          this.arrayDetalle.push({
+              articulo_id : this.detalleOrdenServicio.articulo_id,
+              articulo    : this.detalleOrdenServicio.articulo,
+              talla       : this.detalleOrdenServicio.talla,
+              medicion    : this.detalleOrdenServicio.medicion,
+              descripcion : this.detalleOrdenServicio.descripcion,
+              entregado   : this.detalleOrdenServicio.entregado
 
-      });
+          });
 
           this.detalleOrdenServicio.codigo      ="";
           this.detalleOrdenServicio.articulo_id = "";
+          this.detalleOrdenServicio.articulo    = "";
           this.detalleOrdenServicio.talla       ="";
           this.detalleOrdenServicio.medicion    = "";
           this.detalleOrdenServicio.descripcion = "";
           this.detalleOrdenServicio.entregado   = "";
       }
 
-  }
-
-    
-  
-     /* agregarDetalle(){
-          if(this.detalleCliente.nombre_referencia!='' && this.detalleCliente.telefono_referencia!='' ){
-      
-            this.arrayDetalleCliente.push({
-                      nombre_referencia: this.detalleCliente.nombre_referencia,
-                  telefono_referencia: this.detalleCliente.telefono_referencia
-              });
-  
-              this.detalleCliente.id ="";
-              this.detalleCliente.nombre_referencia="";
-              this.detalleCliente.telefono_referencia="";
-      }
-  
-      };*/
+    }
   
   
     verificarDatosLogin(){
@@ -231,7 +223,9 @@ export class CrearOrdenServicioComponent implements OnInit {
 
   onChangeSearchVendedor(search: string) {
     this._autocompleteService.autocompleteVededor(search).subscribe(response => { 
-      this.cliente = response;
+      this.vendedor = response;
+
+      console.log(response);
       },
       error =>{
         console.log("error--------------",error);
@@ -244,6 +238,7 @@ export class CrearOrdenServicioComponent implements OnInit {
   // fin metodos auto complete Cliente//
 
   abrirModal(tipoPago){
+    this.obtenerAbonoDeposito(tipoPago);
     this.modal = 1;
     this.tituloModal =`Realizar ${tipoPago}`;
     this.tipoAbono = tipoPago;
@@ -276,12 +271,14 @@ export class CrearOrdenServicioComponent implements OnInit {
         }
       );
 
+      this.cerrarModal();
+
     }else if(this.tipoAbono == 'Deposito'){
 
       this.ordenServicio.deposito = this.ordenServicio.valorAbonoDeposito
 
       this.arrayAbonos.push(
-        {tipoAbono: this.tipoAbono,
+        { tipoAbono: this.tipoAbono,
           valor: this.ordenServicio.deposito,
           formaPago: this.ordenServicio.formapago,
           numeroTarjeta: this.ordenServicio.no_tarjeta,
@@ -293,9 +290,24 @@ export class CrearOrdenServicioComponent implements OnInit {
 
     }
 
-    
+  }
 
-    console.log("tarjeta",  this.arrayAbonos);
+ async obtenerAbonoDeposito (tipoPago){
+
+    if(this.arrayAbonos.length > 0){
+        
+      for(let i=0; i < this.arrayAbonos.length; i++){
+
+        if( this.arrayAbonos[i].tipoAbono === tipoPago){
+            
+            this.ordenServicio.valorAbonoDeposito  = this.arrayAbonos[i].valor;
+            this.ordenServicio.formapago           = this.arrayAbonos[i].formaPago;
+            this.ordenServicio.no_tarjeta          = this.arrayAbonos[i].numeroTarjeta;
+            this.ordenServicio.descripcion_tarjeta = this.arrayAbonos[i].descripcion;
+        }
+      }
+    }
+
   }
  
 }

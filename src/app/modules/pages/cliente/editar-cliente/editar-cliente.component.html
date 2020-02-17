@@ -126,7 +126,7 @@
                                 </div>
                                 <div class="col-md-8">
 
-                                    <input type="text" class="form-control"
+                                    <input type="text" appOnlyNumbers class="form-control"
                                      placeholder="Ingrese su Dcoumento"
                                     name="documento"  [(ngModel)]="cliente.documento"
                                     minlength="5" required
@@ -176,7 +176,7 @@
                                 </div>
                                 <div class="col-md-8">
 
-                                    <input type="text" class="form-control"
+                                    <input type="text" appOnlyNumbers class="form-control"
                                      placeholder="Ingrese su Telefono"
                                     name="telefonoCasa"  [(ngModel)]="cliente.telefonoCasa"
                                     minlength="5" required
@@ -204,7 +204,7 @@
                                 </div>
                                 <div class="col-md-8">
 
-                                    <input type="text" class="form-control"
+                                    <input type="text" appOnlyNumbers class="form-control"
                                      placeholder="Ingrese su Telefono"
                                     name="telefonoOficina"  [(ngModel)]="cliente.telefonoOficina"
                                     minlength="5" required
@@ -376,7 +376,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Telefono Referencia</label>
-                                    <input type="number" class="form-control" name="telefono_referencia" [(ngModel)]="detalleCliente.telefono_referencia"  placeholder="Ingrese Telefono">
+                                    <input type="text" appOnlyNumbers class="form-control" name="telefono_referencia" [(ngModel)]="detalleCliente.telefono_referencia"  placeholder="Ingrese Telefono">
                                 </div>
                             </div>
                             <div class="col-md-2">

@@ -10,6 +10,7 @@ import { ListarClienteComponent } from './listar-cliente/listar-cliente.componen
 import { CambioEstadoComponent } from './procedimientos/cambio-estado/cambio-estado.component';
 import { AsignacionNovedadComponent } from './procedimientos/asignacion-novedad/asignacion-novedad.component';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [ClienteComponent, CrearClienteComponent, EditarClienteComponent, ListarClienteComponent, CambioEstadoComponent, AsignacionNovedadComponent],
@@ -17,7 +18,8 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
     CommonModule,
     ClienteRoutingModule,
     FormsModule,
-    AutocompleteLibModule
+    AutocompleteLibModule,
+    SharedModule,
   ]
 })
 export class ClienteModule { }

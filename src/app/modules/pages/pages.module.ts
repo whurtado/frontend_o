@@ -22,7 +22,7 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { OrdenServicioModule } from './orden-servicio/orden-servicio.module';
 import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -52,7 +52,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     AutocompleteLibModule,
     OrdenServicioModule,
     NgxPaginationModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    SharedModule,
 
   ]
 })

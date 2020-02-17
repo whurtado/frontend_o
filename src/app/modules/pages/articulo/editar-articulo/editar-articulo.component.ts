@@ -5,6 +5,7 @@ import { Articulo } from "../../../models/articulo";
 import Swal from 'sweetalert2';
 import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { CategoriaService } from '../../../services/categoria/categoria.service';
+import { NumericService } from '../../../services/numerics/numeric.service';
 
 @Component({
   selector: 'app-editar-articulo',
@@ -31,18 +32,30 @@ export class EditarArticuloComponent implements OnInit {
   usuarioLogueado:any = [];
   categorias:any = [];
   id_articulo:any;
+  message: any;
 
   constructor(private _router: ActivatedRoute,
               public _articuloService: ArticuloService,
-              public _categoriaService: CategoriaService) { 
+              public _categoriaService: CategoriaService,
+              public numeric: NumericService,) { 
 
     this.id_articulo = this._router.snapshot.paramMap.get('id');
-              }
+   }
 
   ngOnInit() {
     this.mostrarArticulo(this.id_articulo);
     this.verificarDatosLogin();
     this.listarTodasLasCategorias();
+    this.changeMessage();
+
+
+    //mantiene actualizado el numero que se va digitando con separadores de miles
+      this.numeric.customMessage.subscribe(msg => {
+        
+        this.message = msg;
+        this.articulo.valor = msg;
+  
+       });
   }
 
   mostrarArticulo(id){ 
@@ -128,4 +141,15 @@ export class EditarArticuloComponent implements OnInit {
     if(me.arrayRol.indexOf('admin') >=0){ me.adminUsuario = true; }*/
 
   }
+
+  changeMessage() {
+
+        //se envian la informacion al componente principal (padre)
+        //para que pueda ser accedida cuando cuando se tecleen los botones del escritorio
+        const fila: any = {
+                      id: 1,
+                      valor_pagar: this.articulo.valor
+                    }
+        this.numeric.changeMessage(fila);
+      }
 }  
