@@ -11,7 +11,7 @@ import {EnvServiceProvider} from './modules/services/utils/env.service.provider'
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-
+import { SharedModule } from './modules/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +27,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     AutocompleteLibModule,
     NgxPaginationModule,
     NgMultiSelectDropDownModule.forRoot(),
+    SharedModule
 
   ],
   providers: [

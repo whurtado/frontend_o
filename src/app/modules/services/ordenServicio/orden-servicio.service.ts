@@ -36,7 +36,7 @@ listarTodasLasOrdenServicios(): Observable<any>{
   }
 
   //metodo para crear un usuario
-  crearOrdenServicio(OrdenServicio, detalleOrdenServicio,usuariologueado:object): Observable<OrdenServicio>{
+  crearOrdenServicio(OrdenServicio,OrdenModelo, detalleOrdenServicio, arrayAbonos,usuariologueado:object): Observable<OrdenServicio>{
 
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
@@ -46,7 +46,7 @@ listarTodasLasOrdenServicios(): Observable<any>{
     body.append('nombre', OrdenServicio.nombre);
     body.append('genero', OrdenServicio.genero);
     body.append('sede', OrdenServicio.sede);
-    body.append('vendedor', OrdenServicio.vendedor);
+    body.append('vendedor', OrdenModelo.vendedor);
     body.append('total', OrdenServicio.total);
     body.append('abono', OrdenServicio.abono);
     body.append('fecha_entrega', OrdenServicio.fecha_entrega);
@@ -67,10 +67,11 @@ listarTodasLasOrdenServicios(): Observable<any>{
     body.append('motivo_bloqueo', OrdenServicio.motivo_bloqueo);
     body.append('deposito', OrdenServicio.deposito);
     body.append('usuario', OrdenServicio.usuario);
-    body.append('cliente', OrdenServicio.cliente);
+    body.append('cliente', OrdenModelo.cliente);
     body.append('factura', OrdenServicio.factura);
-    body.append('usuario_referido', OrdenServicio.usuario_referido);
+    body.append('usuario_referido', OrdenServicio.usuario);
     body.append('data', JSON.stringify(detalleOrdenServicio));
+    body.append('dataAbonos', JSON.stringify(arrayAbonos));
     body.append('usuario_sesion', usuariologueado[0].id);
 
 

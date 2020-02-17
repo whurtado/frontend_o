@@ -8,6 +8,9 @@ ng g c modules/pages/rol/listar
 ng g s modules/services/ordenServicio/ordenServicio
 ng g s modules/services/autocomplete/autocomplete
 
+
+ng g m modules/shared/
+
 //crear un modulo
 ng g m modules/pages/ordenServicio/ordenServicio 
 
