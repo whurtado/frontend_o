@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { UsuarioService } from '../../../services/usuario/usuario.service';
 import { SedeService } from '../../../services/sede/sede.service';
+import { LoginService } from '../../../services/auth/login.service';
 
 import { Usuario } from "../../../models/usuario";
 import Swal from 'sweetalert2';
@@ -38,7 +39,8 @@ export class EditarUsuarioComponent implements OnInit {
 
   constructor( private _router: ActivatedRoute,
                public _usuarioService: UsuarioService,
-               public _sedeService: SedeService) { 
+               public _sedeService: SedeService,
+               public _loginService:LoginService,) { 
 
     this.id_usuario = this._router.snapshot.paramMap.get('id');
 
@@ -46,7 +48,7 @@ export class EditarUsuarioComponent implements OnInit {
 
   ngOnInit() {
     this.mostrarUsuaio(this.id_usuario);
-    this.listarSedes();
+    this.traerSedes();
 
     this.dropdownSettings = {
       singleSelection: false,
@@ -213,10 +215,12 @@ export class EditarUsuarioComponent implements OnInit {
 
     }
 
-    async listarSedes() {
-      this._sedeService.listarTodasLasSedes().subscribe(response => {
+    
+
+  traerSedes() {
+    this._loginService.listarTodasLasSedes().subscribe(response => {
             
-        this.dropdownList = response.sede.data;
+        this.dropdownList = response.sede;
 
 
      //se arma el array para mostrar las sedes seleccionadas

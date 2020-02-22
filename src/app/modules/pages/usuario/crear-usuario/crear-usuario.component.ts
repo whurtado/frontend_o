@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Usuario } from "../../../models/usuario";
 import { UsuarioService } from '../../../services/usuario/usuario.service';
 import { SedeService } from '../../../services/sede/sede.service';
+import { LoginService } from '../../../services/auth/login.service';
 
 import Swal from 'sweetalert2';
 import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
@@ -33,12 +34,13 @@ export class CrearUsuarioComponent implements OnInit {
   dropdownSettings:IDropdownSettings = {};
 
   constructor(public _usuarioService: UsuarioService,
-              public _sedeService: SedeService) { }
+              public _sedeService: SedeService,
+              public _loginService:LoginService,) { }
 
   ngOnInit() {
     this.cargarRolesUsuario();
 
-    this.listarSedes();
+    this.traerSedes();
 
     this.selectedSedes = [];
 
@@ -95,10 +97,11 @@ export class CrearUsuarioComponent implements OnInit {
     }
   } 
 
-  async listarSedes() {
-    this._sedeService.listarTodasLasSedes().subscribe(response => {
+
+  traerSedes() {
+    this._loginService.listarTodasLasSedes().subscribe(response => {
           
-      this.dropdownList = response.sede.data;
+      this.dropdownList = response.sede;
     });
   }
 
