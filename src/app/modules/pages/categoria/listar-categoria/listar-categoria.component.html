@@ -7,23 +7,33 @@
     
             <div class="box-body">
     
-                <div class="form-group" style="position: relative">
-                    <div class="col-md-6">
-                        <div class="input-group" style="display: inline-block;" >
-                            <select class="form-control " >
-                                <option value="name">Nombre</option>
-                                <option value="genero">Genero</option>
+                <form role="form" autocomplete="off">
+                    <div class="cuadro_busqueda_mini" >
+                        <div class="form-group col-md-4">
+                            <label for="email">Nombre:</label>
+                            <input type="text" class="form-control"
+                                placeholder="Ingrese su Nombre"
+                            name="nombre"  [(ngModel)]="categoria.nombre">
+                        </div>
+            
+                        <div class="form-group col-md-4">
+                            <label for="pwd">Genero:</label>
+                            
+                            <select name="estado" class="form-control" [(ngModel)]="categoria.genero">
+                                    <option value="" selected>Seleccione Genero</option>
+                                    <option value="Masculino">Masculino</option>
+                                    <option value="Femenino">Femenino</option>
                             </select>
                         </div>
-                        <div class="input-group" style="display: inline-block;" >
-                            <input type="text" v-model="buscar" class="form-control inline" placeholder="Texto a buscar" style="display: inline-block;">
-                        </div>
-                        <div class="input-group " style="display: inline-block;" >
-                            <button type="submit"  class="btn btn-primary inline boton-buscar"><i class="fa fa-search"></i> Buscar</button>
+                        <div class="form-group col-md-4">
+                            
+                                <button type="submit" style="margin-top: 25px!important"   class="btn btn-primary" (click)="listarTodosLosCategorias(categoria)"><i class="fa fa-search"></i> Buscar</button>
                         </div>
     
                     </div>
-                </div>
+                            
+                </form>
+                <br><br>
     
     
                 <table id="posts-table" class="table table-bordered table-striped "  >
@@ -38,7 +48,7 @@
                     </thead>
                     <tbody>
                     
-                    <tr *ngFor="let categoria of categorias | paginate: { itemsPerPage: 1, currentPage: p } ">
+                    <tr *ngFor="let categoria of categorias | paginate: { itemsPerPage: 20, currentPage: p } ">
                         <td>{{ categoria.id}}</td>
                         <td>{{ categoria.fvcnombre}}</td>
                         <td>{{ categoria.fvcgenero}}</td>

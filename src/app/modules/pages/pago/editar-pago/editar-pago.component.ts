@@ -27,6 +27,7 @@ export class EditarPagoComponent implements OnInit {
  }
   usuarioLogueado:any = [];
   id_pago:any;
+  sedeSesion:any = '';
 
   constructor(private _router: ActivatedRoute,
               public _pagoService: PagoService) { 
@@ -67,7 +68,7 @@ export class EditarPagoComponent implements OnInit {
 
     console.log("forma",forma.value)
       
-    this._pagoService.actualizarPago( forma.value, this.id_pago, this.usuarioLogueado).subscribe((pago: Pago) => { 
+    this._pagoService.actualizarPago( forma.value, this.id_pago, this.usuarioLogueado, this.sedeSesion).subscribe((pago: Pago) => { 
 
       Swal.fire({
         title: '',
@@ -90,6 +91,7 @@ export class EditarPagoComponent implements OnInit {
     let arrayPermisos:any   = localStorage.getItem('rolesPermisos');
     let arrayRol:any        = localStorage.getItem('roles');
     this.usuarioLogueado = JSON.parse(localStorage.getItem('user'));
+    this.sedeSesion      = JSON.parse(localStorage.getItem('sedeSesion'));
 
     /*if(me.arrayPermisos.indexOf('create-role') >=0){ me.crearRol = true; }
     if(me.arrayRol.indexOf('admin') >=0){ me.adminUsuario = true; }*/

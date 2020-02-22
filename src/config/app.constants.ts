@@ -13,6 +13,8 @@ export const constants = {
         actualizarUsuario: 'api/auth/usuarios/actualizar',
         actualizarRolesUsuario:'api/auth/usuariosRoles/actualizar',
         actualizarPermisosUsuario:'api/auth/usuariosPermisos/actualizar',
+        mostrarSedesDelUsuario: 'api/auth/usuarios/mostrarSedesDelUsuario',
+        traerSedes: 'api/auth/usuarios/traerSedes',
 
         listarRoles: 'api/auth/roles',
         cargarPermisos: 'api/auth/roles/create',
@@ -37,6 +39,7 @@ export const constants = {
         crearCategoria: 'api/auth/categorias/registrar',
         mostrarCategoria: 'api/auth/categorias/edit',
         actualizarCategoria: 'api/auth/categorias/actualizar',
+        categoriasSinFiltros: 'api/auth/categorias/categoriasSinFiltros',
 
         listarTipoAutorizaciones: 'api/auth/tipoAutorizaciones',
         cargarTipoAutorizacion: 'api/auth/tipoAutorizaciones/create',

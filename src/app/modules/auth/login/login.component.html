@@ -11,12 +11,22 @@
     <form (ngSubmit)="login( f.value )" #f="ngForm">
 
         <div class="form-group has-feedback">
-          <input class="form-control" placeholder="Email" type="email"  name="email" [(ngModel)]="usuario.email" >
+          <input class="form-control" placeholder="Email" type="email"  
+           name="email" [(ngModel)]="usuario.email"
+           (blur)="listarSedesUsuario(usuario.email)" >
           <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
         </div>
         <div class="form-group has-feedback">
           <input class="form-control" placeholder="Password" type="password" name="password" [(ngModel)]="usuario.password" >
           <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        </div>
+
+        <div class="form-group has-feedback" *ngIf="selectedSedes.length"> 
+
+            <select name="sede" class="form-control" [(ngModel)]="usuario.sede">
+                <option value="" selected>Seleccione Sede</option>
+                <option *ngFor="let sede of selectedSedes" [value]="sede.id">{{sede.fvcnombre}}</option>
+            </select>
         </div>
         <div class="row">
           <!-- <div class="col-xs-8">

@@ -14,21 +14,19 @@ export class ClasificacionPagoService {
   constructor(private http: HttpClient,
               private env: EnvService) { }
 
-  listarTodasLasClasificaciones(): Observable<any>{
+  listarTodasLasClasificaciones(clasificacionPago, sedeSesion): Observable<any>{
 
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
     headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
 
-
-    let buscar = '';
-    let criterio= '';
-
-    const url2 = `?page=0&buscar=${buscar}&criterio=${criterio}` ;
-
     const body: FormData = new FormData();
+    body.append('fvcnombre', clasificacionPago.nombre);
+    body.append('estado', clasificacionPago.estado);
+    body.append('sede_creacion', sedeSesion);
+
     const url = this.env.apiGatewayBackOffice + constants.config.listarClasificacionPagos ;
-    return this.http.get(url, {headers})
+    return this.http.post(url, body, {headers})
     .pipe(
       delay(500)
     );
@@ -36,7 +34,7 @@ export class ClasificacionPagoService {
   }
 
     //metodo para crear un usuario
-    crearClasificacionPago(clasificacionPago,usuariologueado:object): Observable<ClasificacionPago>{
+    crearClasificacionPago(clasificacionPago,usuariologueado:object ,sedeSesion): Observable<ClasificacionPago>{
 
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
@@ -48,7 +46,8 @@ export class ClasificacionPagoService {
     body.append('fvcdescripcion', clasificacionPago.descripcion);
     body.append('estado', clasificacionPago.estado);
     body.append('usuario_sesion', usuariologueado[0].id);
-   
+    body.append('sede_creacion', sedeSesion);
+
     const url = this.env.apiGatewayBackOffice + constants.config.crearClasificacionPago;
     return this.http.post<ClasificacionPago>(url, body, {headers})
     .pipe(
@@ -70,7 +69,7 @@ export class ClasificacionPagoService {
     );
   }
 
-  actualizarClasificacionPago(clasificacionPago, id,  usuariologueado:object): Observable<ClasificacionPago>{
+  actualizarClasificacionPago(clasificacionPago, id,  usuariologueado:object, sedeSesion): Observable<ClasificacionPago>{
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
     headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
@@ -81,6 +80,7 @@ export class ClasificacionPagoService {
     body.append('estado', clasificacionPago.estado);
     body.append('id', id);
     body.append('usuario_sesion', usuariologueado[0].id);
+    body.append('sede_creacion', sedeSesion);
 
     
 

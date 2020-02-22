@@ -7,22 +7,49 @@
     
             <div class="box-body">
     
-                <div class="form-group" style="position: relative">
-                    <div class="col-md-6">
-                        <div class="input-group" style="display: inline-block;" >
-                            <select class="form-control " >
-                                <option value="name">Nombre</option>
+                <form role="form" autocomplete="off">
+                    <div class="cuadro_busqueda" >
+                        <div class="form-group col-md-4">
+                            <label for="pwd">Categoria:</label>
+                            
+                            <select name="estado" class="form-control" [(ngModel)]="articulo.categoria_id">
+                                    <option value="" selected>Seleccione Categoria</option>
+                                    <option *ngFor="let categoria of arrayCategorias" [value]="categoria.id">{{categoria.fvcnombre}} - {{categoria.fvcgenero}}</option>
                             </select>
                         </div>
-                        <div class="input-group" style="display: inline-block;" >
-                            <input type="text" v-model="buscar" class="form-control inline" placeholder="Texto a buscar" style="display: inline-block;">
+
+                        <div class="form-group col-md-4">
+                            <label for="email">Articulo:</label>
+                            <input type="text" class="form-control"
+                                placeholder="Ingrese su Nombre"
+                            name="nombre"  [(ngModel)]="articulo.nombre">
                         </div>
-                        <div class="input-group" style="display: inline-block;" >
-                            <button type="submit"  class="btn btn-primary inline"><i class="fa fa-search"></i> Buscar</button>
+            
+                        <div class="form-group col-md-4">
+                            <label for="pwd">Requiere Deposito:</label>
+                            
+                            <select name="estado" class="form-control" [(ngModel)]="articulo.requiereDeposito">
+                                    <option value="" selected>Seleccione Opcion</option>
+                                    <option value="SI">SI</option>
+                                    <option value="NO">NO</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                                <label for="email">Precio Articulo:</label>
+                                <input type="text" class="form-control"
+                                    placeholder="Ingrese su Nombre"
+                                name="nombre"  [(ngModel)]="articulo.nombre">
+                            </div>
+                        <div class="form-group col-md-4">
+                            
+                                <button type="submit" style="margin-top: 25px!important"   class="btn btn-primary" (click)="listarTodosLosArticulos(articulo)"><i class="fa fa-search"></i> Buscar</button>
                         </div>
     
                     </div>
-                </div>
+                            
+                </form>
+                <br><br>
     
     
                 <table id="posts-table" class="table table-bordered table-striped">
@@ -31,6 +58,8 @@
                         <th>Id</th>
                         <th>Nombre</th>
                         <th>Descripcion</th>
+                        <th>Requiere Deposito</th>
+
                         <th>Precio</th>
                         <th>Acciones</th>
     
@@ -42,7 +71,9 @@
                         <td>{{ articulo.id}}</td>
                         <td>{{ articulo.fvcnombre}}</td>
                         <td>{{ articulo.fvcdescripcion}}</td>
+                        <td>{{ articulo.flvrequieredeposito }}</td>   
                         <td>{{ articulo.flngvalor }}</td>    
+ 
                         <td>
                             <a routerLink="/dashboard/articulo/editarArticulo/{{articulo.id}}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
                         </td>

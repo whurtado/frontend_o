@@ -16,9 +16,10 @@ export class CrearTipoAutorizacionComponent implements OnInit {
   tipoAutorizacion:  TipoAutorizacion  = {
     id:  null ,
     nombre:null,
-    estado:null,
+    estado:'',
   };
   usuarioLogueado:any = [];
+  sedeSesion:any = '';
 
   constructor( public _tipoAutorizacionService: TipoAutorizacionService) { }
 
@@ -28,7 +29,7 @@ export class CrearTipoAutorizacionComponent implements OnInit {
 
   crearTipoAutorizacion(forma:NgForm){
     
-    this._tipoAutorizacionService.crearTipoAutorizacion(forma.value,this.usuarioLogueado).subscribe((tipoAutorizacion: TipoAutorizacion)=>{
+    this._tipoAutorizacionService.crearTipoAutorizacion(forma.value,this.usuarioLogueado, this.sedeSesion).subscribe((tipoAutorizacion: TipoAutorizacion)=>{
 
       Swal.fire({
         title: '',
@@ -47,6 +48,7 @@ export class CrearTipoAutorizacionComponent implements OnInit {
     let arrayPermisos:any   = localStorage.getItem('rolesPermisos');
     let arrayRol:any        = localStorage.getItem('roles');
     this.usuarioLogueado = JSON.parse(localStorage.getItem('user'));
+    this.sedeSesion      = JSON.parse(localStorage.getItem('sedeSesion'));
 
     /*if(me.arrayPermisos.indexOf('create-role') >=0){ me.crearRol = true; }
     if(me.arrayRol.indexOf('admin') >=0){ me.adminUsuario = true; }*/

@@ -7,6 +7,7 @@ import { PagoComponent } from './pago/pago.component';
 import { ListarPagoComponent } from './listar-pago/listar-pago.component';
 import { CrearPagoComponent } from './crear-pago/crear-pago.component';
 import { EditarPagoComponent } from './editar-pago/editar-pago.component';
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { EditarPagoComponent } from './editar-pago/editar-pago.component';
   imports: [
     CommonModule,
     PagoRoutingModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ]
 })
 export class PagoModule { }

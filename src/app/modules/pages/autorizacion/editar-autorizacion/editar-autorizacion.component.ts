@@ -24,6 +24,7 @@ export class EditarAutorizacionComponent implements OnInit {
   usuarioLogueado:any = [];
   id_autorizacion:any;
   tipoAutorizacions:any = [];
+  sedeSesion:any = '';
 
   constructor(private _router: ActivatedRoute,
               public _autorizacionService: AutorizacionService) { 
@@ -64,7 +65,7 @@ export class EditarAutorizacionComponent implements OnInit {
 
     console.log("forma",forma.value)
       
-    this._autorizacionService.actualizarAutorizacion( forma.value, this.id_autorizacion, this.usuarioLogueado).subscribe((autorizacion:  Autorizacion) => { 
+    this._autorizacionService.actualizarAutorizacion( forma.value, this.id_autorizacion, this.usuarioLogueado, this.sedeSesion).subscribe((autorizacion:  Autorizacion) => { 
 
       Swal.fire({
         title: '',
@@ -87,6 +88,7 @@ export class EditarAutorizacionComponent implements OnInit {
     let arrayPermisos:any   = localStorage.getItem('rolesPermisos');
     let arrayRol:any        = localStorage.getItem('roles');
     this.usuarioLogueado = JSON.parse(localStorage.getItem('user'));
+    this.sedeSesion      = JSON.parse(localStorage.getItem('sedeSesion'));
 
     /*if(me.arrayPermisos.indexOf('create-role') >=0){ me.crearRol = true; }
     if(me.arrayRol.indexOf('admin') >=0){ me.adminUsuario = true; }*/

@@ -11,6 +11,7 @@ import { CambioEstadoComponent } from './procedimientos/cambio-estado/cambio-est
 import { AsignacionNovedadComponent } from './procedimientos/asignacion-novedad/asignacion-novedad.component';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { SharedModule } from '../../shared/shared.module';
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 
 @NgModule({
   declarations: [ClienteComponent, CrearClienteComponent, EditarClienteComponent, ListarClienteComponent, CambioEstadoComponent, AsignacionNovedadComponent],
@@ -20,6 +21,7 @@ import { SharedModule } from '../../shared/shared.module';
     FormsModule,
     AutocompleteLibModule,
     SharedModule,
+    NgxPaginationModule,
   ]
 })
 export class ClienteModule { }

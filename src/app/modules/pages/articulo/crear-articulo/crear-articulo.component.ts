@@ -23,7 +23,7 @@ export class CrearArticuloComponent implements OnInit {
      valor:  null , 
      imagen:  null , 
      cantidad:  null , 
-     requiereDeposito: null ,  
+     requiereDeposito: '' ,  
      valorDeposito:  null , 
      categoria_id:  null , 
 
@@ -31,6 +31,7 @@ export class CrearArticuloComponent implements OnInit {
   usuarioLogueado:any = [];
   categorias:any = [];
   message: any;
+  sedeSesion:any = '';
 
   constructor(public _articuloService: ArticuloService,
               public _categoriaService: CategoriaService,
@@ -51,10 +52,7 @@ export class CrearArticuloComponent implements OnInit {
 
   crearArticulo(forma:NgForm){
 
-    console.log("forma.value",forma.value);
-    console.log("imagen",this.articulo.imagen);
-
-    this._articuloService.crearArticulo(forma.value,this.articulo.imagen,this.usuarioLogueado).subscribe((articulo: Articulo)=>{
+    this._articuloService.crearArticulo(forma.value,this.articulo.imagen,this.usuarioLogueado ,this.sedeSesion).subscribe((articulo: Articulo)=>{
 
       Swal.fire({
         title: '',
@@ -73,6 +71,7 @@ export class CrearArticuloComponent implements OnInit {
     let arrayPermisos:any   = localStorage.getItem('rolesPermisos');
     let arrayRol:any        = localStorage.getItem('roles');
     this.usuarioLogueado = JSON.parse(localStorage.getItem('user'));
+    this.sedeSesion      = JSON.parse(localStorage.getItem('sedeSesion'));
 
     /*if(me.arrayPermisos.indexOf('create-role') >=0){ me.crearRol = true; }
     if(me.arrayRol.indexOf('admin') >=0){ me.adminUsuario = true; }*/
@@ -81,27 +80,13 @@ export class CrearArticuloComponent implements OnInit {
 
   listarTodasLasCategorias() {
 
-    this._categoriaService.listarTodasLasCategorias().subscribe(response => { 
-      this.categorias = response.categoria.data;
+    this._categoriaService.categoriasSinFiltros().subscribe(response => { 
+      this.categorias = response.categoria;
       },
       error =>{
         console.log("error--------------",error);
       });
   }
-
-  //IMAGEN
- /* onImageChange(e) {
- 
-    let files = e.target.files || e.dataTransfer.files;
-    if (!files.length)
-        return;
-
-    const reader = new FileReader();
-    reader.onload = (e) => {
-        this.articulo.imagen = e.target[`result`];
-      };
-      reader.readAsDataURL(files[0]);
-  }*/
 
   onImageChange() {
 

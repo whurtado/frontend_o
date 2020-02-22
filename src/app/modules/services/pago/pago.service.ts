@@ -14,21 +14,19 @@ export class PagoService {
     constructor(private http: HttpClient,
       private env: EnvService) { }
 
-  listarTodosLosPagos(): Observable<any>{
+  listarTodosLosPagos(pago): Observable<any>{
 
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
     headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
 
 
-    let buscar = '';
-    let criterio= '';
-
-    const url2 = `?page=0&buscar=${buscar}&criterio=${criterio}` ;
-
     const body: FormData = new FormData();
+    body.append('nombre', pago.nombre);
+    body.append('documento', pago.documento);
+
     const url = this.env.apiGatewayBackOffice + constants.config.listarPagos ;
-    return this.http.get(url, {headers})
+    return this.http.post(url, body, {headers})
     .pipe(
     delay(500)
     );
@@ -36,7 +34,7 @@ export class PagoService {
   }
 
   //metodo para crear un usuario
-  crearPago(pago,usuariologueado:object): Observable<Pago>{
+  crearPago(pago,usuariologueado:object, sedeSesion): Observable<Pago>{
 
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
@@ -53,6 +51,7 @@ export class PagoService {
     body.append('ahh', pago.ahh);
     body.append('factura', pago.factura);
     body.append('usuario_sesion', usuariologueado[0].id);
+    body.append('sede_creacion', sedeSesion);
 
     const url = this.env.apiGatewayBackOffice + constants.config.crearPago;
     return this.http.post<Pago>(url, body, {headers})
@@ -75,15 +74,10 @@ export class PagoService {
     );
   }
 
-  actualizarPago(pago, id,  usuariologueado:object): Observable<Pago>{
+  actualizarPago(pago, id,  usuariologueado:object, sedeSesion): Observable<Pago>{
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
     headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
-
-    console.log("rolssaaa---",pago);
-    console.log("aaa---",id);
-    console.log("ssss---",usuariologueado[0].id);
-
 
     const body: FormData = new FormData();
     body.append('fvcnombre', pago.nombre);
@@ -96,7 +90,7 @@ export class PagoService {
     body.append('factura', pago.factura);
     body.append('id', id);
     body.append('usuario_sesion', usuariologueado[0].id);
-
+    body.append('sede_creacion', sedeSesion);
 
 
     const url = this.env.apiGatewayBackOffice + constants.config.actualizarPago;

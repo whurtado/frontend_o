@@ -15,21 +15,19 @@ export class CategoriaService {
   constructor(private http: HttpClient,
               private env: EnvService) { }
 
-  listarTodasLasCategorias(): Observable<any>{
+  listarTodasLasCategorias(categoria): Observable<any>{
 
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
     headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
 
 
-    let buscar = '';
-    let criterio= '';
-
-    const url2 = `?page=0&buscar=${buscar}&criterio=${criterio}` ;
-
     const body: FormData = new FormData();
+    body.append('fvcnombre', categoria.nombre);
+    body.append('genero', categoria.genero);
+
     const url = this.env.apiGatewayBackOffice + constants.config.listarCategorias ;
-    return this.http.get(url, {headers})
+    return this.http.post(url, body, {headers})
     .pipe(
       delay(500)
     );
@@ -37,7 +35,7 @@ export class CategoriaService {
   }
 
     //metodo para crear un usuario
-    crearCategoria(categoria,usuariologueado:object): Observable<Categoria>{
+    crearCategoria(categoria,usuariologueado:object, sedeSesion): Observable<Categoria>{
 
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
@@ -49,7 +47,8 @@ export class CategoriaService {
     body.append('genero', categoria.genero);
     body.append('descripcion', categoria.descripcion);
     body.append('usuario_sesion', usuariologueado[0].id);
-   
+    body.append('sede_creacion', sedeSesion);
+
     const url = this.env.apiGatewayBackOffice + constants.config.crearCategoria;
     return this.http.post<Categoria>(url, body, {headers})
     .pipe(
@@ -71,24 +70,18 @@ export class CategoriaService {
     );
   }
 
-  actualizarCategoria(categoria, id,  usuariologueado:object): Observable<Categoria>{
+  actualizarCategoria(categoria, id,  usuariologueado:object ,sedeSesion): Observable<Categoria>{
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
     headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
-  
-    console.log("rolssaaa---",categoria);
-    console.log("aaa---",id);
-    console.log("ssss---",usuariologueado[0].id);
-
-    
+      
     const body: FormData = new FormData();
     body.append('fvcnombre', categoria.nombre);
     body.append('genero', categoria.genero);
     body.append('descripcion', categoria.descripcion);
     body.append('id', id);
     body.append('usuario_sesion', usuariologueado[0].id);
-
-    
+    body.append('sede_creacion', sedeSesion);    
 
     const url = this.env.apiGatewayBackOffice + constants.config.actualizarCategoria;
 
@@ -96,5 +89,20 @@ export class CategoriaService {
     .pipe(
       delay(500)
     );
+  }
+
+  categoriasSinFiltros(): Observable<any>{
+
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/form-data');
+    headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
+
+    const body: FormData = new FormData();
+    const url = this.env.apiGatewayBackOffice + constants.config.categoriasSinFiltros ;
+    return this.http.get(url, {headers})
+    .pipe(
+    delay(500)
+    );
+
   }
 }

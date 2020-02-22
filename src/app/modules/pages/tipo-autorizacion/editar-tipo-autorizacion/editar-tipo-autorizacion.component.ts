@@ -21,6 +21,7 @@ export class EditarTipoAutorizacionComponent implements OnInit {
   };
   usuarioLogueado:any = [];
   id_tipoAutorizacion:any;  
+  sedeSesion:any = '';
 
 
   constructor(private _router: ActivatedRoute,
@@ -55,7 +56,7 @@ export class EditarTipoAutorizacionComponent implements OnInit {
 
   actualizarTipoAutorizacion(forma:NgForm){
       
-    this._tipoAutorizacionService.actualizarTipoAutorizacion( forma.value, this.id_tipoAutorizacion, this.usuarioLogueado).subscribe((tipoAutorizacion: TipoAutorizacion) => { 
+    this._tipoAutorizacionService.actualizarTipoAutorizacion( forma.value, this.id_tipoAutorizacion, this.usuarioLogueado, this.sedeSesion).subscribe((tipoAutorizacion: TipoAutorizacion) => { 
 
       Swal.fire({
         title: '',
@@ -78,6 +79,7 @@ export class EditarTipoAutorizacionComponent implements OnInit {
     let arrayPermisos:any   = localStorage.getItem('rolesPermisos');
     let arrayRol:any        = localStorage.getItem('roles');
     this.usuarioLogueado = JSON.parse(localStorage.getItem('user'));
+    this.sedeSesion      = JSON.parse(localStorage.getItem('sedeSesion'));
 
     /*if(me.arrayPermisos.indexOf('create-role') >=0){ me.crearRol = true; }
     if(me.arrayRol.indexOf('admin') >=0){ me.adminUsuario = true; }*/

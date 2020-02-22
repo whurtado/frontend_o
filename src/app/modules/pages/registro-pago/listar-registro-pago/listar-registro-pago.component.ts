@@ -9,6 +9,7 @@ import { RegistroPagoService } from '../../../services/registroPago/registro-pag
 export class ListarRegistroPagoComponent implements OnInit {
 
   registroPago:any = [];
+  p: number = 1;
 
   constructor(private _registroPagoService: RegistroPagoService) { }
 

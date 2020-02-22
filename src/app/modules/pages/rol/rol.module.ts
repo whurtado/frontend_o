@@ -8,6 +8,7 @@ import { ListarRolComponent } from './listar-rol/listar-rol.component';
 import { CrearRolComponent } from './crear-rol/crear-rol.component';
 import { EditarRolComponent } from './editar-rol/editar-rol.component';
 import { RolComponent } from './rol/rol.component';
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { RolComponent } from './rol/rol.component';
   imports: [
     CommonModule,
     RolRoutingModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ]
 })
 export class RolModule { }

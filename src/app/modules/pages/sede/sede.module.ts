@@ -7,6 +7,7 @@ import { ListarSedeComponent } from './listar-sede/listar-sede.component';
 import { CrearSedeComponent } from './crear-sede/crear-sede.component';
 import { EditarSedeComponent } from './editar-sede/editar-sede.component';
 import { SedeComponent } from './sede/sede.component';
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { SedeComponent } from './sede/sede.component';
   imports: [
     CommonModule,
     SedeRoutingModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ]
 })
 export class SedeModule { }

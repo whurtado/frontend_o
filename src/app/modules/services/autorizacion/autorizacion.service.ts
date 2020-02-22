@@ -14,21 +14,19 @@ export class AutorizacionService {
   constructor(private http: HttpClient,
     private env: EnvService) { }
 
-  listarTodasLasAutorizaciones(): Observable<any>{
+  listarTodasLasAutorizaciones(autorizacion): Observable<any>{
 
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
     headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
 
-
-    let buscar = '';
-    let criterio= '';
-
-    const url2 = `?page=0&buscar=${buscar}&criterio=${criterio}` ;
-
     const body: FormData = new FormData();
+    body.append('fvcdescripcion', autorizacion.descripcion);
+    body.append('fvctipoautorizacion_id', autorizacion.tipoAutorizacion);
+    body.append('fvcfechaAutorizacion', autorizacion.fechaAplicaAutorizacion);
+    
     const url = this.env.apiGatewayBackOffice + constants.config.listarAutorizaciones ;
-    return this.http.get(url, {headers})
+    return this.http.post(url, body, {headers})
     .pipe(
     delay(500)
     );
@@ -36,7 +34,7 @@ export class AutorizacionService {
   }
 
   //metodo para crear un usuario
-  crearAutorizacion(autorizacion,usuariologueado:object): Observable<Autorizacion>{
+  crearAutorizacion(autorizacion,usuariologueado:object, sedeSesion): Observable<Autorizacion>{
 
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
@@ -49,6 +47,7 @@ export class AutorizacionService {
     body.append('fvcfechaAutorizacion', autorizacion.fechaAplicaAutorizacion);
     body.append('estado', autorizacion.estado);
     body.append('usuario_sesion', usuariologueado[0].id);
+    body.append('sede_creacion', sedeSesion);
 
     const url = this.env.apiGatewayBackOffice + constants.config.crearAutorizacion;
     return this.http.post<Autorizacion>(url, body, {headers})
@@ -71,7 +70,7 @@ export class AutorizacionService {
     );
   }
 
-  actualizarAutorizacion(autorizacion, id,  usuariologueado:object): Observable<Autorizacion>{
+  actualizarAutorizacion(autorizacion, id,  usuariologueado:object, sedeSesion): Observable<Autorizacion>{
     
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
@@ -84,7 +83,7 @@ export class AutorizacionService {
     body.append('estado', autorizacion.estado);
     body.append('id', id);
     body.append('usuario_sesion', usuariologueado[0].id);
-
+    body.append('sede_creacion', sedeSesion);
 
 
     const url = this.env.apiGatewayBackOffice + constants.config.actualizarAutorizacion;

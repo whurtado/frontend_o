@@ -14,21 +14,19 @@ export class ClienteService {
   constructor(private http: HttpClient,
     private env: EnvService) { }
 
-listarTodosLosClientes(): Observable<any>{
+listarTodosLosClientes(cliente): Observable<any>{
 
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
     headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
 
-
-    let buscar = '';
-    let criterio= '';
-
-    const url2 = `?page=0&buscar=${buscar}&criterio=${criterio}` ;
-
     const body: FormData = new FormData();
+    body.append('fvcprimernombre', cliente.primernombre);
+    body.append('documento', cliente.documento);
+    body.append('email', cliente.email);
+
     const url = this.env.apiGatewayBackOffice + constants.config.listarClientes ;
-    return this.http.get(url, {headers})
+    return this.http.post(url, body, {headers})
     .pipe(
     delay(500)
     );
@@ -36,7 +34,7 @@ listarTodosLosClientes(): Observable<any>{
   }
 
   //metodo para crear un usuario
-  crearCliente(cliente, detalleCliente,usuariologueado:object): Observable<Cliente>{
+  crearCliente(cliente, detalleCliente,usuariologueado:object , sedeSesion): Observable<Cliente>{
 
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
@@ -58,6 +56,7 @@ listarTodosLosClientes(): Observable<any>{
     body.append('observacion', cliente.observacion);
     body.append('data', JSON.stringify(detalleCliente));
     body.append('usuario_sesion', usuariologueado[0].id);
+    body.append('sede_creacion', sedeSesion);
 
     const url = this.env.apiGatewayBackOffice + constants.config.crearCliente;
     return this.http.post<Cliente>(url, body, {headers})
@@ -80,7 +79,7 @@ listarTodosLosClientes(): Observable<any>{
     );
   }
 
-  actualizarCliente(cliente,  detalleCliente, id,  usuariologueado:object): Observable<Cliente>{
+  actualizarCliente(cliente,  detalleCliente, id,  usuariologueado:object, sedeSesion): Observable<Cliente>{
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
     headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
@@ -103,6 +102,7 @@ listarTodosLosClientes(): Observable<any>{
     body.append('data', JSON.stringify(detalleCliente));
     body.append('id', id);
     body.append('usuario_sesion', usuariologueado[0].id);
+    body.append('sede_creacion', sedeSesion);
 
     const url = this.env.apiGatewayBackOffice + constants.config.actualizarCliente;
 

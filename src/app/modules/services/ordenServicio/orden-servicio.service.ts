@@ -14,7 +14,7 @@ export class OrdenServicioService {
   constructor(private http: HttpClient,
     private env: EnvService) { }
 
-listarTodasLasOrdenServicios(): Observable<any>{
+listarTodasLasOrdenServicios(ordenServicio): Observable<any>{
 
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');

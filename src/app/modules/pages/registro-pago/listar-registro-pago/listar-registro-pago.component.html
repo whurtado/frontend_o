@@ -41,7 +41,7 @@
                 </thead>
                 <tbody>
                 
-                <tr *ngFor="let registro of registroPago">
+                <tr *ngFor="let registro of registroPago  | paginate: { itemsPerPage: 1, currentPage: p }" >
                     <td>{{ registro.id}}</td>
                     <td>{{ registro.fvcfactura}}</td>
                     <td>{{ registro.flngvalorFactura}}</td>
@@ -58,6 +58,12 @@
                 </tbody>
 
             </table>
+            <pagination-controls  class="espacio-paginacion"
+                      (pageChange)="p = $event"
+                        previousLabel="Anterior" 
+                        nextLabel="Siguiente">
+                </pagination-controls>
+            
 
 
             <!--<nav>

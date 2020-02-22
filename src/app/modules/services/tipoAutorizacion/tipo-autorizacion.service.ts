@@ -15,21 +15,19 @@ export class TipoAutorizacionService {
     private env: EnvService) { }
 
 
-listarTodosLosTipoAutorizacion(): Observable<any>{
+listarTodosLosTipoAutorizacion(tipoAutorizacion, sedeSesion): Observable<any>{
 
   const headers = new HttpHeaders();
   headers.append('Content-Type', 'application/form-data');
   headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
 
-
-  let buscar = '';
-  let criterio= '';
-
-  const url2 = `?page=0&buscar=${buscar}&criterio=${criterio}` ;
-
   const body: FormData = new FormData();
+  body.append('fvcnombre', tipoAutorizacion.nombre);
+  body.append('estado', tipoAutorizacion.estado);
+  body.append('sede_creacion', sedeSesion);
+
   const url = this.env.apiGatewayBackOffice + constants.config.listarTipoAutorizaciones ;
-  return this.http.get(url, {headers})
+  return this.http.post(url, body, {headers})
   .pipe(
   delay(500)
   );
@@ -37,7 +35,7 @@ listarTodosLosTipoAutorizacion(): Observable<any>{
 }
 
 //metodo para crear un usuario
-crearTipoAutorizacion(tipoAutorizacion,usuariologueado:object): Observable<TipoAutorizacion>{
+crearTipoAutorizacion(tipoAutorizacion,usuariologueado:object, sedeSesion): Observable<TipoAutorizacion>{
 
   const headers = new HttpHeaders();
   headers.append('Content-Type', 'application/form-data');
@@ -47,6 +45,7 @@ crearTipoAutorizacion(tipoAutorizacion,usuariologueado:object): Observable<TipoA
   body.append('fvcnombre', tipoAutorizacion.nombre);
   body.append('estado', tipoAutorizacion.estado);
   body.append('usuario_sesion', usuariologueado[0].id);
+  body.append('sede_creacion', sedeSesion);
 
 
   const url = this.env.apiGatewayBackOffice + constants.config.crearTipoAutorizacion;
@@ -70,7 +69,7 @@ mostrarTipoAutorizacion( id) : Observable<any>{
   );
 }
 
-actualizarTipoAutorizacion(tipoAutorizacion, id, usuariologueado:object): Observable<TipoAutorizacion>{
+actualizarTipoAutorizacion(tipoAutorizacion, id, usuariologueado:object,sedeSesion): Observable<TipoAutorizacion>{
  
   const headers = new HttpHeaders();
   headers.append('Content-Type', 'application/form-data');
@@ -81,6 +80,7 @@ actualizarTipoAutorizacion(tipoAutorizacion, id, usuariologueado:object): Observ
   body.append('estado', tipoAutorizacion.estado);
   body.append('id', id);
   body.append('usuario_sesion', usuariologueado[0].id);
+  body.append('sede_creacion', sedeSesion);
 
 
 

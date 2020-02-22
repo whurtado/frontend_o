@@ -55,6 +55,7 @@ export class CrearClienteComponent implements OnInit {
 
   usuarioLogueado:any = [];
   arrayDetalleCliente:any = [];
+  sedeSesion:any = '';
 
 
   constructor(private _clienteService: ClienteService) { }
@@ -65,7 +66,7 @@ export class CrearClienteComponent implements OnInit {
 
   crearCliente(forma:NgForm){
     
-    this._clienteService.crearCliente(forma.value,this.arrayDetalleCliente,this.usuarioLogueado).subscribe((cliente:  Cliente)=>{
+    this._clienteService.crearCliente(forma.value,this.arrayDetalleCliente,this.usuarioLogueado,this.sedeSesion).subscribe((cliente:  Cliente)=>{
 
       Swal.fire({
         title: '',
@@ -104,6 +105,7 @@ agregarDetalle(){
     let arrayPermisos:any   = localStorage.getItem('rolesPermisos');
     let arrayRol:any        = localStorage.getItem('roles');
     this.usuarioLogueado = JSON.parse(localStorage.getItem('user'));
+    this.sedeSesion      = JSON.parse(localStorage.getItem('sedeSesion'));
 
     /*if(me.arrayPermisos.indexOf('create-role') >=0){ me.crearRol = true; }
     if(me.arrayRol.indexOf('admin') >=0){ me.adminUsuario = true; }*/

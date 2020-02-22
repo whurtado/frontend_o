@@ -14,21 +14,22 @@ export class ArticuloService {
   constructor(private http: HttpClient,
     private env: EnvService) { }
 
-listarTodosLosArticulos(): Observable<any>{
+listarTodosLosArticulos(articulo): Observable<any>{
 
   const headers = new HttpHeaders();
   headers.append('Content-Type', 'application/form-data');
   headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
 
 
-  let buscar = '';
-  let criterio= '';
-
-  const url2 = `?page=0&buscar=${buscar}&criterio=${criterio}` ;
 
   const body: FormData = new FormData();
+  body.append('categoria', articulo.categoria_id);
+  body.append('fvcnombre', articulo.nombre);
+  body.append('flvrequieredeposito', articulo.requiereDeposito);
+  body.append('valor', articulo.valor);
+
   const url = this.env.apiGatewayBackOffice + constants.config.listarArticulos ;
-  return this.http.get(url, {headers})
+  return this.http.post(url, body, {headers})
   .pipe(
   delay(500)
   );
@@ -36,7 +37,7 @@ listarTodosLosArticulos(): Observable<any>{
 }
 
 //metodo para crear un usuario
-crearArticulo(articulo,imagen, usuariologueado:object): Observable<Articulo>{
+crearArticulo(articulo,imagen, usuariologueado:object , sedeSesion): Observable<Articulo>{
 
   const headers = new HttpHeaders();
   headers.append('Content-Type', 'application/form-data');
@@ -54,6 +55,7 @@ crearArticulo(articulo,imagen, usuariologueado:object): Observable<Articulo>{
   body.append('flvrequieredeposito', articulo.requiereDeposito);
   body.append('flngvalorDeposito', articulo.valorDeposito);
   body.append('usuario_sesion', usuariologueado[0].id);
+  body.append('sede_creacion', sedeSesion);
 
 
   const url = this.env.apiGatewayBackOffice + constants.config.crearArticulo;
@@ -77,7 +79,7 @@ mostrarArticulo( id) : Observable<any>{
   );
 }
 
-actualizarArticulo(articulo, id, imagen,  usuariologueado:object): Observable<Articulo>{
+actualizarArticulo(articulo, id, imagen,  usuariologueado:object, sedeSesion): Observable<Articulo>{
   const headers = new HttpHeaders();
   headers.append('Content-Type', 'application/form-data');
   headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
@@ -99,6 +101,7 @@ actualizarArticulo(articulo, id, imagen,  usuariologueado:object): Observable<Ar
   body.append('flngvalorDeposito', articulo.valorDeposito);
   body.append('id', id);
   body.append('usuario_sesion', usuariologueado[0].id);
+  body.append('sede_creacion', sedeSesion);
 
 
 

@@ -14,21 +14,17 @@ export class RolService {
   constructor( private http: HttpClient,
                private env: EnvService) { }
 
-    listarTodosLosRoles(): Observable<any>{
+    listarTodosLosRoles(rol): Observable<any>{
 
       const headers = new HttpHeaders();
       headers.append('Content-Type', 'application/form-data');
       headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
 
-
-      let buscar = '';
-      let criterio= '';
-
-      const url2 = `?page=0&buscar=${buscar}&criterio=${criterio}` ;
-
       const body: FormData = new FormData();
+      body.append('nombre', rol.nombre);
+      
       const url = this.env.apiGatewayBackOffice + constants.config.listarRoles ;
-      return this.http.get(url, {headers})
+      return this.http.post(url, body, {headers})
       .pipe(
         delay(500)
       );

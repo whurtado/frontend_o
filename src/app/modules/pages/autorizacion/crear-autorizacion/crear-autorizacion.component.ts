@@ -16,11 +16,12 @@ export class CrearAutorizacionComponent implements OnInit {
     descripcion:null,
     tipoAutorizacion:"",
     fechaAplicaAutorizacion:null,
-    estado:'ACTIVA',
+    estado:'ACTIVA', 
   };
  
   usuarioLogueado:any = [];
   tipoAutorizacions:any = [];
+  sedeSesion:any = '';
 
 
   constructor(private _autorizacionService: AutorizacionService) { }
@@ -32,7 +33,7 @@ export class CrearAutorizacionComponent implements OnInit {
 
   crearAutorizacion(forma:NgForm){
     
-    this._autorizacionService.crearAutorizacion(forma.value,this.usuarioLogueado).subscribe((autorizacion:  Autorizacion)=>{
+    this._autorizacionService.crearAutorizacion(forma.value,this.usuarioLogueado, this.sedeSesion).subscribe((autorizacion:  Autorizacion)=>{
 
       Swal.fire({
         title: '',
@@ -47,9 +48,6 @@ export class CrearAutorizacionComponent implements OnInit {
 
     this._autorizacionService.verTipoAutorizacion().subscribe(response => { 
       this.tipoAutorizacions = response.tipoAutorizacion;
-      console.log("respuesta", response);
-      console.log("usus", this.tipoAutorizacions);
-
       },
       error =>{
         console.log("error--------------",error);
@@ -64,6 +62,7 @@ export class CrearAutorizacionComponent implements OnInit {
     let arrayPermisos:any   = localStorage.getItem('rolesPermisos');
     let arrayRol:any        = localStorage.getItem('roles');
     this.usuarioLogueado = JSON.parse(localStorage.getItem('user'));
+    this.sedeSesion      = JSON.parse(localStorage.getItem('sedeSesion'));
 
     /*if(me.arrayPermisos.indexOf('create-role') >=0){ me.crearRol = true; }
     if(me.arrayRol.indexOf('admin') >=0){ me.adminUsuario = true; }*/

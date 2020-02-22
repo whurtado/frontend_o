@@ -9,161 +9,96 @@
 
         <div class="box-body">
 
-         <div class="form-group col-md-12">
+         
+                <form role="form" autocomplete="off">
+                    <div class="cuadro_busqueda" >
 
-                <div class="form-group col-md-3" [ngClass]="{'has-error': (total.errors?.required || total.errors?.minlength) && total.touched }">
-                        <div class="col-md-4">
-                            <label>Estado:</label>
-                        </div>
-                        <div class="col-md-8">
+                        <div>
 
-                                <select name="confesion" class="form-control" >
-                                        <option value="SI" selected>SI</option>
-                                        <option value="NO">NO</option>
-                                    </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group col-md-3" [ngClass]="{'has-error': (total.errors?.required || total.errors?.minlength) && total.touched }">
-                            <div class="col-md-4">
-                                <label>Estado:</label>
+                            <div class="form-group col-md-3">
+                                <label for="pwd">Estado</label>
+                                
+                                <select name="estado" class="form-control" [(ngModel)]="ordenServicio.estado">
+                                    <option value="" selected>Todos</option>
+                                    <option value="ACTIVO">ACTIVO</option>
+                                    <option value="INACTIVO">INACTIVO</option>
+                                </select>
                             </div>
-                            <div class="col-md-8">
-    
-                                    <select name="confesion" class="form-control" >
-                                            <option value="SI" selected>SI</option>
+                            <div class="form-group col-md-2">
+                                <label for="email">Vendedor</label>
+                                <input type="text" class="form-control"
+                                    placeholder="Ingrese su Nombre"
+                                name="nombre"  [(ngModel)]="ordenServicio.vendedor">
+                            </div>
+                
+                            <div class="form-group col-md-3">
+                                <label for="pwd">Fecha</label>
+                                
+                                <select name="estado" class="form-control" [(ngModel)]="ordenServicio.fecha">
+                                    <option value="Creacion" selected>Creacion</option>
+                                    <option value="Entrega">Entrega</option>
+                                    <option value="Prueba">Prueba</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label for="email">Fecha Inicial</label>
+                                <input type="text" class="form-control"
+                                    placeholder="Ingrese su Nombre"
+                                name="nombre"  [(ngModel)]="ordenServicio.fecha_inicial">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="email">Fecha Final</label>
+                                <input type="text" class="form-control"
+                                    placeholder="Ingrese su Nombre"
+                                name="nombre"  [(ngModel)]="ordenServicio.fecha_final">
+                            </div>
+
+                        </div>
+                        <div>
+
+                                   <div class="form-group col-md-3">
+                                        <label for="pwd">Genero</label>
+                                        
+                                        <select name="estado" class="form-control" [(ngModel)]="ordenServicio.genero">
+                                            <option value="" selected>Todos</option>
+                                            <option value="ACTIVO">ACTIVO</option>
+                                            <option value="INACTIVO">INACTIVO</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label for="pwd">Confeccion</label>
+                                        
+                                        <select name="estado" class="form-control" [(ngModel)]="ordenServicio.confesion">
+                                            <option value="" selected>Todos</option>
+                                            <option value="SI">SI</option>
                                             <option value="NO">NO</option>
                                         </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group col-md-3" [ngClass]="{'has-error': (total.errors?.required || total.errors?.minlength) && total.touched }">
-                                <div class="col-md-4">
-                                    <label>Estado:</label>
-                                </div>
-                                <div class="col-md-8">
-        
-                                        <select name="confesion" class="form-control" >
-                                                <option value="SI" selected>SI</option>
-                                                <option value="NO">NO</option>
-                                            </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group col-md-3" [ngClass]="{'has-error': (total.errors?.required || total.errors?.minlength) && total.touched }">
-                                <div class="col-md-4">
-                                    <label>Estado:</label>
-                                </div>
-                                <div class="col-md-8">
-        
-                                        <select name="confesion" class="form-control" >
-                                                <option value="SI" selected>SI</option>
-                                                <option value="NO">NO</option>
-                                            </select>
-                                </div>
-                            </div>
-
-         </div>
-
-
-
-           <!-- <table class="table table-bordered table-striped table-sm ">
-                <tbody>
-
-                <tr>
-                    <td>
-                        <div class="form-group col-md-6" [ngClass]="{'has-error': (total.errors?.required || total.errors?.minlength) && total.touched }">
-                                <div class="col-md-4">
-                                    <label>Estado:</label>
-                                </div>
-                                <div class="col-md-8">
-
-                                        <select name="confesion" class="form-control" >
-                                                <option value="SI" selected>SI</option>
-                                                <option value="NO">NO</option>
-                                            </select>
-                                </div>
-                            </div>
-                    </td>
-                    <td >
-                            <div class="form-group col-md-6" [ngClass]="{'has-error': (total.errors?.required || total.errors?.minlength) && total.touched }">
-                                <div class="col-md-4">
-                                    <label>Vendedor:</label>
-                                </div>
-                                <div class="col-md-8">
-
-                                        <select name="confesion" class="form-control" >
-                                                <option value="SI" selected>SI</option>
-                                                <option value="NO">NO</option>
-                                            </select>
-                                </div>
-                            </div>
-                    </td>
-                    <td>
-                        <div class="form-group col-md-6" [ngClass]="{'has-error': (total.errors?.required || total.errors?.minlength) && total.touched }">
-                            <div class="col-md-4">
-                                <label>Fecha:</label>
-                            </div>
-                            <div class="col-md-8">
-
-                                    <select name="confesion" class="form-control" >
-                                            <option value="Entrega" selected>Entrega</option>
-                                            <option value="Pruebas">Pruebas</option>
-                                        </select>
-                            </div>
-                        </div>
-                    </td>
-                    <td><div class="form-group col-md-6" [ngClass]="{'has-error': (total.errors?.required || total.errors?.minlength) && total.touched }">
-                            <div class="col-md-4">
-                                <label>Fecha Inicial:</label>
-                            </div>
-                            <div class="col-md-8">
-
-                                    <input type="date" name="fecha_final">
-
-                            </div>
-                        </div></td>
-                    <td>
-                            <div class="form-group col-md-12" [ngClass]="{'has-error': (total.errors?.required || total.errors?.minlength) && total.touched }">
-                                    <div class="col-md-4">
-                                        <label>Fecha Final:</label>
                                     </div>
-                                    <div class="col-md-8">
-    
-                                            <input type="date" name="fecha_final">
+                                    <div class="form-group col-md-3">
+                                        <label for="email">Articulo</label>
+                                        <input type="text" class="form-control"
+                                            placeholder="Ingrese su Nombre"
+                                        name="nombre"  [(ngModel)]="ordenServicio.articulo">
                                     </div>
-                                </div>
-                    </td>
+                                    <div class="form-group col-md-2">
+                                        <label for="email">Ficha</label>
+                                        <input type="text" class="form-control"
+                                            placeholder="Ingrese su Nombre"
+                                        name="nombre"  [(ngModel)]="ordenServicio.ficha">
+                                    </div>
+                                    
+                                    <div class="form-group col-md-2">                                
+                                        <button type="submit" style="margin-top: 25px!important"   class="btn btn-primary btn-block" (click)="listarTodasLasOrdenServicios(ordenServicio)"><i class="fa fa-search"></i> Buscar</button>
+                                    </div>
 
-                </tr>
-                <tr>
-                        <td >4</td>
-                        <td >2</td>
-                        <td>1</td>
-                        <td>3</td>
-                        <td>6</td>
-    
-                </tr>
-                </tbody>-->
-
-               <!-- <div class="form-group" style="position: relative" >
-                    <div class="col-md-6">
-                        <div class="input-group" style="display: inline-block;" >
-                            <select class="form-control " >
-                                <option value="name">Nombre</option>
-                            </select>
                         </div>
-                        <div class="input-group" style="display: inline-block;" >
-                            <input type="text" v-model="buscar" class="form-control inline" placeholder="Texto a buscar" style="display: inline-block;">
-                        </div>
-                        <div class="input-group" style="display: inline-block;" >
-                            <button type="submit"  class="btn btn-primary inline"><i class="fa fa-search"></i> Buscar</button>
-                        </div>
-
+                            
                     </div>
-                </div>
-            </table>-->
-            <br>
+                                                   
+                </form>
+                    <br><br>
+
             
             <table id="posts-table" class="table table-bordered table-striped">
                 <thead>
@@ -191,7 +126,7 @@
                 <tbody>
 
                 
-                <tr *ngFor="let orden of ordenes;index as i">
+                <tr *ngFor="let orden of ordenes | paginate: { itemsPerPage: 1, currentPage: p }; let i = index ">
                     <td>{{ orden.i}}</td>
                     <td>{{ orden.id}}</td>
                     <td>{{ orden.fvcficha}}</td>
@@ -221,20 +156,12 @@
 
             </table>
 
- 
-            <!--<nav>
-                <ul class="pagination">
-                    <li class="page-item" v-if="pagination.current_page > 1">
-                        <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)">Ant</a>
-                    </li>
-                    <li class="page-item" v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
-                        <a class="page-link" href="#" @click.prevent="cambiarPagina(page,buscar,criterio)" v-text="page"></a>
-                    </li>
-                    <li class="page-item" v-if="pagination.current_page < pagination.last_page">
-                        <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1,buscar,criterio)">Sig</a>
-                    </li>
-                </ul>
-            </nav>-->
+            <pagination-controls  class="espacio-paginacion"
+                    (pageChange)="p = $event"
+                    previousLabel="Anterior" 
+                    nextLabel="Siguiente">
+            </pagination-controls>
+
         </div>
         <!-- /.box-body -->
     </div>
