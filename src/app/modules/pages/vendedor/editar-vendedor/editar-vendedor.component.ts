@@ -20,6 +20,7 @@ export class EditarVendedorComponent implements OnInit {
     estado:null,
   };
   usuarioLogueado:any = [];
+  sedeSesion:any = '';
   id_vendedor:any;
 
   constructor(private _router: ActivatedRoute,
@@ -55,7 +56,7 @@ export class EditarVendedorComponent implements OnInit {
 
     console.log("formasss",forma.value)
       
-    this._vendedorService.actualizarVendedor( forma.value,this.vendedor.id, this.usuarioLogueado).subscribe((vendedor: Vendedor) => { 
+    this._vendedorService.actualizarVendedor( forma.value,this.vendedor.id, this.usuarioLogueado,this.sedeSesion).subscribe((vendedor: Vendedor) => { 
 
       Swal.fire({
         title: '',
@@ -78,6 +79,7 @@ export class EditarVendedorComponent implements OnInit {
     let arrayPermisos:any   = localStorage.getItem('rolesPermisos');
     let arrayRol:any        = localStorage.getItem('roles');
     this.usuarioLogueado = JSON.parse(localStorage.getItem('user'));
+    this.sedeSesion      = JSON.parse(localStorage.getItem('sedeSesion'));
 
     /*if(me.arrayPermisos.indexOf('create-role') >=0){ me.crearRol = true; }
     if(me.arrayRol.indexOf('admin') >=0){ me.adminUsuario = true; }*/

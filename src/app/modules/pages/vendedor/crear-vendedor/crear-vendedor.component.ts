@@ -21,6 +21,7 @@ export class CrearVendedorComponent implements OnInit {
     estado:null,
   };
   usuarioLogueado:any = [];
+  sedeSesion:any = '';
 
   constructor(public _vendedorService: VendedorService,
               public _validacionesService: ValidacionesService) { }
@@ -31,7 +32,8 @@ export class CrearVendedorComponent implements OnInit {
   }
 
   crearVendedor(forma:NgForm){
-    this._vendedorService.crearVendedor(forma.value,this.usuarioLogueado).subscribe((vendedor: Vendedor)=>{
+
+    this._vendedorService.crearVendedor(forma.value,this.usuarioLogueado,this.sedeSesion).subscribe((vendedor: Vendedor)=>{
 
       Swal.fire({
         icon: 'success',
@@ -62,6 +64,7 @@ export class CrearVendedorComponent implements OnInit {
     let arrayPermisos:any   = localStorage.getItem('rolesPermisos');
     let arrayRol:any        = localStorage.getItem('roles');
     this.usuarioLogueado = JSON.parse(localStorage.getItem('user'));
+    this.sedeSesion      = JSON.parse(localStorage.getItem('sedeSesion'));
 
     /*if(me.arrayPermisos.indexOf('create-role') >=0){ me.crearRol = true; }
     if(me.arrayRol.indexOf('admin') >=0){ me.adminUsuario = true; }*/

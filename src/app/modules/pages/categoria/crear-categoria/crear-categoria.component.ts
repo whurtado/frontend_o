@@ -17,10 +17,11 @@ export class CrearCategoriaComponent implements OnInit {
     id:  null ,
     nombre:null,
     descripcion:null,
-    genero:null,
+    genero:'',
 
   };
   usuarioLogueado:any = [];
+  sedeSesion:any = '';
 
   constructor(public _categoriaService: CategoriaService) { }
 
@@ -30,7 +31,7 @@ export class CrearCategoriaComponent implements OnInit {
 
   crearCategoria(forma:NgForm){
     
-    this._categoriaService.crearCategoria(forma.value,this.usuarioLogueado).subscribe((categoria: Categoria)=>{
+    this._categoriaService.crearCategoria(forma.value,this.usuarioLogueado, this.sedeSesion).subscribe((categoria: Categoria)=>{
 
       Swal.fire({
         title: '',
@@ -49,6 +50,7 @@ export class CrearCategoriaComponent implements OnInit {
     let arrayPermisos:any   = localStorage.getItem('rolesPermisos');
     let arrayRol:any        = localStorage.getItem('roles');
     this.usuarioLogueado = JSON.parse(localStorage.getItem('user'));
+    this.sedeSesion      = JSON.parse(localStorage.getItem('sedeSesion'));
 
     /*if(me.arrayPermisos.indexOf('create-role') >=0){ me.crearRol = true; }
     if(me.arrayRol.indexOf('admin') >=0){ me.adminUsuario = true; }*/

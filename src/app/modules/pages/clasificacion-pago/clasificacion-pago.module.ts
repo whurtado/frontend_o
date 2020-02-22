@@ -7,6 +7,7 @@ import { ClasificacionPagoComponent } from './clasificacion-pago/clasificacion-p
 import { CrearClasificacionPagoComponent } from './crear-clasificacion-pago/crear-clasificacion-pago.component';
 import { EditarClasificacionPagoComponent } from './editar-clasificacion-pago/editar-clasificacion-pago.component';
 import { ListarClasificacionPagoComponent } from './listar-clasificacion-pago/listar-clasificacion-pago.component';
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { ListarClasificacionPagoComponent } from './listar-clasificacion-pago/li
   imports: [
     CommonModule,
     ClasificacionPagoRoutingModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ]
 })
 export class ClasificacionPagoModule { }

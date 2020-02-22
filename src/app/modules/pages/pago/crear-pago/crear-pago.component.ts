@@ -26,6 +26,7 @@ export class CrearPagoComponent implements OnInit {
   }
 
   usuarioLogueado:any = [];
+  sedeSesion:any = '';
 
   constructor(public _pagoService: PagoService) { }
 
@@ -35,14 +36,14 @@ export class CrearPagoComponent implements OnInit {
 
   crearPago(forma:NgForm){
     
-    this._pagoService.crearPago(forma.value,this.usuarioLogueado).subscribe((pago: Pago)=>{
+    this._pagoService.crearPago(forma.value,this.usuarioLogueado, this.sedeSesion).subscribe((pago: Pago)=>{
 
       Swal.fire({
         title: '',
         text: 'Registro creado correctamente',
         //type: 'success'
       });
-
+ 
     });
   }
 
@@ -54,6 +55,7 @@ export class CrearPagoComponent implements OnInit {
     let arrayPermisos:any   = localStorage.getItem('rolesPermisos');
     let arrayRol:any        = localStorage.getItem('roles');
     this.usuarioLogueado = JSON.parse(localStorage.getItem('user'));
+    this.sedeSesion      = JSON.parse(localStorage.getItem('sedeSesion'));
 
     /*if(me.arrayPermisos.indexOf('create-role') >=0){ me.crearRol = true; }
     if(me.arrayRol.indexOf('admin') >=0){ me.adminUsuario = true; }*/

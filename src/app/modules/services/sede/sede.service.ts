@@ -15,21 +15,18 @@ export class SedeService {
               private env: EnvService) { }
 
 
-  listarTodasLasSedes(): Observable<any>{
+  listarTodasLasSedes(sede): Observable<any>{
 
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
     headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
 
-
-    let buscar = '';
-    let criterio= '';
-
-    const url2 = `?page=0&buscar=${buscar}&criterio=${criterio}` ;
-
     const body: FormData = new FormData();
+    body.append('fvcnombre', sede.nombre);
+    body.append('estado', sede.estado);
+
     const url = this.env.apiGatewayBackOffice + constants.config.listarSedes ;
-    return this.http.get(url, {headers})
+    return this.http.post(url, body, {headers})
     .pipe(
       delay(500)
     );

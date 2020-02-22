@@ -44,4 +44,34 @@ export class LoginService {
     if(me.arrayRol.indexOf('admin') >=0){ me.adminUsuario = true; }*/
 
   }
+
+  listarSedesUsuario( email ): Observable<any>{
+
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/form-data');
+
+    const body: FormData = new FormData();
+    body.append('email', email);
+
+    const url = this.env.apiGatewayBackOffice + constants.config.mostrarSedesDelUsuario;
+    return this.http.post(url, body, {headers})
+    .pipe(
+      delay(500)
+    );
+  }
+
+  listarTodasLasSedes(): Observable<any>{
+
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/form-data');
+    headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
+
+    const body: FormData = new FormData();
+    const url = this.env.apiGatewayBackOffice + constants.config.traerSedes ;
+    return this.http.get(url, {headers})
+    .pipe(
+      delay(500)
+    );
+
+  }
 }

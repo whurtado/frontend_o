@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoriaService } from '../../../services/categoria/categoria.service';
+import { Categoria } from "../../../models/categoria";
 
 @Component({
   selector: 'app-listar-categoria',
@@ -8,6 +9,14 @@ import { CategoriaService } from '../../../services/categoria/categoria.service'
 })
 export class ListarCategoriaComponent implements OnInit {
 
+  categoria:  Categoria  = {
+    id:  null ,
+    nombre:null,
+    descripcion:null,
+    genero:'',
+
+  };
+
   categorias:any = [];
   p: number = 1;
 
@@ -15,18 +24,20 @@ export class ListarCategoriaComponent implements OnInit {
   constructor(private _categoriaService: CategoriaService) { }
 
   ngOnInit() {
-    this.listarTodosLosCategorias();
+    this.listarTodosLosCategorias(this.categoria);
   }
 
 
-  listarTodosLosCategorias() {
+  listarTodosLosCategorias(categoria) {
 
-    this._categoriaService.listarTodasLasCategorias().subscribe(response => { 
-      this.categorias = response.categoria.data;
+    this._categoriaService.listarTodasLasCategorias(categoria).subscribe(response => { 
+      this.categorias = response.categoria;
       },
       error =>{
         console.log("error--------------",error);
       });
   }
+
+ 
 
 }

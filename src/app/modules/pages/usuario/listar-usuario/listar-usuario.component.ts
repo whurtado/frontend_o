@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../../../services/usuario/usuario.service';
+import { Usuario } from "../../../models/usuario";
+import { LoginService } from '../../../services/auth/login.service';
 
 @Component({
   selector: 'app-listar-usuario',
@@ -8,24 +10,44 @@ import { UsuarioService } from '../../../services/usuario/usuario.service';
 })
 export class ListarUsuarioComponent implements OnInit {
 
-   usuarios:any = [];
+  usuario:  Usuario  = {
+    id:  null ,
+    nombre:null,
+    email:null,
+    password:null,
+    sede:'',
+  };
 
-  constructor( public _usuarioService: UsuarioService) { }
+   usuarios:any = [];
+   p: number = 1;
+   arraySedes:any = [];
+
+  constructor( public _usuarioService: UsuarioService,
+               public _loginService:LoginService,) { }
 
   ngOnInit() {
-    this.listarTodosLosUsuarios();
+    this.traerSedes();
+    this.listarTodosLosUsuarios(this.usuario);
   }
 
-  listarTodosLosUsuarios() {
+  listarTodosLosUsuarios(usuario) {
 
-    this._usuarioService.listarTodosLosUsuarios().subscribe(response => { 
-      this.usuarios = response.user.data;
-      console.log("respuesta", response.user.data);
+    this._usuarioService.listarTodosLosUsuarios(usuario).subscribe(response => { 
+      this.usuarios = response.user;
+      console.log("respuesta", response);
       console.log("usus", this.usuarios);
 
       },
       error =>{
         console.log("error--------------",error);
       });
+  }
+
+   traerSedes() {
+    this._loginService.listarTodasLasSedes().subscribe(response => {
+          
+      this.arraySedes = response.sede;
+
+    });
   }
 }

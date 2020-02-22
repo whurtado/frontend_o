@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Vendedor } from "../../../models/vendedor";
 import { VendedorService } from '../../../services/vendedor/vendedor.service';
 
 @Component({
@@ -8,19 +9,28 @@ import { VendedorService } from '../../../services/vendedor/vendedor.service';
 })
 export class ListarVendedorComponent implements OnInit {
 
+  vendedor:  Vendedor  = {
+    id:  null ,
+    nombre:null,
+    estado:null,
+  };
+
   vendedores:any = [];
+  sedeSesion:any = '';
+  p: number = 1;
 
   constructor( private _vendedorService: VendedorService) { }
 
   ngOnInit() {
-    this.listarTodosLosVendedores();
+    this.verificarDatosLogin();
+    this.listarTodosLosVendedores(this.vendedor);
 
   }
 
-  listarTodosLosVendedores() {
+  listarTodosLosVendedores(vendedor) {
 
-    this._vendedorService.listarTodosLosVendedores().subscribe(response => { 
-      this.vendedores = response.vendedor.data;
+    this._vendedorService.listarTodosLosVendedores(vendedor, this.sedeSesion).subscribe(response => { 
+      this.vendedores = response.vendedor;
       console.log("respuesta", response);
       console.log("usus", this.vendedores);
 
@@ -28,6 +38,20 @@ export class ListarVendedorComponent implements OnInit {
       error =>{
         console.log("error--------------",error);
       });
+  }
+
+  verificarDatosLogin(){
+
+    let adminUsuario  = false;
+    let crearRol  = false;
+
+    let arrayPermisos:any   = localStorage.getItem('rolesPermisos');
+    let arrayRol:any        = localStorage.getItem('roles');
+    this.sedeSesion      = JSON.parse(localStorage.getItem('sedeSesion'));
+
+    /*if(me.arrayPermisos.indexOf('create-role') >=0){ me.crearRol = true; }
+    if(me.arrayRol.indexOf('admin') >=0){ me.adminUsuario = true; }*/
+
   }
 
 }

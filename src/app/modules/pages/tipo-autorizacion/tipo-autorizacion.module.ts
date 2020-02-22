@@ -7,6 +7,7 @@ import { TipoAutorizacionComponent } from './tipo-autorizacion/tipo-autorizacion
 import { CrearTipoAutorizacionComponent } from './crear-tipo-autorizacion/crear-tipo-autorizacion.component';
 import { EditarTipoAutorizacionComponent } from './editar-tipo-autorizacion/editar-tipo-autorizacion.component';
 import { ListarTipoAutorizacionComponent } from './listar-tipo-autorizacion/listar-tipo-autorizacion.component';
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { ListarTipoAutorizacionComponent } from './listar-tipo-autorizacion/list
   imports: [
     CommonModule,
     TipoAutorizacionRoutingModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ]
 })
 export class TipoAutorizacionModule { }

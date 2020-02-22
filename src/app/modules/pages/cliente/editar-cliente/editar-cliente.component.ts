@@ -41,6 +41,7 @@ export class EditarClienteComponent implements OnInit {
   usuarioLogueado:any = [];
   arrayDetalleCliente:any = [];
   id_cliente :any;
+  sedeSesion:any = '';
 
   constructor(private _router: ActivatedRoute,
               public _clienteService: ClienteService) { 
@@ -91,7 +92,7 @@ export class EditarClienteComponent implements OnInit {
 
     console.log("forma",forma.value)
       
-    this._clienteService.actualizarCliente( forma.value, this.arrayDetalleCliente, this.id_cliente, this.usuarioLogueado).subscribe((cliente: Cliente) => { 
+    this._clienteService.actualizarCliente( forma.value, this.arrayDetalleCliente, this.id_cliente, this.usuarioLogueado, this.sedeSesion).subscribe((cliente: Cliente) => { 
 
       Swal.fire({
         title: '',
@@ -133,6 +134,7 @@ export class EditarClienteComponent implements OnInit {
     let arrayPermisos:any   = localStorage.getItem('rolesPermisos');
     let arrayRol:any        = localStorage.getItem('roles');
     this.usuarioLogueado = JSON.parse(localStorage.getItem('user'));
+    this.sedeSesion      = JSON.parse(localStorage.getItem('sedeSesion'));
 
     /*if(me.arrayPermisos.indexOf('create-role') >=0){ me.crearRol = true; }
     if(me.arrayRol.indexOf('admin') >=0){ me.adminUsuario = true; }*/

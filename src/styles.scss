@@ -76,3 +76,28 @@
 .autocomplete-container .input-container input {
   height: 32px!important;
 }
+
+.cuadro_busquaeda { 
+  border-style: solid; 
+  border-width: 1px; 
+  border-radius: 25px;                  /* Primer formato */
+
+}
+
+.cuadro_busqueda{
+  background:#ccc;
+  border:solid 1px #ccc;
+  border-radius:15px;
+  height:200px;
+  width:250;
+  padding-top: 15px;
+}
+
+.cuadro_busqueda_mini{
+  background:rgb(204, 204, 204);
+  border:solid 1px #ccc;
+  border-radius:15px;
+  height:100px;
+  width:250;
+  padding-top: 15px;
+}

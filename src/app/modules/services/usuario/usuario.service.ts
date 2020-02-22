@@ -14,21 +14,19 @@ export class UsuarioService {
   constructor( private http: HttpClient,
                private env: EnvService) { }
 
-  listarTodosLosUsuarios(): Observable<any>{
+  listarTodosLosUsuarios(usuario): Observable<any>{
 
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
     headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
 
-
-    let buscar = '';
-    let criterio= '';
-
-    const url2 = `?page=0&buscar=${buscar}&criterio=${criterio}` ;
-
     const body: FormData = new FormData();
-    const url = this.env.apiGatewayBackOffice + constants.config.listarUsuarios + url2;
-    return this.http.get(url, {headers})
+    body.append('nombre', usuario.nombre);
+    body.append('email', usuario.email);
+    body.append('sede', usuario.sede);
+
+    const url = this.env.apiGatewayBackOffice + constants.config.listarUsuarios ;
+    return this.http.post(url, body, {headers})
     .pipe(
       delay(500)
     );

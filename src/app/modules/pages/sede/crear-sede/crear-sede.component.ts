@@ -16,7 +16,7 @@ export class CrearSedeComponent implements OnInit {
   sede:  Sede  = {
     id:  null ,
     nombre:null,
-    estado: 'Seleccione Estado',
+    estado: '',
   };
   usuarioLogueado:any = [];
 

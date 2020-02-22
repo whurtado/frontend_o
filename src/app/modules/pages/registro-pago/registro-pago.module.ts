@@ -7,15 +7,15 @@ import { ListarRegistroPagoComponent } from './listar-registro-pago/listar-regis
 import { EditarRegistroPagoComponent } from './editar-registro-pago/editar-registro-pago.component';
 import { CrearRegistroPagoComponent } from './crear-registro-pago/crear-registro-pago.component';
 import { RegistroPagoComponent } from './registro-pago/registro-pago.component';
-
-
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 
 @NgModule({
   declarations: [ListarRegistroPagoComponent, EditarRegistroPagoComponent, CrearRegistroPagoComponent, RegistroPagoComponent],
   imports: [
     CommonModule,
     RegistroPagoRoutingModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ]
 })
 export class RegistroPagoModule { }

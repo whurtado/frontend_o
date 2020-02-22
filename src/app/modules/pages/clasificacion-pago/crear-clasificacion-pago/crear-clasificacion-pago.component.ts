@@ -17,10 +17,11 @@ export class CrearClasificacionPagoComponent implements OnInit {
     id:  null ,
     nombre:null,
     descripcion:null,
-    estado:null,
+    estado:'null',
 
   };
   usuarioLogueado:any = [];
+  sedeSesion:any = '';
 
   constructor(public _clasificacionPagoService: ClasificacionPagoService) { }
 
@@ -30,7 +31,7 @@ export class CrearClasificacionPagoComponent implements OnInit {
 
   crearClasificacionPago(forma:NgForm){
     
-    this._clasificacionPagoService.crearClasificacionPago(forma.value,this.usuarioLogueado).subscribe((clasificacionPago: ClasificacionPago)=>{
+    this._clasificacionPagoService.crearClasificacionPago(forma.value,this.usuarioLogueado, this.sedeSesion).subscribe((clasificacionPago: ClasificacionPago)=>{
 
       Swal.fire({
         title: '',
@@ -49,6 +50,7 @@ export class CrearClasificacionPagoComponent implements OnInit {
     let arrayPermisos:any   = localStorage.getItem('rolesPermisos');
     let arrayRol:any        = localStorage.getItem('roles');
     this.usuarioLogueado = JSON.parse(localStorage.getItem('user'));
+    this.sedeSesion      = JSON.parse(localStorage.getItem('sedeSesion'));
 
     /*if(me.arrayPermisos.indexOf('create-role') >=0){ me.crearRol = true; }
     if(me.arrayRol.indexOf('admin') >=0){ me.adminUsuario = true; }*/

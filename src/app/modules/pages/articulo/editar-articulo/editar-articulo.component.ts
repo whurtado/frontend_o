@@ -24,7 +24,7 @@ export class EditarArticuloComponent implements OnInit {
      valor:  null , 
      imagen:  null , 
      cantidad:  null , 
-     requiereDeposito: null ,  
+     requiereDeposito: '' ,  
      valorDeposito:  null , 
      categoria_id:  null , 
 
@@ -33,6 +33,7 @@ export class EditarArticuloComponent implements OnInit {
   categorias:any = [];
   id_articulo:any;
   message: any;
+  sedeSesion:any = '';
 
   constructor(private _router: ActivatedRoute,
               public _articuloService: ArticuloService,
@@ -61,7 +62,6 @@ export class EditarArticuloComponent implements OnInit {
   mostrarArticulo(id){ 
 
     this._articuloService.mostrarArticulo(id).subscribe(response => { 
-       console.log("respuesta",response);
 
       this.articulo = {
         id:  response.articulo.id ,
@@ -85,8 +85,8 @@ export class EditarArticuloComponent implements OnInit {
 
   listarTodasLasCategorias() {
 
-    this._categoriaService.listarTodasLasCategorias().subscribe(response => { 
-      this.categorias = response.categoria.data;
+    this._categoriaService.categoriasSinFiltros().subscribe(response => { 
+      this.categorias = response.categoria;
 
       console.log(this.categorias);
       },
@@ -99,7 +99,7 @@ export class EditarArticuloComponent implements OnInit {
 
     console.log("forma....",forma.value)
       
-    this._articuloService.actualizarArticulo( forma.value, this.id_articulo,this.articulo.imagen, this.usuarioLogueado).subscribe((articulo: Articulo) => { 
+    this._articuloService.actualizarArticulo( forma.value, this.id_articulo,this.articulo.imagen, this.usuarioLogueado, this.sedeSesion).subscribe((articulo: Articulo) => { 
 
       Swal.fire({
         title: '',
@@ -136,6 +136,7 @@ export class EditarArticuloComponent implements OnInit {
     let arrayPermisos:any   = localStorage.getItem('rolesPermisos');
     let arrayRol:any        = localStorage.getItem('roles');
     this.usuarioLogueado = JSON.parse(localStorage.getItem('user'));
+    this.sedeSesion      = JSON.parse(localStorage.getItem('sedeSesion'));
 
     /*if(me.arrayPermisos.indexOf('create-role') >=0){ me.crearRol = true; }
     if(me.arrayRol.indexOf('admin') >=0){ me.adminUsuario = true; }*/

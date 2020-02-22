@@ -8,22 +8,24 @@ import { RolService } from '../../../services/rol/rol.service';
 })
 export class ListarRolComponent implements OnInit {
 
+  rol = {
+    nombre : ''
+  }
+
   roles:any = [];
+  p: number = 1;
 
   constructor( public _rolService: RolService) { }
 
   ngOnInit() {
-    this.listarTodosLosRoles();
+    this.listarTodosLosRoles(this.rol);
 
   }
 
-  listarTodosLosRoles() {
+  listarTodosLosRoles(rol) {
 
-    this._rolService.listarTodosLosRoles().subscribe(response => { 
+    this._rolService.listarTodosLosRoles(rol).subscribe(response => { 
       this.roles = response;
-      console.log("respuesta", response);
-      console.log("usus", this.roles);
-
       },
       error =>{
         console.log("error--------------",error);

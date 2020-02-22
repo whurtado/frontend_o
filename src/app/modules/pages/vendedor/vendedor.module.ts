@@ -7,6 +7,7 @@ import { VendedorComponent } from './vendedor/vendedor.component';
 import { ListarVendedorComponent } from './listar-vendedor/listar-vendedor.component';
 import { CrearVendedorComponent } from './crear-vendedor/crear-vendedor.component';
 import { EditarVendedorComponent } from './editar-vendedor/editar-vendedor.component';
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { EditarVendedorComponent } from './editar-vendedor/editar-vendedor.compo
   imports: [
     CommonModule,
     VendedorRoutingModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ]
 })
 export class VendedorModule { }

@@ -14,21 +14,19 @@ export class VendedorService {
   constructor(private http: HttpClient,
               private env: EnvService) { }
 
-  listarTodosLosVendedores(): Observable<any>{
+  listarTodosLosVendedores(vendedor,sedeSesion): Observable<any>{
 
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
     headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
-
-
-    let buscar = '';
-    let criterio= '';
-
-    const url2 = `?page=0&buscar=${buscar}&criterio=${criterio}` ;
-
+    
     const body: FormData = new FormData();
+    body.append('fvcnombre', vendedor.nombre);
+    body.append('estado', vendedor.estado);
+    body.append('sede_creacion', sedeSesion);
+
     const url = this.env.apiGatewayBackOffice + constants.config.listarVendedores ;
-    return this.http.get(url, {headers})
+    return this.http.post(url, body, {headers})
     .pipe(
       delay(500)
     );
@@ -36,7 +34,7 @@ export class VendedorService {
   }
 
    //metodo para crear un usuario
-   crearVendedor(vendedor,usuariologueado:object): Observable<Vendedor>{
+   crearVendedor(vendedor,usuariologueado:object, sedeSesion): Observable<Vendedor>{
 
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
@@ -46,7 +44,8 @@ export class VendedorService {
     body.append('fvcnombre', vendedor.nombre);
     body.append('estado', vendedor.estado);
     body.append('usuario_sesion', usuariologueado[0].id);
-  
+    body.append('sede_creacion', sedeSesion);
+
 
     const url = this.env.apiGatewayBackOffice + constants.config.crearVendedor;
     return this.http.post<Vendedor>(url, body, {headers})
@@ -69,7 +68,7 @@ export class VendedorService {
     );
   }
 
-  actualizarVendedor(vendedor, id,usuariologueado:object): Observable<Vendedor>{
+  actualizarVendedor(vendedor, id,usuariologueado:object, sedeSesion): Observable<Vendedor>{
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
     headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
@@ -79,6 +78,7 @@ export class VendedorService {
     body.append('estado', vendedor.estado);
     body.append('id', id);
     body.append('usuario_sesion', usuariologueado[0].id);
+    body.append('sede_creacion', sedeSesion);
 
     
 
