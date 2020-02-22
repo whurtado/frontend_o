@@ -109,6 +109,7 @@ export class CrearOrdenServicioComponent implements OnInit {
     tituloModal: string ='';
     arrayAbonos:any     = [];
     tipoAbono: string   = '';
+    sedeSesion:any      = '';
 
   
   
@@ -121,7 +122,7 @@ export class CrearOrdenServicioComponent implements OnInit {
   
     crearOrdenServicio(forma:NgForm){
       
-      this._ordenServicioService.crearOrdenServicio(forma.value,this.ordenServicio, this.arrayDetalle, this.arrayAbonos, this.usuarioLogueado).subscribe((ordenServicio:  OrdenServicio)=>{
+      this._ordenServicioService.crearOrdenServicio(forma.value,this.ordenServicio, this.arrayDetalle, this.arrayAbonos, this.usuarioLogueado, this.sedeSesion).subscribe((ordenServicio:  OrdenServicio)=>{
   
         Swal.fire({
           title: '',
@@ -191,7 +192,8 @@ export class CrearOrdenServicioComponent implements OnInit {
       let arrayPermisos:any   = localStorage.getItem('rolesPermisos');
       let arrayRol:any        = localStorage.getItem('roles');
       this.usuarioLogueado = JSON.parse(localStorage.getItem('user'));
-  
+      this.sedeSesion      = JSON.parse(localStorage.getItem('sedeSesion'));
+
       /*if(me.arrayPermisos.indexOf('create-role') >=0){ me.crearRol = true; }
       if(me.arrayRol.indexOf('admin') >=0){ me.adminUsuario = true; }*/
   

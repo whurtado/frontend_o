@@ -9,13 +9,6 @@ import { OrdenServicio } from '../../../models/ordenServicio';
 })
 export class ListarOrdenServicioComponent implements OnInit {
 
-  ordenes:any = [];
-  p: number = 1;
-
-
-  constructor(private _ordenServicioService: OrdenServicioService) { }
-
-
   ordenServicio: any  = {
 
     genero:  "", 
@@ -28,22 +21,46 @@ export class ListarOrdenServicioComponent implements OnInit {
     articulo:  null, 
     estado:  "null",  
 
-
-
   }
 
+  ordenes:any     = [];
+  p: number       = 1;
+  sedeSesion:any  = '';
+
+
+  constructor(private _ordenServicioService: OrdenServicioService) { }
+
+
   ngOnInit() {
+    this. verificarDatosLogin();
     this.listarTodasLasOrdenServicios(this.ordenServicio);
   }
 
 
   listarTodasLasOrdenServicios(ordenServicio) {
 
-    this._ordenServicioService.listarTodasLasOrdenServicios(ordenServicio).subscribe(response => { 
-      this.ordenes = response.factura.data;
+    this._ordenServicioService.listarTodasLasOrdenServicios(ordenServicio,this.sedeSesion).subscribe(response => { 
+      this.ordenes = response.factura;
+
+      console.log("ordenes", response);
       },
       error =>{
         console.log("error--------------",error);
       });
+  }
+
+  verificarDatosLogin(){
+  
+    let adminUsuario  = false;
+    let crearRol  = false;
+
+    let arrayPermisos:any   = localStorage.getItem('rolesPermisos');
+    let arrayRol:any        = localStorage.getItem('roles');
+    //this.usuarioLogueado = JSON.parse(localStorage.getItem('user'));
+    this.sedeSesion      = JSON.parse(localStorage.getItem('sedeSesion'));
+
+    /*if(me.arrayPermisos.indexOf('create-role') >=0){ me.crearRol = true; }
+    if(me.arrayRol.indexOf('admin') >=0){ me.adminUsuario = true; }*/
+
   }
 } 

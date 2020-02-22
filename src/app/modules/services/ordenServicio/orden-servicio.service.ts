@@ -14,21 +14,26 @@ export class OrdenServicioService {
   constructor(private http: HttpClient,
     private env: EnvService) { }
 
-listarTodasLasOrdenServicios(ordenServicio): Observable<any>{
+listarTodasLasOrdenServicios(OrdenServicio, sedeSesion): Observable<any>{
+
+  console.log("OrdenServicio",OrdenServicio)
 
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
     headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
 
-
-    let buscar = '';
-    let criterio= '';
-
-    const url2 = `?page=0&buscar=${buscar}&criterio=${criterio}` ;
-
     const body: FormData = new FormData();
+    body.append('estado', OrdenServicio.estado);
+    body.append('vendedor', OrdenServicio.vendedor);
+    body.append('fecha', OrdenServicio.fecha);
+    body.append('genero', OrdenServicio.genero);
+    body.append('confesion', OrdenServicio.confesion);
+    body.append('articulo', OrdenServicio.articulo);
+    body.append('ficha', OrdenServicio.ficha);
+    body.append('sede_creacion', sedeSesion);
+
     const url = this.env.apiGatewayBackOffice + constants.config.listarOrdenServicios ;
-    return this.http.get(url, {headers})
+    return this.http.post(url, body ,{headers})
     .pipe(
     delay(500)
     );
@@ -36,7 +41,7 @@ listarTodasLasOrdenServicios(ordenServicio): Observable<any>{
   }
 
   //metodo para crear un usuario
-  crearOrdenServicio(OrdenServicio,OrdenModelo, detalleOrdenServicio, arrayAbonos,usuariologueado:object): Observable<OrdenServicio>{
+  crearOrdenServicio(OrdenServicio,OrdenModelo, detalleOrdenServicio, arrayAbonos,usuariologueado:object, sedeSesion): Observable<OrdenServicio>{
 
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
@@ -73,6 +78,7 @@ listarTodasLasOrdenServicios(ordenServicio): Observable<any>{
     body.append('data', JSON.stringify(detalleOrdenServicio));
     body.append('dataAbonos', JSON.stringify(arrayAbonos));
     body.append('usuario_sesion', usuariologueado[0].id);
+    body.append('sede_creacion', sedeSesion);
 
 
     const url = this.env.apiGatewayBackOffice + constants.config.crearOrdenServicio;
@@ -96,7 +102,7 @@ listarTodasLasOrdenServicios(ordenServicio): Observable<any>{
     );
   }
 
-  actualizarOrdenServicio(OrdenServicio,  detalleOrdenServicio, id,  usuariologueado:object): Observable<OrdenServicio>{
+  actualizarOrdenServicio(OrdenServicio,  detalleOrdenServicio, id,  usuariologueado:object, sedeSesion): Observable<OrdenServicio>{
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/form-data');
     headers.append( 'Authorization', 'Bearer ' + localStorage.getItem('token'));
@@ -133,6 +139,7 @@ listarTodasLasOrdenServicios(ordenServicio): Observable<any>{
     body.append('data', JSON.stringify(detalleOrdenServicio));
     body.append('id', id);
     body.append('usuario_sesion', usuariologueado[0].id);
+    body.append('sede_creacion', sedeSesion);
 
     const url = this.env.apiGatewayBackOffice + constants.config.actualizarOrdenServicio;
 
